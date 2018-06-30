@@ -338,7 +338,7 @@ public class PunnettMe implements Runnable
 			{
 				if (!traverseForDuplicates(score, root, false))
 				{
-					System.out.println("No Duplicates");
+//					System.out.println("No Duplicates");
 					insert(new Node(score, data), root);
 				}
 			}
@@ -362,7 +362,7 @@ public class PunnettMe implements Runnable
 			{
 				root.left.duplicate++;
 				hasDuplicate = true;
-				System.out.println("Duplicate Score FOUND: " + score);
+//				System.out.println("Duplicate Score FOUND: " + score);
 			}
 		}
 		else if (root.right != null)
@@ -375,7 +375,7 @@ public class PunnettMe implements Runnable
 			{
 				root.right.duplicate++;
 				hasDuplicate = true;
-				System.out.println("Duplicate Score FOUND: " + score);
+//				System.out.println("Duplicate Score FOUND: " + score);
 			}
 		}
 		return hasDuplicate;
