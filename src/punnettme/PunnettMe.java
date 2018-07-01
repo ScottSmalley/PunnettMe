@@ -23,7 +23,8 @@ public class PunnettMe implements Runnable
 	private Parent parentOne;
 	private Parent parentTwo;
 	private List<String> offspring = new ArrayList<>();
-	private Node root;
+	private AVLTree tree;
+	//private Node root;
 
 	public static void main (String [] args)
 	{
@@ -32,6 +33,7 @@ public class PunnettMe implements Runnable
 	
 	public void run() 
 	{
+		tree = new AVLTree();
 //		parentOne = new Parent();
 //		parentTwo = new Parent();
 		
@@ -127,7 +129,7 @@ public class PunnettMe implements Runnable
 		
 		buildPunnettSquare(parentOne.getGeneCombinations(), parentTwo.getGeneCombinations());
 		
-		System.out.println("Height of Root: " + getHeight(root));
+		//System.out.println("Height of Root: " + getHeight(root));
 		
 	}
 	
@@ -263,7 +265,7 @@ public class PunnettMe implements Runnable
 			{
 				String result =	buildPunnettSquare("", parentOne[i], parentTwo[j]);
 				offspring.add(result);
-				storeInTree(scoreResult(result), result);
+				tree.storeInTree(result);
 			}
 		}
 	}
@@ -291,185 +293,185 @@ public class PunnettMe implements Runnable
 		return result;
 	}
 	
-	//give the string a value
-	/*
-	 * scores are 2x the position, so if 5 genes, Capital in the first
-	 * position is 10, then 9, 8, 7....
-	 * 
-	 */
-	public int scoreResult(String result)
-	{
-//		System.out.println("result.length: " + result.length());
-		int score = 0;
-		
-		for (int i = 0; i < result.length(); i++)
-		{
-			if (Character.isUpperCase(result.charAt(i)))
-			{
-//				System.out.println("IT'S UPPER CASE!!! score: " + (result.length() - i));
-				score += result.length() - i;
-			}
-		}
-		return score;
-	}
-	
-	
-	
-	//enter into AVL tree
-	/*
-	 * Node class
-	 * 
-	 * Need left/right/clockwise rotation methods
-	 * Need insert method
-	 * 
-	 * connections from root to leaves
-	 */
-	public void storeInTree(int score, String data)
-	{
-		if (root != null)
-		{
-			//In case root and score are dups
-			if (score == root.score)
-			{
-				System.out.println("DUPLICATE ROOT SCORE");
-				root.duplicate++;
-			}
-			else
-			{
-				if (!traverseForDuplicates(score, root, false))
-				{
-//					System.out.println("No Duplicates");
-					insert(new Node(score, data), root);
-				}
-			}
-		}
-		else 
-		{
-			root = new Node(score, data);
-		}
-	}
-	
-	
-	private boolean traverseForDuplicates(int score, Node root, boolean hasDuplicate)
-	{
-		if (root.left != null)
-		{
-			if (!(root.left.score == score))
-			{
-				traverseForDuplicates(score, root.left, hasDuplicate);
-			}
-			else
-			{
-				root.left.duplicate++;
-				hasDuplicate = true;
-//				System.out.println("Duplicate Score FOUND: " + score);
-			}
-		}
-		else if (root.right != null)
-		{
-			if (!(root.right.score == score))
-			{
-				traverseForDuplicates(score, root.right, hasDuplicate);
-			}
-			else
-			{
-				root.right.duplicate++;
-				hasDuplicate = true;
-//				System.out.println("Duplicate Score FOUND: " + score);
-			}
-		}
-		return hasDuplicate;
-	}
-	
-	/*
-	 * Is used only if root != null && no duplicates
-	 * places in descending order
-	 */
-	private void insert(Node newNode, Node root)
-	{
-		//Small on the right
-		if (newNode.score > root.score)
-		{
-			if (root.left != null)
-			{
-				insert(newNode, root.left);
-			}
-			else
-			{
-				root.left = newNode;
-				newNode.parent = root;
-				newNode.height = root.height + 1;
-				
-			}
-		}
-		//Large on the left
-		else if (newNode.score < root.score)
-		{
-			if (root.right != null)
-			{
-				insert(newNode, root.right);
-			}
-			else
-			{
-				root.right = newNode;
-				newNode.parent = root;
-				newNode.height = root.height + 1;
-			}
-		}
-
-	}
-	
-	
-	/*
-	 * NEED TO:
-	 * FIND METHOD FOR CHECKING EACH SIDE FOR BALANCING
-	 * CREATE ROTATE LEFT & ROTATE RIGHT METHODS
-	 * 5/4/2018
-	 * 
-	 * 
-	 */
-	private int getHeight(Node root)
-	{
-		if (root == null)
-		{
-			return -1;
-		}
-		
-		int leftH = getHeight(root.left);
-		int rightH = getHeight(root.right);
-		
-		if (rightH > leftH)
-		{
-			return rightH + 1;
-		}
-		else
-		{
-			return leftH +1;
-		}
-	}
-	
-	private void rotateLeft()
-	{
-		
-	}
-	private void rotateRight()
-	{
-		
-	}
-	private class Node
-	{
-		private int score, height, duplicate;
-		private String data;
-		private Node parent, left, right;
-		
-		private Node(int score, String data)
-		{
-			this.score = score;
-			this.data = data;
-			height = 1;
-			duplicate = 0;
-		}
-	}
+//	//give the string a value
+//	/*
+//	 * scores are 2x the position, so if 5 genes, Capital in the first
+//	 * position is 10, then 9, 8, 7....
+//	 * 
+//	 */
+//	public int scoreResult(String result)
+//	{
+////		System.out.println("result.length: " + result.length());
+//		int score = 0;
+//		
+//		for (int i = 0; i < result.length(); i++)
+//		{
+//			if (Character.isUpperCase(result.charAt(i)))
+//			{
+////				System.out.println("IT'S UPPER CASE!!! score: " + (result.length() - i));
+//				score += result.length() - i;
+//			}
+//		}
+//		return score;
+//	}
+//	
+//	
+//	
+//	//enter into AVL tree
+//	/*
+//	 * Node class
+//	 * 
+//	 * Need left/right/clockwise rotation methods
+//	 * Need insert method
+//	 * 
+//	 * connections from root to leaves
+//	 */
+//	public void storeInTree(int score, String data)
+//	{
+//		if (root != null)
+//		{
+//			//In case root and score are dups
+//			if (score == root.score)
+//			{
+//				System.out.println("DUPLICATE ROOT SCORE");
+//				root.duplicate++;
+//			}
+//			else
+//			{
+//				if (!traverseForDuplicates(score, root, false))
+//				{
+////					System.out.println("No Duplicates");
+//					insert(new Node(score, data), root);
+//				}
+//			}
+//		}
+//		else 
+//		{
+//			root = new Node(score, data);
+//		}
+//	}
+//	
+//	
+//	private boolean traverseForDuplicates(int score, Node root, boolean hasDuplicate)
+//	{
+//		if (root.left != null)
+//		{
+//			if (!(root.left.score == score))
+//			{
+//				traverseForDuplicates(score, root.left, hasDuplicate);
+//			}
+//			else
+//			{
+//				root.left.duplicate++;
+//				hasDuplicate = true;
+////				System.out.println("Duplicate Score FOUND: " + score);
+//			}
+//		}
+//		else if (root.right != null)
+//		{
+//			if (!(root.right.score == score))
+//			{
+//				traverseForDuplicates(score, root.right, hasDuplicate);
+//			}
+//			else
+//			{
+//				root.right.duplicate++;
+//				hasDuplicate = true;
+////				System.out.println("Duplicate Score FOUND: " + score);
+//			}
+//		}
+//		return hasDuplicate;
+//	}
+//	
+//	/*
+//	 * Is used only if root != null && no duplicates
+//	 * places in descending order
+//	 */
+//	private void insert(Node newNode, Node root)
+//	{
+//		//Small on the right
+//		if (newNode.score > root.score)
+//		{
+//			if (root.left != null)
+//			{
+//				insert(newNode, root.left);
+//			}
+//			else
+//			{
+//				root.left = newNode;
+//				newNode.parent = root;
+//				newNode.height = root.height + 1;
+//				
+//			}
+//		}
+//		//Large on the left
+//		else if (newNode.score < root.score)
+//		{
+//			if (root.right != null)
+//			{
+//				insert(newNode, root.right);
+//			}
+//			else
+//			{
+//				root.right = newNode;
+//				newNode.parent = root;
+//				newNode.height = root.height + 1;
+//			}
+//		}
+//
+//	}
+//	
+//	
+//	/*
+//	 * NEED TO:
+//	 * FIND METHOD FOR CHECKING EACH SIDE FOR BALANCING
+//	 * CREATE ROTATE LEFT & ROTATE RIGHT METHODS
+//	 * 5/4/2018
+//	 * 
+//	 * 
+//	 */
+//	private int getHeight(Node root)
+//	{
+//		if (root == null)
+//		{
+//			return -1;
+//		}
+//		
+//		int leftH = getHeight(root.left);
+//		int rightH = getHeight(root.right);
+//		
+//		if (rightH > leftH)
+//		{
+//			return rightH + 1;
+//		}
+//		else
+//		{
+//			return leftH +1;
+//		}
+//	}
+//	
+//	private void rotateLeft()
+//	{
+//		
+//	}
+//	private void rotateRight()
+//	{
+//		
+//	}
+//	private class Node
+//	{
+//		private int score, height, duplicate;
+//		private String data;
+//		private Node parent, left, right;
+//		
+//		private Node(int score, String data)
+//		{
+//			this.score = score;
+//			this.data = data;
+//			height = 1;
+//			duplicate = 0;
+//		}
+//	}
 	
 }
 
