@@ -129,6 +129,8 @@ public class PunnettMe implements Runnable
 		
 		buildPunnettSquare(parentOne.getGeneCombinations(), parentTwo.getGeneCombinations());
 		
+		System.out.println("PROGRAM COMPLETE, IN ORDER TRAVERSAL: ");
+		tree.inOrderTraversal();
 		//System.out.println("Height of Root: " + getHeight(root));
 		
 	}

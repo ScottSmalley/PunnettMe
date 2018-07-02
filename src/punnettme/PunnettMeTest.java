@@ -330,14 +330,14 @@ class PunnettMeTest {
 //				new Gene("A", true, false, false),
 //				new Gene("B", true, false, false),
 //				new Gene("C", true, false, false),
-				new Gene("D", true, false, false),
+//				new Gene("D", true, false, false),
 				new Gene("E", true, false, false)});
 		
 		parentTwo.setRawGenes(new Gene[] {
 //				new Gene("A", true, false, false),
 //				new Gene("B", true, false, false),
 //				new Gene("C", true, false, false),
-				new Gene("D", true, false, false),
+//				new Gene("D", true, false, false),
 				new Gene("E", true, false, false)});
 		
 		pm.setParents(parentOne, parentTwo);

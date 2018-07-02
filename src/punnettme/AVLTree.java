@@ -61,6 +61,7 @@ public class AVLTree
 			{
 				root = new Node(score, data);
 			}
+			
 		}
 		
 		//give the string a value
@@ -87,6 +88,7 @@ public class AVLTree
 		
 		private boolean traverseForDuplicates(int score, Node root, boolean hasDuplicate)
 		{
+			
 			if (root.left != null)
 			{
 				if (!(root.left.score == score))
@@ -125,12 +127,13 @@ public class AVLTree
 		
 		/*
 		 * Is used only if root != null && no duplicates
-		 * places in descending order
+		 * 
 		 */
 		private void insert(Node newNode, Node root)
 		{
-			//Large on the left
-			if (newNode.score > root.score)
+			
+			//Small on the left
+			if (newNode.score < root.score)
 			{
 				if (root.left != null)
 				{
@@ -138,15 +141,16 @@ public class AVLTree
 				}
 				else
 				{
+//					System.out.println("LEFT: " + newNode.data + " Score: " + newNode.score );
 					root.left = newNode;
 					newNode.parent = root;
-					root.height = (1 + Math.max(getHeight(root.left), getHeight(root.right)));
-					System.out.println("this root's updated height = " + root.height);
+//					root.height = (1 + Math.max(getHeight(root.left), getHeight(root.right)));
+//					System.out.println("this root's updated height = " + root.height);
 					
 				}
 			}
-			//Small on the right
-			else if (newNode.score < root.score)
+			//Large on the right
+			else if (newNode.score > root.score)
 			{
 				if (root.right != null)
 				{
@@ -154,10 +158,11 @@ public class AVLTree
 				}
 				else
 				{
+//					System.out.println("RIGHT: " + newNode.data );
 					root.right = newNode;
 					newNode.parent = root;
-					root.height = (1 + Math.max(getHeight(root.left), getHeight(root.right)));
-					System.out.println("this root's updated height = " + root.height);
+//					root.height = (1 + Math.max(getHeight(root.left), getHeight(root.right)));
+//					System.out.println("this root's updated height = " + root.height);
 //					int balance = getBalance(root);
 //					System.out.println("Right balancing value = " + balance);
 //					newNode.height = root.height + 1;
@@ -165,33 +170,81 @@ public class AVLTree
 				}
 			}
 			
-			int balance = getBalance(root);
-			System.out.println("balancing value = " + balance);
+//			int balance = checkBalance(newNode);
+			checkBalance(newNode);
 			
-			//Remember! my values are switched, high on the left, low on the right!
-			//Left Left Case
-			if (balance > 1 && newNode.score > root.left.score)
-			{
-				rotateRight(root);
-			}
-			//Left Right Case
-			else if (balance > 1 && newNode.score < root.left.score)
-			{
-//				root.left = leftRotate(node.left)
-//				return rightRotate(node)
-			}
-			//Right Left Case
-			else if (balance < -1 && newNode.score > root.right.score)
-			{
-//				node.right = rightRotate(node.right)
-//				return leftRotate(node)
-			}
-			//Right Right Case
-			else if (balance < -1 && newNode.score < root.right.score)
-			{
-				rotateLeft(root);
-			}
+//			System.out.println("balancing value = " + balance);
 			
+			/*
+			 * try catch to grab newNode's grandparent and parent?
+			 */
+//			if (balance < -1)
+//			{
+//				System.out.println("Got a left rotation to do!");
+//				rotateLeft(root);
+//			}
+//			else if (balance > 1)
+//			{
+//				System.out.println("Got a right rotation to do!");
+//				rotateRight(root);
+//			}
+//			
+//			//Left Left Case
+//			if (balance > 1 && newNode.score < root.left.score)
+//			{
+//				
+//			}
+//			//Left Right Case
+//			else if (balance > 1 && newNode.score > root.left.score)
+//			{
+//				
+//			}
+//			//Right Left Case
+//			else if (balance < -1 && newNode.score < root.right.score)
+//			{
+//				
+//			}
+//			//Right Right Case
+//			else if (balance < -1 && newNode.score > root.right.score)
+//			{
+//				
+//			}
+			
+//			//Large on the left
+//			if (newNode.score > root.score)
+//			{
+//				if (root.left != null)
+//				{
+//					insert(newNode, root.left);
+//				}
+//				else
+//				{
+//					root.left = newNode;
+//					newNode.parent = root;
+//					root.height = (1 + Math.max(getHeight(root.left), getHeight(root.right)));
+//					System.out.println("this root's updated height = " + root.height);
+//					
+//				}
+//			}
+//			//Small on the right
+//			else if (newNode.score < root.score)
+//			{
+//				if (root.right != null)
+//				{
+//					insert(newNode, root.right);
+//				}
+//				else
+//				{
+//					root.right = newNode;
+//					newNode.parent = root;
+//					root.height = (1 + Math.max(getHeight(root.left), getHeight(root.right)));
+//					System.out.println("this root's updated height = " + root.height);
+////					int balance = getBalance(root);
+////					System.out.println("Right balancing value = " + balance);
+////					newNode.height = root.height + 1;
+////					System.out.println("newNode height = " + newNode.height);
+//				}
+//			}
 			
 			//Original
 //			if (balance > 1 && newNode.score < root.left.score)
@@ -222,41 +275,219 @@ public class AVLTree
 		{
 			if (root == null)
 			{
-				return 0;
+				return -1;
 			}
-			return root.height;
 			
-//			int leftH = getHeight(root.left);
-//			int rightH = getHeight(root.right);
-//			
-//			if (rightH > leftH)
-//			{
-//				return rightH + 1;
-//			}
-//			else
-//			{
-//				return leftH + 1;
-//			}
+			return (Math.max(getHeight(root.left), getHeight(root.right)) + 1);
 		}
 		
 		
-		private int getBalance(Node root)
+		private void checkBalance(Node node)
+		{
+			if ((getHeight(node.left) - getHeight(node.right) > 1) || (getHeight(node.left) - getHeight(node.right) < -1))
+			{
+				System.out.println("************REBALANCE INITIATED************");
+				System.out.println("************BALANCE VALUE: " + ((getHeight(node.left) - getHeight(node.right)) + "************"));
+				
+				rebalance(node);
+			}
+			if (node.parent != null)
+			{
+				checkBalance(node.parent);
+			}
+
+		}
+		
+		
+		/*
+		 * NOTES FROM JULY 1 2018:
+		 * I NEED TO FIGURE OUT HOW TO GET THE GREAT-GRANDPARENT NODE TO POINT TO TEMP.
+		 * WITH THAT, I NEED TO FIGURE OUT HOW TO SET GREAT-GRANDPA LEFT OR RIGHT
+		 * NODE TO THE NEW TEMP NODE.... MAYBE CHECK ROOT.PARENT AGAINST EACH
+		 * OF GREAT GRANDPA'S LEFT/RIGHT NODES FOR EQUALITY? THEN I KNOW WHICH TO ASSIGN?
+		 */
+		private void rebalance(Node node)
+		{
+			if (getHeight(node.left) - getHeight(node.right) > 1)
+			{
+				if (getHeight(node.left.left) > getHeight(node.left.right))
+				{
+					System.out.println("************RIGHT ROTATE CALLED************");
+					//Left left case.
+					node = rotateRight(node);
+				}
+				else
+				{
+					System.out.println("************LEFT-RIGHT ROTATE CALLED************");
+					//Left Right case.
+//					leftRightRotate(node);
+					node = rotateLeftRight(node);
+				}
+			}
+			else
+			{
+				if (getHeight(node.right.left) > getHeight(node.right.right))
+				{
+					System.out.println("************LEFT ROTATE CALLED************");
+					//Right Right case.
+					node = rotateLeft(node);
+				}
+				else
+				{
+					System.out.println("************RIGHT-LEFT ROTATE CALLED************");
+					//Right Left case.
+//					RightLeftRotate(node);
+					node = rotateRightLeft(node);
+				}
+			}
+			if (node.parent == null)
+			{
+				root = node;
+			}
+		}
+		
+		/*
+		 * Rotates the Grandparent counterclockwise around the
+		 * parent.
+		 * @param root Node (Grandparent)
+		 */
+		private Node rotateLeft(Node root)
+		{
+			
+			try
+			{
+//				System.out.println("Grandparent: " + root.data);
+//				System.out.println("Grandparent Left Child: " + root.left.data);
+//				System.out.println("Grandparent Right Child: " + root.right.data);
+//				System.out.println("Parent: " + root.parent.data);
+//				System.out.println("Parent Left Child: " + root.parent.left.data);
+//				System.out.println("Parent Right Child: " + root.parent.right.data);
+//				
+////				System.out.println("TEmp's parent: " + temp.);
+//				
+//				
+////				//Grandparent's right child.
+////				Node temp = root.parent.right;
+////				root.parent.right = temp.left;
+////				temp.left = root.parent;
+//				
+			System.out.println("LEFT Root sent: " + root.data);
+			System.out.println("LEFT left child: " + root.left.data);
+			System.out.println("LEFT right child: " + root.right.data);
+				
+			}
+			catch (NullPointerException e)
+			{
+				System.out.println("Couldn't find an ancestor.");
+			}
+
+			Node temp = root.right;
+			root.right = temp.left;
+			temp.left = root;
+			if (root.parent != null)
+			{
+				temp.parent = root.parent;
+			}
+			try
+			{
+
+			System.out.println("LEFT temp's parent:  " + temp.parent.data);
+				
+			}
+			catch (NullPointerException e)
+			{
+				System.out.println("LEFT Couldn't find parent.");
+			}
+			
+			return temp;
+		}
+		
+		/*
+		 * Rotates the Grandparent clockwise around the
+		 * parent.
+		 * @param root Node (Grandparent)
+		 */
+		private Node rotateRight(Node root)
+		{
+			try
+			{
+//				System.out.println("Grandparent: " + root.parent.parent.data);
+//				System.out.println("Grandparent Left Child: " + root.parent.parent.left.data);
+//				System.out.println("Grandparent Right Child: " + root.parent.parent.right.data);
+//				System.out.println("Parent: " + root.parent.data);
+//				System.out.println("Parent Left Child: " + root.parent.left.data);
+//				System.out.println("Parent Right Child: " + root.parent.right.data);
+//				
+//				
+//				//Grandparent's right child.
+////				Node temp = root.parent.left;
+////				root.parent.left = temp.right;
+////				temp.right = root.parent;
+//				
+			System.out.println("RIGHT Root sent: " + root.data);
+			System.out.println("RIGHT left child: " + root.left.data);
+			System.out.println("RIGHT right child: " + root.right.data);
+//				
+//				
+//				
+			}
+			catch (NullPointerException e)
+			{
+				System.out.println("Couldn't find an ancestor.");
+			}
+
+			Node temp = root.left;
+			root.left = temp.right;
+			temp.right = root;
+			
+			try
+			{
+				
+				System.out.println("RIGHT temp's parent:  " + temp.parent.data);
+				
+			}
+			catch (NullPointerException e)
+			{
+				System.out.println("RIGHT Couldn't find parent.");
+			}
+			return temp;
+		}
+		
+		private Node rotateRightLeft(Node root)
+		{
+			root.right = rotateRight(root.right);
+			
+			return rotateLeft(root);
+			
+		}
+		private Node rotateLeftRight(Node root)
+		{
+			root.left = rotateLeft(root.left);
+			
+			return rotateRight(root);
+			
+		}
+		
+		public void inOrderTraversal()
+		{
+			inOrderTraversal(root);
+			
+		}
+		private void inOrderTraversal(Node root)
 		{
 			if (root == null)
 			{
-				return 0;
+				return;
 			}
-			return getHeight(root.left) - getHeight(root.right);
-		}
-		
-		private void rotateLeft(Node root)
-		{
-			
-		}
-		
-		private void rotateRight(Node root)
-		{
-			
+//			if (root.left != null)
+//			{
+				inOrderTraversal(root.left);
+//			}
+			System.out.println(root.data);
+//			if (root.right != null)
+//			{
+				inOrderTraversal(root.right);
+//			}
 		}
 		
 		private class Node
@@ -269,13 +500,13 @@ public class AVLTree
 			{
 				this.score = score;
 				this.data = data;
-				this.height = 0;
-				this.duplicate = 0;
+				height = 0;
+				duplicate = 0;
 			}
 			
 			void increment()
 			{
-				this.duplicate++;
+				duplicate++;
 			}
 			
 		}
