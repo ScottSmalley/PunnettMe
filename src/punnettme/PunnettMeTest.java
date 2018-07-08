@@ -1,7 +1,12 @@
 package punnettme;
 
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 class PunnettMeTest {
@@ -319,30 +324,112 @@ class PunnettMeTest {
 //		
 //	}
 //	
+//	@Test
+//	void toRunCurrently()
+//	{
+//		PunnettMe pm = new PunnettMe();
+//		Parent parentOne = new Parent();
+//		Parent parentTwo = new Parent();
+//		
+//		parentOne.setRawGenes(new Gene[] {
+////				new Gene("A", true, false, false),
+////				new Gene("B", true, false, false),
+//				new Gene("C", true, false, false),
+//				new Gene("D", true, false, false),
+//				new Gene("E", true, false, false)});
+//		
+//		parentTwo.setRawGenes(new Gene[] {
+////				new Gene("A", true, false, false),
+////				new Gene("B", true, false, false),
+//				new Gene("C", true, false, false),
+//				new Gene("D", true, false, false),
+//				new Gene("E", true, false, false)});
+//		
+//		pm.setParents(parentOne, parentTwo);
+//		pm.run();
+//		
+//	}
+
+	
 	@Test
-	void toRunCurrently()
+	void rightRightCaseWithSize3TreeCheck()
 	{
-		PunnettMe pm = new PunnettMe();
-		Parent parentOne = new Parent();
-		Parent parentTwo = new Parent();
+		AVLTree tree = new AVLTree();
 		
-		parentOne.setRawGenes(new Gene[] {
-//				new Gene("A", true, false, false),
-//				new Gene("B", true, false, false),
-//				new Gene("C", true, false, false),
-//				new Gene("D", true, false, false),
-				new Gene("E", true, false, false)});
+		tree.storeInTree("aa");
+		tree.storeInTree("Aa");
+		tree.storeInTree("AA");
 		
-		parentTwo.setRawGenes(new Gene[] {
-//				new Gene("A", true, false, false),
-//				new Gene("B", true, false, false),
-//				new Gene("C", true, false, false),
-//				new Gene("D", true, false, false),
-				new Gene("E", true, false, false)});
+		tree.inOrderTraversal();
+
+//		List<String> sample = tree.getTestingOutput();
+//		
+//		List<String> expected = new ArrayList<>();
+//		expected.add("aa");
+//		expected.add("Aa");
+//		expected.add("AA");
+//
+//		boolean isEquals = true;
+//		String badSample;
+//		String badExpected;
+//		for (int index = 0; index < sample.size(); index++)
+//		{
+//			if (!(sample.get(index).equals(expected.get(index))))
+//			{
+//				System.out.println("FAILURE");
+//				isEquals = false;
+//				badSample = sample.get(index);
+//				badExpected = expected.get(index);
+//				break;
+//			}
+//		}
+//		assertTrue(isEquals);
 		
-		pm.setParents(parentOne, parentTwo);
-		pm.run();
+		
 		
 	}
-
+	@Test
+	void rightRightCaseWithSize5TreeCheck()
+	{
+		AVLTree tree = new AVLTree();
+		
+		tree.storeInTree("aabB");
+		tree.storeInTree("aabb");
+		tree.storeInTree("aaBb");
+		tree.storeInTree("AaBb");
+		tree.storeInTree("AABB");
+		
+		tree.inOrderTraversal();
+		
+	}
+	
+	@Test
+	void leftLeftCaseWithSize3TreeCheck()
+	{
+		AVLTree tree = new AVLTree();
+		
+		tree.storeInTree("AA");
+		tree.storeInTree("Aa");
+		tree.storeInTree("aa");
+		
+		tree.inOrderTraversal();
+		
+		
+	}
+	@Test
+	void leftLeftCaseWithSize5TreeCheck()
+	{
+		AVLTree tree = new AVLTree();
+		
+		
+		tree.storeInTree("AaBb");
+		tree.storeInTree("AABB");
+		tree.storeInTree("aaBb");
+		tree.storeInTree("aabB");
+		tree.storeInTree("aabb");
+		
+		tree.inOrderTraversal();
+		
+	}
+	
 }
