@@ -34,7 +34,7 @@ public class AVLTree
 				//In case root and score are the same value
 				if (score == root.score)
 				{
-					System.out.println("DUPLICATE ROOT SCORE");
+//					System.out.println("DUPLICATE ROOT SCORE");
 					root.increment();
 				}
 				else
@@ -64,7 +64,7 @@ public class AVLTree
 		 * position is 10, then 9, 8, 7....
 		 * 
 		 */
-		public int scoreResult(String result)
+		private int scoreResult(String result)
 		{
 			int score = 0;
 			
@@ -149,8 +149,6 @@ public class AVLTree
 			
 			checkBalance(newNode);
 		}
-		
-		
 		
 		private int getHeight(Node root)
 		{
@@ -371,6 +369,7 @@ public class AVLTree
 		
 		public List<String> getTestingOutput()
 		{
+			output = new ArrayList<>();
 			getInOrderTraversal(root);
 			return output;
 		}
@@ -381,10 +380,14 @@ public class AVLTree
 			{
 				return;
 			}
-				inOrderTraversal(root.left);
+				getInOrderTraversal(root.left);
 			System.out.println(root.data);
-			output.add(root.data);
-				inOrderTraversal(root.right);
+//			output.add(root.data);
+			for (int add = 0; add <= root.duplicate; add++)
+			{
+				output.add(root.data);
+			}
+				getInOrderTraversal(root.right);
 				
 		}
 		

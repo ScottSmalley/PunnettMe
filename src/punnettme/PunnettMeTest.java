@@ -37,7 +37,7 @@ class PunnettMeTest {
 //		}
 //		assertArrayEquals(sample, test);
 //	}
-//	
+	
 //	@Test
 //	void heteroBuildPunnettSquareResultsAccuracyWithTwoGenes() 
 //	{
@@ -130,7 +130,7 @@ class PunnettMeTest {
 //		pm.setParents(parentOne, parentTwo);
 //		pm.run();
 //		
-//		String[] sample = new String[] 	{
+//		String[] test = new String[] 	{
 //				("AABBCCDD"),("AABBCCDd"),("AABBCcDD"),("AABbCCDD"),("AABBCcDd"),("AABbCcDD"),("AABbCCDd"),("AABbCcDd"),
 //					("AaBBCCDD"),("AaBBCCDd"),("AaBBCcDD"),("AaBbCCDD"),("AaBBCcDd"),("AaBbCcDD"),("AaBbCCDd"),("AaBbCcDd"),
 //				("AABBCCDd"),("AABBCCdd"),("AABBCcDd"),("AABbCCDd"),("AABBCcdd"),("AABbCcDd"),("AABbCCdd"),("AABbCcdd"),
@@ -164,19 +164,19 @@ class PunnettMeTest {
 //				("AaBbCcDd"),("AaBbCcdd"),("AaBbccDd"),("AabbCcDd"),("AaBbccdd"),("AabbccDd"),("AabbCcdd"),("Aabbccdd"),
 //					("aaBbCcDd"),("aaBbCcdd"),("aaBbccDd"),("aabbCcDd"),("aaBbccdd"),("aabbccDd"),("aabbCcdd"),("aabbccdd")};
 //		
-//		String[] test = new String[pm.getOffspring().size()];
-//		for (int i = 0; i < test.length; i++)
+//		String[] sample = new String[pm.getOffspring().size()];
+//		for (int i = 0; i < sample.length; i++)
 //		{
-//			test[i] = pm.getOffspring().get(i);
+//			sample[i] = pm.getOffspring().get(i);
 //		}
 //		
 //		boolean allEntriesIncluded = true;
-//		for (int k = 0; k < test.length; k++)
+//		for (int k = 0; k < sample.length; k++)
 //		{
 //			boolean isResultInArray = false;
-//			for (String a: test)
+//			for (String a: sample)
 //			{
-//				if (a.equals(sample[k]))
+//				if (a.equals(test[k]))
 //				{
 //					isResultInArray = true;
 //				}
@@ -213,7 +213,7 @@ class PunnettMeTest {
 //		pm.setParents(parentOne, parentTwo);
 //		pm.run();
 //		
-//		String[] sample = new String[] 	{
+//		String[] test = new String[] 	{
 //				("AABBCCDDEE"),("AABBCCDDEe"),("AABBCCDdEE"),("AABBCcDDEE"),("AABbCCDDEE"),("AABBCCDdEe"),("AABBCcDdEE"),("AABBCcDDEe"),("AABbCCDDEe"),("AABbCCDdEE"),("AABbCcDDEE"),("AABBCcDdEe"),("AABbCCDdEe"),("AABbCcDDEe"),("AABbCcDdEE"),("AABbCcDdEe"),
 //					("AaBBCCDDEE"),("AaBBCCDDEe"),("AaBBCCDdEE"),("AaBBCcDDEE"),("AaBbCCDDEE"),("AaBBCCDdEe"),("AaBBCcDdEE"),("AaBBCcDDEe"),("AaBbCCDDEe"),("AaBbCCDdEE"),("AaBbCcDDEE"),("AaBBCcDdEe"),("AaBbCCDdEe"),("AaBbCcDDEe"),("AaBbCcDdEE"),("AaBbCcDdEe"),
 //				("AABBCCDDEe"),("AABBCCDDee"),("AABBCCDdEe"),("AABBCcDDEe"),("AABbCCDDEe"),("AABBCCDdee"),("AABBCcDdEe"),("AABBCcDDee"),("AABbCCDDee"),("AABbCCDdEe"),("AABbCcDDEe"),("AABBCcDdee"),("AABbCCDdee"),("AABbCcDDee"),("AABbCcDdEe"),("AABbCcDdee"),
@@ -279,19 +279,19 @@ class PunnettMeTest {
 //				("AaBbCcDdEe"),("AaBbCcDdee"),("AaBbCcddEe"),("AaBbccDdEe"),("AabbCcDdEe"),("AaBbCcddee"),("AaBbccddEe"),("AaBbccDdee"),("AabbCcDdee"),("AabbCcddEe"),("AabbccDdEe"),("AaBbccddee"),("AabbCcddee"),("AabbccDdee"),("AabbccddEe"),("Aabbccddee"),
 //					("aaBbCcDdEe"),("aaBbCcDdee"),("aaBbCcddEe"),("aaBbccDdEe"),("aabbCcDdEe"),("aaBbCcddee"),("aaBbccddEe"),("aaBbccDdee"),("aabbCcDdee"),("aabbCcddEe"),("aabbccDdEe"),("aaBbccddee"),("aabbCcddee"),("aabbccDdee"),("aabbccddEe"),("aabbccddee")};
 //		
-//		String[] test = new String[pm.getOffspring().size()];
-//		for (int i = 0; i < test.length; i++)
+//		String[] sample = new String[pm.getOffspring().size()];
+//		for (int i = 0; i < sample.length; i++)
 //		{
-//			test[i] = pm.getOffspring().get(i);
+//			sample[i] = pm.getOffspring().get(i);
 //		}
 //		
 //		boolean allEntriesIncluded = true;
-//		for (int k = 0; k < test.length; k++)
+//		for (int k = 0; k < sample.length; k++)
 //		{
 //			boolean isResultInArray = false;
-//			for (String a: test)
+//			for (String a: sample)
 //			{
-//				if (a.equals(sample[k]))
+//				if (a.equals(test[k]))
 //				{
 //					isResultInArray = true;
 //				}
@@ -303,7 +303,7 @@ class PunnettMeTest {
 //		}
 //		assertTrue(allEntriesIncluded);
 //	}
-//
+
 //	@Test
 //	void heteroScoreResultsWithOneGene()
 //	{
@@ -320,116 +320,267 @@ class PunnettMeTest {
 //		pm.setParents(parentOne, parentTwo);
 //		pm.run();
 //		
-//		
-//		
-//	}
-//	
-//	@Test
-//	void toRunCurrently()
-//	{
-//		PunnettMe pm = new PunnettMe();
-//		Parent parentOne = new Parent();
-//		Parent parentTwo = new Parent();
-//		
-//		parentOne.setRawGenes(new Gene[] {
-////				new Gene("A", true, false, false),
-////				new Gene("B", true, false, false),
-//				new Gene("C", true, false, false),
-//				new Gene("D", true, false, false),
-//				new Gene("E", true, false, false)});
-//		
-//		parentTwo.setRawGenes(new Gene[] {
-////				new Gene("A", true, false, false),
-////				new Gene("B", true, false, false),
-//				new Gene("C", true, false, false),
-//				new Gene("D", true, false, false),
-//				new Gene("E", true, false, false)});
-//		
-//		pm.setParents(parentOne, parentTwo);
-//		pm.run();
-//		
 //	}
 
-	
 	@Test
-	void rightRightCaseWithSize3TreeCheck()
+	void toRunCurrently()
 	{
-		AVLTree tree = new AVLTree();
+		PunnettMe pm = new PunnettMe();
+		Parent parentOne = new Parent();
+		Parent parentTwo = new Parent();
 		
-		tree.storeInTree("aa");
-		tree.storeInTree("Aa");
-		tree.storeInTree("AA");
+		parentOne.setRawGenes(new Gene[] {
+				new Gene("A", true, false, false),
+				new Gene("B", true, false, false),
+				new Gene("C", true, false, false),
+				new Gene("D", true, false, false),
+				new Gene("E", true, false, false)});
 		
-		tree.inOrderTraversal();
+		parentTwo.setRawGenes(new Gene[] {
+				new Gene("A", true, false, false),
+				new Gene("B", true, false, false),
+				new Gene("C", true, false, false),
+				new Gene("D", true, false, false),
+				new Gene("E", true, false, false)});
+		
+		pm.setParents(parentOne, parentTwo);
+		pm.run();
+		
+	}
 
+//	@Test
+//	void checkingDuplicateRootScores()
+//	{
+//		AVLTree tree = new AVLTree();
+//		
+//		tree.storeInTree("aa");
+//		tree.storeInTree("AA");
+//		tree.storeInTree("Aa");
+//		tree.storeInTree("aa");
+//		tree.storeInTree("Aa");
+//		tree.storeInTree("Aa");
+//		tree.storeInTree("AA");
+//		tree.storeInTree("AA");
+//		tree.storeInTree("aa");
+//		
 //		List<String> sample = tree.getTestingOutput();
 //		
-//		List<String> expected = new ArrayList<>();
-//		expected.add("aa");
-//		expected.add("Aa");
-//		expected.add("AA");
+//		List<String> test = new ArrayList<>();
+//		test.add("aa");
+//		test.add("aa");
+//		test.add("aa");
+//		test.add("Aa");
+//		test.add("Aa");
+//		test.add("Aa");
+//		test.add("AA");
+//		test.add("AA");
+//		test.add("AA");
 //
 //		boolean isEquals = true;
-//		String badSample;
-//		String badExpected;
-//		for (int index = 0; index < sample.size(); index++)
+//		if (sample.size() != test.size())
 //		{
-//			if (!(sample.get(index).equals(expected.get(index))))
+//			//Sample size and Expected size do not match.
+//			fail();
+//		}
+//		for (int index = 0; index < test.size(); index++)
+//		{
+//			boolean isInArray = false;
+//			for (int subindex = 0; subindex < test.size(); subindex++)
 //			{
-//				System.out.println("FAILURE");
+//				if (sample.get(index).equals(test.get(subindex)))
+//				{
+//				System.out.println("Value found");
+//					isInArray = true;
+//				}
+//			}
+//			if (!isInArray)
+//			{
+//				System.out.println("Value NOT found");
 //				isEquals = false;
-//				badSample = sample.get(index);
-//				badExpected = expected.get(index);
 //				break;
 //			}
 //		}
 //		assertTrue(isEquals);
-		
-		
-		
-	}
-	@Test
-	void rightRightCaseWithSize5TreeCheck()
-	{
-		AVLTree tree = new AVLTree();
-		
-		tree.storeInTree("aabB");
-		tree.storeInTree("aabb");
-		tree.storeInTree("aaBb");
-		tree.storeInTree("AaBb");
-		tree.storeInTree("AABB");
-		
-		tree.inOrderTraversal();
-		
-	}
-	
-	@Test
-	void leftLeftCaseWithSize3TreeCheck()
-	{
-		AVLTree tree = new AVLTree();
-		
-		tree.storeInTree("AA");
-		tree.storeInTree("Aa");
-		tree.storeInTree("aa");
-		
-		tree.inOrderTraversal();
-		
-		
-	}
-	@Test
-	void leftLeftCaseWithSize5TreeCheck()
-	{
-		AVLTree tree = new AVLTree();
-		
-		
-		tree.storeInTree("AaBb");
-		tree.storeInTree("AABB");
-		tree.storeInTree("aaBb");
-		tree.storeInTree("aabB");
-		tree.storeInTree("aabb");
-		
-		tree.inOrderTraversal();
-		
-	}
+//	}
+//	
+//	@Test
+//	void rightRightCaseWithSize3TreeCheck()
+//	{
+//		AVLTree tree = new AVLTree();
+//		
+//		tree.storeInTree("aa");
+//		tree.storeInTree("Aa");
+//		tree.storeInTree("AA");
+//		
+//		List<String> sample = tree.getTestingOutput();
+//		
+//		List<String> test = new ArrayList<>();
+//		test.add("aa");
+//		test.add("Aa");
+//		test.add("AA");
+//
+//		boolean isEquals = true;
+//		if (sample.size() != test.size())
+//		{
+//			//Sample size and Expected size do not match.
+//			fail();
+//		}
+//		for (int index = 0; index < test.size(); index++)
+//		{
+//			boolean isInArray = false;
+//			for (int subindex = 0; subindex < test.size(); subindex++)
+//			{
+//				if (sample.get(index).equals(test.get(subindex)))
+//				{
+//					System.out.println("Value found");
+//					isInArray = true;
+//				}
+//			}
+//			if (!isInArray)
+//			{
+//				System.out.println("Value NOT found");
+//				isEquals = false;
+//				break;
+//			}
+//		}
+//		assertTrue(isEquals);
+//	}
+//	
+//	@Test
+//	void rightRightCaseWithSize5TreeCheck()
+//	{
+//		AVLTree tree = new AVLTree();
+//		
+//		tree.storeInTree("aabB");
+//		tree.storeInTree("aabb");
+//		tree.storeInTree("aaBb");
+//		tree.storeInTree("AaBb");
+//		tree.storeInTree("AABB");
+//		
+//		List<String> sample = tree.getTestingOutput();
+//		
+//		List<String> test = new ArrayList<>();
+//		test.add("aabB");
+//		test.add("aabb");
+//		test.add("aaBb");
+//		test.add("AaBb");
+//		test.add("AABB");
+//
+//		boolean isEquals = true;
+//		if (sample.size() != test.size())
+//		{
+//			//Sample size and Expected size do not match.
+//			fail();
+//		}
+//		for (int index = 0; index < test.size(); index++)
+//		{
+//			boolean isInArray = false;
+//			for (int subindex = 0; subindex < test.size(); subindex++)
+//			{
+//				if (sample.get(index).equals(test.get(subindex)))
+//				{
+//				System.out.println("Value found");
+//					isInArray = true;
+//				}
+//			}
+//			if (!isInArray)
+//			{
+//				System.out.println("Value NOT found");
+//				isEquals = false;
+//				break;
+//			}
+//		}
+//		assertTrue(isEquals);
+//	}
+//	
+//	@Test
+//	void leftLeftCaseWithSize3TreeCheck()
+//	{
+//		AVLTree tree = new AVLTree();
+//		
+//		tree.storeInTree("AA");
+//		tree.storeInTree("Aa");
+//		tree.storeInTree("aa");
+//		
+//		List<String> sample = tree.getTestingOutput();
+//		
+//		List<String> test = new ArrayList<>();
+//		test.add("AA");
+//		test.add("Aa");
+//		test.add("aa");
+//
+//		boolean isEquals = true;
+//		if (sample.size() != test.size())
+//		{
+//			//Sample size and Expected size do not match.
+//			fail();
+//		}
+//		for (int index = 0; index < test.size(); index++)
+//		{
+//			boolean isInArray = false;
+//			for (int subindex = 0; subindex < test.size(); subindex++)
+//			{
+//				if (sample.get(index).equals(test.get(subindex)))
+//				{
+//				System.out.println("Value found");
+//					isInArray = true;
+//				}
+//			}
+//			if (!isInArray)
+//			{
+//				System.out.println("Value NOT found");
+//				isEquals = false;
+//				break;
+//			}
+//		}
+//		assertTrue(isEquals);		
+//	}
+//	
+//	@Test
+//	void leftLeftCaseWithSize5TreeCheck()
+//	{
+//		AVLTree tree = new AVLTree();
+//		
+//		tree.storeInTree("AaBb");
+//		tree.storeInTree("AABB");
+//		tree.storeInTree("aaBb");
+//		tree.storeInTree("aabB");
+//		tree.storeInTree("aabb");
+//		
+//		List<String> sample = tree.getTestingOutput();
+//		
+//		List<String> test = new ArrayList<>();
+//		test.add("AaBb");
+//		test.add("AABB");
+//		test.add("aaBb");
+//		test.add("aabB");
+//		test.add("aabb");
+//
+//		boolean isEquals = true;
+//		if (sample.size() != test.size())
+//		{
+//			//Sample size and Expected size do not match.
+//			fail();
+//		}
+//		for (int index = 0; index < test.size(); index++)
+//		{
+//			boolean isInArray = false;
+//			for (int subindex = 0; subindex < test.size(); subindex++)
+//			{
+//				if (sample.get(index).equals(test.get(subindex)))
+//				{
+//				System.out.println("Value found");
+//					isInArray = true;
+//				}
+//			}
+//			if (!isInArray)
+//			{
+//				System.out.println("Value NOT found");
+//				isEquals = false;
+//				break;
+//			}
+//		}
+//		assertTrue(isEquals);
+//	}
 	
 }
