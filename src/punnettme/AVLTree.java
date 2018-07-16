@@ -15,7 +15,6 @@ public class AVLTree
 	}
 	
 	
-		
 		//enter into AVL tree
 		/*
 		 * Node class
@@ -35,6 +34,7 @@ public class AVLTree
 				if (score == root.score)
 				{
 //					System.out.println("DUPLICATE ROOT SCORE");
+//					System.out.println("Data Stored: " + data); 
 					root.increment();
 				}
 				else
@@ -54,6 +54,7 @@ public class AVLTree
 			else 
 			{
 				root = new Node(score, data);
+//				System.out.println("Data Stored: " + data); 
 			}
 			
 		}
@@ -91,6 +92,8 @@ public class AVLTree
 				else
 				{
 					root.left.increment();
+//					System.out.println("Data Stored: " + root.left.data); 
+					
 					hasDuplicate = true;
 					return true;
 				}
@@ -105,6 +108,7 @@ public class AVLTree
 				else
 				{
 					root.right.increment();
+//					System.out.println("Data Stored: " + root.right.data); 
 					hasDuplicate = true;
 					return true;
 				}
@@ -130,6 +134,7 @@ public class AVLTree
 				{
 					root.left = newNode;
 					newNode.parent = root;
+//					System.out.println("Data Stored: " + newNode.data); 
 					
 				}
 			}
@@ -144,6 +149,7 @@ public class AVLTree
 				{
 					root.right = newNode;
 					newNode.parent = root;
+//					System.out.println("Data Stored: " + newNode.data); 
 				}
 			}
 			
@@ -165,8 +171,8 @@ public class AVLTree
 		{
 			if ((getHeight(node.left) - getHeight(node.right) > 1) || (getHeight(node.left) - getHeight(node.right) < -1))
 			{
-				System.out.println("************REBALANCE INITIATED************");
-				System.out.println("************BALANCE VALUE: " + ((getHeight(node.left) - getHeight(node.right)) + "************"));
+//				System.out.println("************REBALANCE INITIATED************");
+//				System.out.println("************BALANCE VALUE: " + ((getHeight(node.left) - getHeight(node.right)) + "************"));
 				
 				//To point to the parent we're disconnecting & reconnecting to.
 				Node greatGrandParent = node.parent;
@@ -176,30 +182,29 @@ public class AVLTree
 				//Reconnecting the new rebalanced node back into the tree.
 				if (greatGrandParent != null)
 				{
-					System.out.println("GPP not null");
+//					System.out.println("GPP not null");
 					node.parent = greatGrandParent;
 					
 					if (greatGrandParent.left.score == oldChildScore)
 					{
-						System.out.println("GPP's left child needs updating.");
+//						System.out.println("GPP's left child needs updating.");
 						greatGrandParent.left = node;
 					}
 					else if (greatGrandParent.right.score == oldChildScore) 
 					{
-						System.out.println("GPP's right child needs updating.");
+//						System.out.println("GPP's right child needs updating.");
 						greatGrandParent.right = node;
 						
 					}
 					else
 					{
-						System.out.println("GPP's L and R scores don't match.");
+//						System.out.println("GPP's L and R scores don't match.");
 					}
-					
 				}
 				else
 				{
-					node.parent = null;
 					root = node;
+					node.parent = null;
 				}
 			}
 			
@@ -212,12 +217,18 @@ public class AVLTree
 		
 		
 		/*
-		 * NOTES FROM JULY 7
+		 * NOTES FROM JULY 15
+		 * 
+		 * 
 		 * 
 		 * LEFT ROTATE AND RIGHT ROTATE WORK!
-		 * TO DO LIST:
+		 * LEFT RIGHT ROTATE AND RIGHT LEFT ROTATE WORK! - I think. more testing needed.
 		 * 
-		 * LEFT RIGHT AND RIGHT LEFT ROTATIONS - VERIFY WITH INORDER TRAVERSALS 
+		 * TO DO:
+		 * IN ORDER TRAVERSALS ARE ONLY SHOWING ~500 OUT OF 1024 OFFSPRING...?
+		 * I TESTED WHEN THEY'RE INSERTED INTO THE TREE AND ALL 1024 ARE "INSERTED"
+		 * HOWEVER, IN-ORDER TRAVERSAL DOESN'T PRINT THEM ALL OUT, I INSERTED A FORLOOP
+		 * TO OUTPUT DUPLICATES.
 		 * 
 		 * FIGURE OUT HOW TO JUNIT TEST STRING ARRAYS, OR
 		 * USE THE OLD AN INNEFICIENT WAY OF A FOR LOOP OR SOMETHING.....ANNOYING
@@ -232,34 +243,34 @@ public class AVLTree
 			{
 				if (getHeight(node.left.left) > getHeight(node.left.right))
 				{
-					System.out.println("************LEFT LEFT CASE************");
+//					System.out.println("************LEFT LEFT CASE************");
 					//Left left case.
+					
 					node = rotateRight(node);
-//					rotateRight(node);
 				}
 				else
 				{
-					System.out.println("************LEFT-RIGHT CASE************");
+//					System.out.println("************LEFT-RIGHT CASE************");
 					//Left Right case.
-//					leftRightRotate(node);
-//					node = rotateLeftRight(node);
+
+					node = rotateLeftRight(node);
 				}
 			}
 			else
 			{
 				if (getHeight(node.right.left) > getHeight(node.right.right))
 				{
-					System.out.println("************RIGHT LEFT CASE************");
+//					System.out.println("************RIGHT LEFT CASE************");
 					//Right Left case.
-//					node = rotateRightLeft(node);
+					
+					node = rotateRightLeft(node);
 				}
 				else
 				{
-					System.out.println("************RIGHT RIGHT CASE************");
+//					System.out.println("************RIGHT RIGHT CASE************");
 					//Right Right case.
-//					RightLeftRotate(node);
+					
 					node = rotateLeft(node);
-//					rotateLeft(node);
 				}
 			}
 
@@ -273,28 +284,9 @@ public class AVLTree
 		 */
 		private Node rotateLeft(Node root)
 		{
-//			try
-//			{
-//				System.out.println("LEFT Root sent: " + root.data);
-//				System.out.println("LEFT left child: " + root.left.data);
-//				System.out.println("LEFT right child: " + root.right.data);
-//				System.out.println("LEFT Root parent: " + root.parent);
-//				
-//			}
-//			catch (NullPointerException e)
-//			{
-//				System.out.println("Couldn't find an ancestor.");
-//			}
-
-			//The actual rotation of Nodes
 			Node temp = root.right;
 			root.right = temp.left;
 			temp.left = root;
-			System.out.println("Switch complete.");
-			
-			//Updating parent variables
-			temp.left.parent = root;
-			System.out.println("Parent fixes complete.");
 			
 			return temp;
 		}
@@ -306,52 +298,33 @@ public class AVLTree
 		 */
 		private Node rotateRight(Node root)
 		{
-//			try
-//			{
-//				
-//			System.out.println("RIGHT Root sent: " + root.data);
-//			System.out.println("RIGHT left child: " + root.left.data);
-//			System.out.println("RIGHT left left child: " + root.left.left.data);
-//			System.out.println("RIGHT right child: " + root.right.data);
-//			System.out.println("RIGHT Root parent: " + root.parent);
-//
-//			}
-//			catch (NullPointerException e)
-//			{
-//				System.out.println("Couldn't find an ancestor.");
-//			}
-			
 			Node temp = root.left;
 			root.left = temp.right;
 			temp.right = root;
-			System.out.println("Switch complete.");
-			
-			//Updating parent variables
-			temp.right.parent = root;
-			System.out.println("Parent fixes complete.");
+
 			return temp;
 		}
 		
-//		private Node rotateRightLeft(Node root)
-//		{
-//			root.right = rotateRight(root.right);
-//			
-//			return rotateLeft(root);
-//			
-//		}
-//		private Node rotateLeftRight(Node root)
-//		{
-//			root.left = rotateLeft(root.left);
-//			
-//			return rotateRight(root);
-//			
-//		}
+		private Node rotateRightLeft(Node root)
+		{
+			root.right = rotateRight(root.right);
+			
+			return rotateLeft(root);
+			
+		}
+		private Node rotateLeftRight(Node root)
+		{
+			root.left = rotateLeft(root.left);
+			
+			return rotateRight(root);
+			
+		}
 		
 		//Outward facing traversal call
 		public void inOrderTraversal()
 		{
 			inOrderTraversal(root);
-			
+			System.out.println("In Order Traversal Complete.");
 		}
 		
 		//inward facing recursive traversal
@@ -359,11 +332,15 @@ public class AVLTree
 		{
 			if (root == null)
 			{
-//				System.out.println("inOrderTraversal Complete.");
 				return;
 			}
 				inOrderTraversal(root.left);
-			System.out.println(root.data);
+			for (int duplicate = 0; duplicate <= root.duplicate; duplicate++)
+			{
+				System.out.println(root.data);
+				
+			}
+//			System.out.println(root.data);
 				inOrderTraversal(root.right);
 		}
 		

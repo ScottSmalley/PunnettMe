@@ -11,6 +11,32 @@ import org.junit.jupiter.api.Test;
 
 class PunnettMeTest {
 
+	@Test
+	void toRunCurrently()
+	{
+		PunnettMe pm = new PunnettMe();
+		Parent parentOne = new Parent();
+		Parent parentTwo = new Parent();
+		
+		parentOne.setRawGenes(new Gene[] {
+				new Gene("A", true, false, false),
+				new Gene("B", true, false, false),
+				new Gene("C", true, false, false),
+				new Gene("D", true, false, false),
+				new Gene("E", true, false, false)});
+		
+		parentTwo.setRawGenes(new Gene[] {
+				new Gene("A", true, false, false),
+				new Gene("B", true, false, false),
+				new Gene("C", true, false, false),
+				new Gene("D", true, false, false),
+				new Gene("E", true, false, false)});
+		
+		pm.setParents(parentOne, parentTwo);
+		pm.run();
+		
+	}
+	
 //	@Test
 //	void heteroBuildPunnettSquareResultsAccuracyWithOneGene() 
 //	{
@@ -322,32 +348,6 @@ class PunnettMeTest {
 //		
 //	}
 
-	@Test
-	void toRunCurrently()
-	{
-		PunnettMe pm = new PunnettMe();
-		Parent parentOne = new Parent();
-		Parent parentTwo = new Parent();
-		
-		parentOne.setRawGenes(new Gene[] {
-				new Gene("A", true, false, false),
-				new Gene("B", true, false, false),
-				new Gene("C", true, false, false),
-				new Gene("D", true, false, false),
-				new Gene("E", true, false, false)});
-		
-		parentTwo.setRawGenes(new Gene[] {
-				new Gene("A", true, false, false),
-				new Gene("B", true, false, false),
-				new Gene("C", true, false, false),
-				new Gene("D", true, false, false),
-				new Gene("E", true, false, false)});
-		
-		pm.setParents(parentOne, parentTwo);
-		pm.run();
-		
-	}
-
 //	@Test
 //	void checkingDuplicateRootScores()
 //	{
@@ -582,5 +582,94 @@ class PunnettMeTest {
 //		}
 //		assertTrue(isEquals);
 //	}
-	
+//	
+//	@Test
+//	void rightLeftCaseWithSize3TreeCheck()
+//	{
+//		AVLTree tree = new AVLTree();
+//		
+//		tree.storeInTree("aa");
+//		tree.storeInTree("AA");
+//		tree.storeInTree("Aa");
+//		
+//		List<String> sample = tree.getTestingOutput();
+//		
+//		List<String> test = new ArrayList<>();
+//		test.add("aa");
+//		test.add("AA");
+//		test.add("Aa");
+//
+//		boolean isEquals = true;
+//		if (sample.size() != test.size())
+//		{
+//			//Sample size and Expected size do not match.
+//			fail();
+//		}
+//		for (int index = 0; index < test.size(); index++)
+//		{
+//			boolean isInArray = false;
+//			for (int subindex = 0; subindex < test.size(); subindex++)
+//			{
+//				if (sample.get(index).equals(test.get(subindex)))
+//				{
+//					System.out.println("Value found");
+//					isInArray = true;
+//				}
+//			}
+//			if (!isInArray)
+//			{
+//				System.out.println("Value NOT found");
+//				isEquals = false;
+//				break;
+//			}
+//		}
+//		assertTrue(isEquals);
+//	}
+//	
+//	@Test
+//	void rightLeftCaseWithSize5TreeCheck()
+//	{
+//		AVLTree tree = new AVLTree();
+//		
+//		tree.storeInTree("aabB");
+//		tree.storeInTree("aabb");
+//		tree.storeInTree("aaBb");
+//		tree.storeInTree("AABB");
+//		tree.storeInTree("AaBb");
+//		
+//		List<String> sample = tree.getTestingOutput();
+//		
+//		List<String> test = new ArrayList<>();
+//		test.add("aabB");
+//		test.add("aabb");
+//		test.add("aaBb");
+//		test.add("AABB");
+//		test.add("AaBb");
+//
+//		boolean isEquals = true;
+//		if (sample.size() != test.size())
+//		{
+//			//Sample size and Expected size do not match.
+//			fail();
+//		}
+//		for (int index = 0; index < test.size(); index++)
+//		{
+//			boolean isInArray = false;
+//			for (int subindex = 0; subindex < test.size(); subindex++)
+//			{
+//				if (sample.get(index).equals(test.get(subindex)))
+//				{
+//				System.out.println("Value found");
+//					isInArray = true;
+//				}
+//			}
+//			if (!isInArray)
+//			{
+//				System.out.println("Value NOT found");
+//				isEquals = false;
+//				break;
+//			}
+//		}
+//		assertTrue(isEquals);
+//	}
 }
