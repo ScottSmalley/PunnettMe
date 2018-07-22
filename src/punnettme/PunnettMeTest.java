@@ -348,328 +348,328 @@ class PunnettMeTest {
 //		
 //	}
 
-//	@Test
-//	void checkingDuplicateRootScores()
-//	{
-//		AVLTree tree = new AVLTree();
-//		
-//		tree.storeInTree("aa");
-//		tree.storeInTree("AA");
-//		tree.storeInTree("Aa");
-//		tree.storeInTree("aa");
-//		tree.storeInTree("Aa");
-//		tree.storeInTree("Aa");
-//		tree.storeInTree("AA");
-//		tree.storeInTree("AA");
-//		tree.storeInTree("aa");
-//		
-//		List<String> sample = tree.getTestingOutput();
-//		
-//		List<String> test = new ArrayList<>();
-//		test.add("aa");
-//		test.add("aa");
-//		test.add("aa");
-//		test.add("Aa");
-//		test.add("Aa");
-//		test.add("Aa");
-//		test.add("AA");
-//		test.add("AA");
-//		test.add("AA");
-//
-//		boolean isEquals = true;
-//		if (sample.size() != test.size())
-//		{
-//			//Sample size and Expected size do not match.
-//			fail();
-//		}
-//		for (int index = 0; index < test.size(); index++)
-//		{
-//			boolean isInArray = false;
-//			for (int subindex = 0; subindex < test.size(); subindex++)
-//			{
-//				if (sample.get(index).equals(test.get(subindex)))
-//				{
-//				System.out.println("Value found");
-//					isInArray = true;
-//				}
-//			}
-//			if (!isInArray)
-//			{
-//				System.out.println("Value NOT found");
-//				isEquals = false;
-//				break;
-//			}
-//		}
-//		assertTrue(isEquals);
-//	}
-//	
-//	@Test
-//	void rightRightCaseWithSize3TreeCheck()
-//	{
-//		AVLTree tree = new AVLTree();
-//		
-//		tree.storeInTree("aa");
-//		tree.storeInTree("Aa");
-//		tree.storeInTree("AA");
-//		
-//		List<String> sample = tree.getTestingOutput();
-//		
-//		List<String> test = new ArrayList<>();
-//		test.add("aa");
-//		test.add("Aa");
-//		test.add("AA");
-//
-//		boolean isEquals = true;
-//		if (sample.size() != test.size())
-//		{
-//			//Sample size and Expected size do not match.
-//			fail();
-//		}
-//		for (int index = 0; index < test.size(); index++)
-//		{
-//			boolean isInArray = false;
-//			for (int subindex = 0; subindex < test.size(); subindex++)
-//			{
-//				if (sample.get(index).equals(test.get(subindex)))
-//				{
-//					System.out.println("Value found");
-//					isInArray = true;
-//				}
-//			}
-//			if (!isInArray)
-//			{
-//				System.out.println("Value NOT found");
-//				isEquals = false;
-//				break;
-//			}
-//		}
-//		assertTrue(isEquals);
-//	}
-//	
-//	@Test
-//	void rightRightCaseWithSize5TreeCheck()
-//	{
-//		AVLTree tree = new AVLTree();
-//		
-//		tree.storeInTree("aabB");
-//		tree.storeInTree("aabb");
-//		tree.storeInTree("aaBb");
-//		tree.storeInTree("AaBb");
-//		tree.storeInTree("AABB");
-//		
-//		List<String> sample = tree.getTestingOutput();
-//		
-//		List<String> test = new ArrayList<>();
-//		test.add("aabB");
-//		test.add("aabb");
-//		test.add("aaBb");
-//		test.add("AaBb");
-//		test.add("AABB");
-//
-//		boolean isEquals = true;
-//		if (sample.size() != test.size())
-//		{
-//			//Sample size and Expected size do not match.
-//			fail();
-//		}
-//		for (int index = 0; index < test.size(); index++)
-//		{
-//			boolean isInArray = false;
-//			for (int subindex = 0; subindex < test.size(); subindex++)
-//			{
-//				if (sample.get(index).equals(test.get(subindex)))
-//				{
-//				System.out.println("Value found");
-//					isInArray = true;
-//				}
-//			}
-//			if (!isInArray)
-//			{
-//				System.out.println("Value NOT found");
-//				isEquals = false;
-//				break;
-//			}
-//		}
-//		assertTrue(isEquals);
-//	}
-//	
-//	@Test
-//	void leftLeftCaseWithSize3TreeCheck()
-//	{
-//		AVLTree tree = new AVLTree();
-//		
-//		tree.storeInTree("AA");
-//		tree.storeInTree("Aa");
-//		tree.storeInTree("aa");
-//		
-//		List<String> sample = tree.getTestingOutput();
-//		
-//		List<String> test = new ArrayList<>();
-//		test.add("AA");
-//		test.add("Aa");
-//		test.add("aa");
-//
-//		boolean isEquals = true;
-//		if (sample.size() != test.size())
-//		{
-//			//Sample size and Expected size do not match.
-//			fail();
-//		}
-//		for (int index = 0; index < test.size(); index++)
-//		{
-//			boolean isInArray = false;
-//			for (int subindex = 0; subindex < test.size(); subindex++)
-//			{
-//				if (sample.get(index).equals(test.get(subindex)))
-//				{
-//				System.out.println("Value found");
-//					isInArray = true;
-//				}
-//			}
-//			if (!isInArray)
-//			{
-//				System.out.println("Value NOT found");
-//				isEquals = false;
-//				break;
-//			}
-//		}
-//		assertTrue(isEquals);		
-//	}
-//	
-//	@Test
-//	void leftLeftCaseWithSize5TreeCheck()
-//	{
-//		AVLTree tree = new AVLTree();
-//		
-//		tree.storeInTree("AaBb");
-//		tree.storeInTree("AABB");
-//		tree.storeInTree("aaBb");
-//		tree.storeInTree("aabB");
-//		tree.storeInTree("aabb");
-//		
-//		List<String> sample = tree.getTestingOutput();
-//		
-//		List<String> test = new ArrayList<>();
-//		test.add("AaBb");
-//		test.add("AABB");
-//		test.add("aaBb");
-//		test.add("aabB");
-//		test.add("aabb");
-//
-//		boolean isEquals = true;
-//		if (sample.size() != test.size())
-//		{
-//			//Sample size and Expected size do not match.
-//			fail();
-//		}
-//		for (int index = 0; index < test.size(); index++)
-//		{
-//			boolean isInArray = false;
-//			for (int subindex = 0; subindex < test.size(); subindex++)
-//			{
-//				if (sample.get(index).equals(test.get(subindex)))
-//				{
-//				System.out.println("Value found");
-//					isInArray = true;
-//				}
-//			}
-//			if (!isInArray)
-//			{
-//				System.out.println("Value NOT found");
-//				isEquals = false;
-//				break;
-//			}
-//		}
-//		assertTrue(isEquals);
-//	}
-//	
-//	@Test
-//	void rightLeftCaseWithSize3TreeCheck()
-//	{
-//		AVLTree tree = new AVLTree();
-//		
-//		tree.storeInTree("aa");
-//		tree.storeInTree("AA");
-//		tree.storeInTree("Aa");
-//		
-//		List<String> sample = tree.getTestingOutput();
-//		
-//		List<String> test = new ArrayList<>();
-//		test.add("aa");
-//		test.add("AA");
-//		test.add("Aa");
-//
-//		boolean isEquals = true;
-//		if (sample.size() != test.size())
-//		{
-//			//Sample size and Expected size do not match.
-//			fail();
-//		}
-//		for (int index = 0; index < test.size(); index++)
-//		{
-//			boolean isInArray = false;
-//			for (int subindex = 0; subindex < test.size(); subindex++)
-//			{
-//				if (sample.get(index).equals(test.get(subindex)))
-//				{
-//					System.out.println("Value found");
-//					isInArray = true;
-//				}
-//			}
-//			if (!isInArray)
-//			{
-//				System.out.println("Value NOT found");
-//				isEquals = false;
-//				break;
-//			}
-//		}
-//		assertTrue(isEquals);
-//	}
-//	
-//	@Test
-//	void rightLeftCaseWithSize5TreeCheck()
-//	{
-//		AVLTree tree = new AVLTree();
-//		
-//		tree.storeInTree("aabB");
-//		tree.storeInTree("aabb");
-//		tree.storeInTree("aaBb");
-//		tree.storeInTree("AABB");
-//		tree.storeInTree("AaBb");
-//		
-//		List<String> sample = tree.getTestingOutput();
-//		
-//		List<String> test = new ArrayList<>();
-//		test.add("aabB");
-//		test.add("aabb");
-//		test.add("aaBb");
-//		test.add("AABB");
-//		test.add("AaBb");
-//
-//		boolean isEquals = true;
-//		if (sample.size() != test.size())
-//		{
-//			//Sample size and Expected size do not match.
-//			fail();
-//		}
-//		for (int index = 0; index < test.size(); index++)
-//		{
-//			boolean isInArray = false;
-//			for (int subindex = 0; subindex < test.size(); subindex++)
-//			{
-//				if (sample.get(index).equals(test.get(subindex)))
-//				{
-//				System.out.println("Value found");
-//					isInArray = true;
-//				}
-//			}
-//			if (!isInArray)
-//			{
-//				System.out.println("Value NOT found");
-//				isEquals = false;
-//				break;
-//			}
-//		}
-//		assertTrue(isEquals);
-//	}
+	@Test
+	void checkingDuplicateRootScores()
+	{
+		AVLTree tree = new AVLTree();
+		
+		tree.storeInTree("aa");
+		tree.storeInTree("AA");
+		tree.storeInTree("Aa");
+		tree.storeInTree("aa");
+		tree.storeInTree("Aa");
+		tree.storeInTree("Aa");
+		tree.storeInTree("AA");
+		tree.storeInTree("AA");
+		tree.storeInTree("aa");
+		
+		List<String> sample = tree.getTestingOutput();
+		
+		List<String> test = new ArrayList<>();
+		test.add("aa");
+		test.add("aa");
+		test.add("aa");
+		test.add("Aa");
+		test.add("Aa");
+		test.add("Aa");
+		test.add("AA");
+		test.add("AA");
+		test.add("AA");
+
+		boolean isEquals = true;
+		if (sample.size() != test.size())
+		{
+			//Sample size and Expected size do not match.
+			fail();
+		}
+		for (int index = 0; index < test.size(); index++)
+		{
+			boolean isInArray = false;
+			for (int subindex = 0; subindex < test.size(); subindex++)
+			{
+				if (sample.get(index).equals(test.get(subindex)))
+				{
+				System.out.println("Value found");
+					isInArray = true;
+				}
+			}
+			if (!isInArray)
+			{
+				System.out.println("Value NOT found");
+				isEquals = false;
+				break;
+			}
+		}
+		assertTrue(isEquals);
+	}
+	
+	@Test
+	void rightRightCaseWithSize3TreeCheck()
+	{
+		AVLTree tree = new AVLTree();
+		
+		tree.storeInTree("aa");
+		tree.storeInTree("Aa");
+		tree.storeInTree("AA");
+		
+		List<String> sample = tree.getTestingOutput();
+		
+		List<String> test = new ArrayList<>();
+		test.add("aa");
+		test.add("Aa");
+		test.add("AA");
+
+		boolean isEquals = true;
+		if (sample.size() != test.size())
+		{
+			//Sample size and Expected size do not match.
+			fail();
+		}
+		for (int index = 0; index < test.size(); index++)
+		{
+			boolean isInArray = false;
+			for (int subindex = 0; subindex < test.size(); subindex++)
+			{
+				if (sample.get(index).equals(test.get(subindex)))
+				{
+					System.out.println("Value found");
+					isInArray = true;
+				}
+			}
+			if (!isInArray)
+			{
+				System.out.println("Value NOT found");
+				isEquals = false;
+				break;
+			}
+		}
+		assertTrue(isEquals);
+	}
+	
+	@Test
+	void rightRightCaseWithSize5TreeCheck()
+	{
+		AVLTree tree = new AVLTree();
+		
+		tree.storeInTree("aabB");
+		tree.storeInTree("aabb");
+		tree.storeInTree("aaBb");
+		tree.storeInTree("AaBb");
+		tree.storeInTree("AABB");
+		
+		List<String> sample = tree.getTestingOutput();
+		
+		List<String> test = new ArrayList<>();
+		test.add("aabB");
+		test.add("aabb");
+		test.add("aaBb");
+		test.add("AaBb");
+		test.add("AABB");
+
+		boolean isEquals = true;
+		if (sample.size() != test.size())
+		{
+			//Sample size and Expected size do not match.
+			fail();
+		}
+		for (int index = 0; index < test.size(); index++)
+		{
+			boolean isInArray = false;
+			for (int subindex = 0; subindex < test.size(); subindex++)
+			{
+				if (sample.get(index).equals(test.get(subindex)))
+				{
+				System.out.println("Value found");
+					isInArray = true;
+				}
+			}
+			if (!isInArray)
+			{
+				System.out.println("Value NOT found");
+				isEquals = false;
+				break;
+			}
+		}
+		assertTrue(isEquals);
+	}
+	
+	@Test
+	void leftLeftCaseWithSize3TreeCheck()
+	{
+		AVLTree tree = new AVLTree();
+		
+		tree.storeInTree("AA");
+		tree.storeInTree("Aa");
+		tree.storeInTree("aa");
+		
+		List<String> sample = tree.getTestingOutput();
+		
+		List<String> test = new ArrayList<>();
+		test.add("AA");
+		test.add("Aa");
+		test.add("aa");
+
+		boolean isEquals = true;
+		if (sample.size() != test.size())
+		{
+			//Sample size and Expected size do not match.
+			fail();
+		}
+		for (int index = 0; index < test.size(); index++)
+		{
+			boolean isInArray = false;
+			for (int subindex = 0; subindex < test.size(); subindex++)
+			{
+				if (sample.get(index).equals(test.get(subindex)))
+				{
+				System.out.println("Value found");
+					isInArray = true;
+				}
+			}
+			if (!isInArray)
+			{
+				System.out.println("Value NOT found");
+				isEquals = false;
+				break;
+			}
+		}
+		assertTrue(isEquals);		
+	}
+	
+	@Test
+	void leftLeftCaseWithSize5TreeCheck()
+	{
+		AVLTree tree = new AVLTree();
+		
+		tree.storeInTree("AaBb");
+		tree.storeInTree("AABB");
+		tree.storeInTree("aaBb");
+		tree.storeInTree("aabB");
+		tree.storeInTree("aabb");
+		
+		List<String> sample = tree.getTestingOutput();
+		
+		List<String> test = new ArrayList<>();
+		test.add("AaBb");
+		test.add("AABB");
+		test.add("aaBb");
+		test.add("aabB");
+		test.add("aabb");
+
+		boolean isEquals = true;
+		if (sample.size() != test.size())
+		{
+			//Sample size and Expected size do not match.
+			fail();
+		}
+		for (int index = 0; index < test.size(); index++)
+		{
+			boolean isInArray = false;
+			for (int subindex = 0; subindex < test.size(); subindex++)
+			{
+				if (sample.get(index).equals(test.get(subindex)))
+				{
+				System.out.println("Value found");
+					isInArray = true;
+				}
+			}
+			if (!isInArray)
+			{
+				System.out.println("Value NOT found");
+				isEquals = false;
+				break;
+			}
+		}
+		assertTrue(isEquals);
+	}
+	
+	@Test
+	void rightLeftCaseWithSize3TreeCheck()
+	{
+		AVLTree tree = new AVLTree();
+		
+		tree.storeInTree("aa");
+		tree.storeInTree("AA");
+		tree.storeInTree("Aa");
+		
+		List<String> sample = tree.getTestingOutput();
+		
+		List<String> test = new ArrayList<>();
+		test.add("aa");
+		test.add("AA");
+		test.add("Aa");
+
+		boolean isEquals = true;
+		if (sample.size() != test.size())
+		{
+			//Sample size and Expected size do not match.
+			fail();
+		}
+		for (int index = 0; index < test.size(); index++)
+		{
+			boolean isInArray = false;
+			for (int subindex = 0; subindex < test.size(); subindex++)
+			{
+				if (sample.get(index).equals(test.get(subindex)))
+				{
+					System.out.println("Value found");
+					isInArray = true;
+				}
+			}
+			if (!isInArray)
+			{
+				System.out.println("Value NOT found");
+				isEquals = false;
+				break;
+			}
+		}
+		assertTrue(isEquals);
+	}
+	
+	@Test
+	void rightLeftCaseWithSize5TreeCheck()
+	{
+		AVLTree tree = new AVLTree();
+		
+		tree.storeInTree("aabB");
+		tree.storeInTree("aabb");
+		tree.storeInTree("aaBb");
+		tree.storeInTree("AABB");
+		tree.storeInTree("AaBb");
+		
+		List<String> sample = tree.getTestingOutput();
+		
+		List<String> test = new ArrayList<>();
+		test.add("aabB");
+		test.add("aabb");
+		test.add("aaBb");
+		test.add("AABB");
+		test.add("AaBb");
+
+		boolean isEquals = true;
+		if (sample.size() != test.size())
+		{
+			//Sample size and Expected size do not match.
+			fail();
+		}
+		for (int index = 0; index < test.size(); index++)
+		{
+			boolean isInArray = false;
+			for (int subindex = 0; subindex < test.size(); subindex++)
+			{
+				if (sample.get(index).equals(test.get(subindex)))
+				{
+				System.out.println("Value found");
+					isInArray = true;
+				}
+			}
+			if (!isInArray)
+			{
+				System.out.println("Value NOT found");
+				isEquals = false;
+				break;
+			}
+		}
+		assertTrue(isEquals);
+	}
 }

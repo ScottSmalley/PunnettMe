@@ -22,9 +22,7 @@ public class PunnettMe implements Runnable
 {
 	private Parent parentOne;
 	private Parent parentTwo;
-//	private List<String> offspring = new ArrayList<>();
 	private AVLTree tree;
-	//private Node root;
 
 	public static void main (String [] args)
 	{
@@ -55,11 +53,6 @@ public class PunnettMe implements Runnable
 		this.parentTwo = parentTwo;
 		
 	}
-	
-//	public List<String> getOffspring()
-//	{
-//		return offspring;
-//	}
 	
 	/*
 	 * Builds the Alleles for all the genes in the array.
@@ -168,7 +161,6 @@ public class PunnettMe implements Runnable
 		}
 		return result;
 	}
-	
 	
 	public void buildPunnettSquare(String[] parentOne, String[] parentTwo)
 	{
