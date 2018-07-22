@@ -39,7 +39,7 @@ public class AVLTree
 			else 
 			{
 				root = new Node(score, data);
-				System.out.println("Data Stored in Root: " + data); 
+//				System.out.println("Data Stored in Root: " + data); 
 			}
 			
 		}
@@ -115,7 +115,7 @@ public class AVLTree
 				{
 					root.left = newNode;
 					newNode.parent = root;
-					System.out.println("Data Stored in Left: " + newNode.data); 
+//					System.out.println("Data Stored in Left: " + newNode.data); 
 				}
 			}
 			//Large on the right
@@ -129,7 +129,7 @@ public class AVLTree
 				{
 					root.right = newNode;
 					newNode.parent = root;
-					System.out.println("Data Stored in Right: " + newNode.data); 
+//					System.out.println("Data Stored in Right: " + newNode.data); 
 				}
 			}
 			
@@ -229,11 +229,11 @@ public class AVLTree
 			{
 				temp.parent = greatGrandParent;
 				
-				if (greatGrandParent.left.score == oldChildScore)
+				if (greatGrandParent.left != null && greatGrandParent.left.score == oldChildScore)
 				{
 					greatGrandParent.left = temp;
 				}
-				else if (greatGrandParent.right.score == oldChildScore) 
+				else if (greatGrandParent.right != null && greatGrandParent.right.score == oldChildScore) 
 				{
 					greatGrandParent.right = temp;
 				}
@@ -266,11 +266,12 @@ public class AVLTree
 			{
 				temp.parent = greatGrandParent;
 				
-				if (greatGrandParent.left.score == oldChildScore)
+				
+				if (greatGrandParent.left != null && greatGrandParent.left.score == oldChildScore)
 				{
 					greatGrandParent.left = temp;
 				}
-				else if (greatGrandParent.right.score == oldChildScore) 
+				else if (greatGrandParent.right != null && greatGrandParent.right.score == oldChildScore) 
 				{
 					greatGrandParent.right = temp;
 				}

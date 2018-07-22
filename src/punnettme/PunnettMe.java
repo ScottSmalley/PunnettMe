@@ -18,22 +18,25 @@ import java.util.List;
 
 import javax.swing.SwingUtilities;
 
-public class PunnettMe implements Runnable
+public class PunnettMe 
 {
 	private Parent parentOne;
 	private Parent parentTwo;
 	private AVLTree tree;
 
-	public static void main (String [] args)
-	{
-		SwingUtilities.invokeLater(new PunnettMe());
-	}
+//	public static void main (String [] args)
+//	{
+//		SwingUtilities.invokeLater(new PunnettMe());
+//	}
 	
-	public void run() 
+	public void build(Parent one, Parent two) 
 	{
 		tree = new AVLTree();
 //		parentOne = new Parent();
 //		parentTwo = new Parent();
+		
+		parentOne = one;
+		parentTwo = two;
 		
 		parentOne.setAlleles(buildAlleles(parentOne.getRawGenes()));
 		parentTwo.setAlleles(buildAlleles(parentTwo.getRawGenes()));
@@ -43,16 +46,16 @@ public class PunnettMe implements Runnable
 
 		buildPunnettSquare(parentOne.getGeneCombinations(), parentTwo.getGeneCombinations());
 		
-		System.out.println("PROGRAM COMPLETE, IN ORDER TRAVERSAL: ");
+//		System.out.println("PROGRAM COMPLETE, IN ORDER TRAVERSAL: ");
 		tree.inOrderTraversal();
 	}
 	
-	public void setParents(Parent parentOne, Parent parentTwo)
-	{
-		this.parentOne = parentOne;
-		this.parentTwo = parentTwo;
-		
-	}
+//	public void setParents(Parent parentOne, Parent parentTwo)
+//	{
+//		this.parentOne = parentOne;
+//		this.parentTwo = parentTwo;
+//		
+//	}
 	
 	/*
 	 * Builds the Alleles for all the genes in the array.
@@ -198,5 +201,10 @@ public class PunnettMe implements Runnable
 			buildPunnettSquare(result, parentOne.substring(1), parentTwo.substring(1));
 		}
 		return result;
+	}
+	
+	public List<String> getResults()
+	{
+		return tree.getTestingOutput();
 	}
 }
