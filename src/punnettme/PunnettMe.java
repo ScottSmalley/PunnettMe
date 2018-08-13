@@ -32,9 +32,7 @@ public class PunnettMe
 	public void build(Parent one, Parent two) 
 	{
 		tree = new AVLTree();
-//		parentOne = new Parent();
-//		parentTwo = new Parent();
-		
+
 		parentOne = one;
 		parentTwo = two;
 		
@@ -46,7 +44,6 @@ public class PunnettMe
 
 		buildPunnettSquare(parentOne.getGeneCombinations(), parentTwo.getGeneCombinations());
 		
-//		System.out.println("PROGRAM COMPLETE, IN ORDER TRAVERSAL: ");
 		tree.inOrderTraversal();
 	}
 	

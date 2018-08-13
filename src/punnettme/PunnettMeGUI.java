@@ -13,10 +13,15 @@ import javax.swing.BoxLayout;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.ActionEvent;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
@@ -28,8 +33,10 @@ import java.awt.BorderLayout;
 import javax.swing.DropMode;
 import javax.swing.JComboBox;
 
-public class PunnettMeGUI {
+public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
+{
 
+	//*********** GUI Globals ***********
 	private JFrame window;
 	private JComboBox<String> geneOnePOneCombo;
 	private JComboBox<String> geneTwoPOneCombo;
@@ -41,6 +48,8 @@ public class PunnettMeGUI {
 	private JComboBox<String> geneThreePTwoCombo;
 	private JComboBox<String> geneFourPTwoCombo;
 	private JComboBox<String> geneFivePTwoCombo;
+	private JButton resetButton;
+	private JButton calcButton;
 	
 	private Color textColor = Color.WHITE;
 	private Color backgroundColor = Color.DARK_GRAY;
@@ -50,59 +59,43 @@ public class PunnettMeGUI {
 									"L","M","N","O","P","Q",
 									"R","S","T","U","V","W",
 									"X","Y","Z",};
+	private String defaultComboItem = "Select Symbol";
 	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PunnettMeGUI window = new PunnettMeGUI();
-					window.window.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	//*********** PunnettMe Globals ***********
+	private PunnettMe pm;
+	private Parent parentOne;
+	private Parent parentTwo;
+	
+	public static void main (String[] args)
+	{
+		SwingUtilities.invokeLater(new PunnettMeGUI());
 	}
 
-	
-	
-	/*
-	 * NOTES AUGUST 12 2018
-	 * GUI PROGRESS GOING WELL
-	 * NEED TO CONTINUE BUILDING,
-	 * WE NEED TO:
-	 * FIGURE OUT SIZING FOR THE COMBO BOXES
-	 * Q: DO WE NEED A COMBO BOX FOR EACH PARENT?
-	 * 	  MAYBE ONE COMBO BOX WITH RADIALS LEFT/RIGHT SIDES
-	 * 	  FOR EACH PARENT? TOO CONFUSING?
-	 * 
-	 * NEED TO SET UP ACTIONLISTENERS FOR:
-	 * ALL 10 COMBO BOXES
-	 * ALL 25 RADIAL BUTTONS
-	 * 	SIDE NOTE: ON THE RADIAL BUTTONS--NEED TO MAKE 
-	 * 			   WHEN YOU CLICK ONE THE OTHERS ARE DISABLED.
-	 * 			   YOU DESELECT THAT RADIAL TO UNLOCK THE OTHERS(BOOLEAN FLAG MBBE?)
-	 * CALCULATE BUTTON
-	 * RESET BUTTON
-	 * 
-	 * NEED TO BUILD HELPER METHODS TO GET:
-	 * ALL 10 COMBO BOXES' INFORMATION
-	 * EACH OF THE 10 GENES' SELECTED GENETIC SELECTION (AA/Aa/aa)
-	 * 
-	 * 
-	 * 
-	 */
-	
-	
-	
-	
-	
-	
-	
+	//UNCOMMENT FOR DESIGN
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					PunnettMeGUI window = new PunnettMeGUI();
+//					window.window.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
-	public PunnettMeGUI() {
-		initialize();
-		
+	//UNCOMMENT FOR DESIGN
+//	public PunnettMeGUI()
+//	{
+//		initialize();
+//	}
+	
+	
+	//COMMENT OUT FOR DESIGN
+	public void run() 
+	{
+		start();
 	}
 
 	/* Builds the GUI.
@@ -114,7 +107,15 @@ public class PunnettMeGUI {
 	 * POne = Parent One identifier
 	 * Label == Description of the Object
 	 */
-	private void initialize() {
+	//COMMENT OUT FOR DESIGN
+//	private void initialize() {
+	private void start() 
+	{
+		
+		//*********** PunnettMe Code init ***********
+		pm = new PunnettMe();
+		
+		//*********** GUI START ***********
 		
 		//Window 
 		window = new JFrame();
@@ -154,9 +155,10 @@ public class PunnettMeGUI {
 		parentOne.setBackground(backgroundColor);
 		parentOne.setForeground(backgroundColor);
 		GridBagConstraints gbc_parentOne = new GridBagConstraints();
+		gbc_parentOne.insets = new Insets(0, 5, 0, 0);
 		gbc_parentOne.weighty = 1.0;
 		gbc_parentOne.weightx = 0.2;
-		gbc_parentOne.fill = GridBagConstraints.HORIZONTAL;
+		gbc_parentOne.fill = GridBagConstraints.BOTH;
 		gbc_parentOne.gridx = 0;
 		gbc_parentOne.gridy = 0;
 		content.add(parentOne, gbc_parentOne);
@@ -173,6 +175,7 @@ public class PunnettMeGUI {
 		parentOneLabel.setBackground(backgroundColor);
 		parentOneLabel.setForeground(textColor);
 		GridBagConstraints gbc_parentOneLabel = new GridBagConstraints();
+		gbc_parentOneLabel.anchor = GridBagConstraints.NORTH;
 		gbc_parentOneLabel.gridwidth = 4;
 		gbc_parentOneLabel.insets = new Insets(0, 0, 5, 0);
 		gbc_parentOneLabel.weightx = 1.0;
@@ -204,6 +207,7 @@ public class PunnettMeGUI {
 		}
 		geneOnePOneCombo.setBackground(textFieldColor);
 		geneOnePOneCombo.setForeground(textColor);
+		geneOnePOneCombo.addItemListener(this);
 		GridBagConstraints gbc_geneOnePOneCombo = new GridBagConstraints();
 		gbc_geneOnePOneCombo.insets = new Insets(0, 0, 5, 5);
 		gbc_geneOnePOneCombo.weightx = 0.25;
@@ -526,13 +530,10 @@ public class PunnettMeGUI {
 		parentOne.add(geneFivePOneRadHomoR, gbc_geneFivePOneRadHomoR);
 		
 		//Parent One Calculation Button
-		JButton calcButton = new JButton("Calculate");
+		calcButton = new JButton("Calculate");
 		calcButton.setBackground(backgroundColor);
 		calcButton.setForeground(textColor);
-		calcButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
+		calcButton.addMouseListener(this);
 		GridBagConstraints gbc_calcButton = new GridBagConstraints();
 		gbc_calcButton.gridwidth = 4;
 		gbc_calcButton.weightx = 1.0;
@@ -545,9 +546,10 @@ public class PunnettMeGUI {
 		JPanel parentTwo = new JPanel();
 		parentTwo.setBackground(Color.DARK_GRAY);
 		GridBagConstraints gbc_parentTwo = new GridBagConstraints();
+		gbc_parentTwo.insets = new Insets(0, 5, 0, 0);
 		gbc_parentTwo.weighty = 1.0;
 		gbc_parentTwo.weightx = 0.2;
-		gbc_parentTwo.fill = GridBagConstraints.HORIZONTAL;
+		gbc_parentTwo.fill = GridBagConstraints.BOTH;
 		gbc_parentTwo.gridx = 1;
 		gbc_parentTwo.gridy = 0;
 		content.add(parentTwo, gbc_parentTwo);
@@ -564,6 +566,7 @@ public class PunnettMeGUI {
 		parentTwoLabel.setBackground(backgroundColor);
 		parentTwoLabel.setForeground(textColor);
 		GridBagConstraints gbc_parentTwoLabel = new GridBagConstraints();
+		gbc_parentTwoLabel.anchor = GridBagConstraints.NORTH;
 		gbc_parentTwoLabel.gridwidth = 4;
 		gbc_parentTwoLabel.weightx = 1.0;
 		gbc_parentTwoLabel.fill = GridBagConstraints.BOTH;
@@ -916,13 +919,10 @@ public class PunnettMeGUI {
 		parentTwo.add(geneFivePTwoRadHomoR, gbc_geneFivePTwoRadHomoR);
 		
 		//Reset Button 
-		JButton resetButton = new JButton("Reset");
+		resetButton = new JButton("Reset");
 		resetButton.setBackground(backgroundColor);
 		resetButton.setForeground(textColor);
-		resetButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		resetButton.addMouseListener(this);
 		GridBagConstraints gbc_resetButton = new GridBagConstraints();
 		gbc_resetButton.gridwidth = 4;
 		gbc_resetButton.weightx = 1.0;
@@ -938,6 +938,7 @@ public class PunnettMeGUI {
 		resultsPanel.setBackground(backgroundColor);
 		resultsPanel.setForeground(textColor);
 		GridBagConstraints gbc_resultsPanel = new GridBagConstraints();
+		gbc_resultsPanel.insets = new Insets(0, 5, 0, 0);
 		gbc_resultsPanel.gridwidth = 2;
 		gbc_resultsPanel.weighty = 1.0;
 		gbc_resultsPanel.weightx = 0.6;
@@ -946,10 +947,10 @@ public class PunnettMeGUI {
 		gbc_resultsPanel.gridy = 0;
 		content.add(resultsPanel, gbc_resultsPanel);
 		GridBagLayout gbl_resultsPanel = new GridBagLayout();
-		gbl_resultsPanel.columnWidths = new int[]{265, 0};
+		gbl_resultsPanel.columnWidths = new int[]{265, 0, 0, 0, 0, 0};
 		gbl_resultsPanel.rowHeights = new int[]{14, 525, 22, 0};
-		gbl_resultsPanel.columnWeights = new double[]{0.0, Double.MIN_VALUE};
-		gbl_resultsPanel.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_resultsPanel.columnWeights = new double[]{1.0, 0.0, 1.0, 0.0, 0.0, 0.0};
+		gbl_resultsPanel.rowWeights = new double[]{0.0, 1.0, 1.0, Double.MIN_VALUE};
 		resultsPanel.setLayout(gbl_resultsPanel);
 		
 		//Results Label
@@ -958,9 +959,11 @@ public class PunnettMeGUI {
 		resultsLabel.setForeground(textColor);
 		resultsLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_lblResults = new GridBagConstraints();
+		gbc_lblResults.gridwidth = 3;
+		gbc_lblResults.insets = new Insets(0, 0, 5, 5);
+		gbc_lblResults.anchor = GridBagConstraints.NORTH;
 		gbc_lblResults.weighty = 0.01;
 		gbc_lblResults.fill = GridBagConstraints.BOTH;
-		gbc_lblResults.gridwidth = 2;
 		gbc_lblResults.gridx = 0;
 		gbc_lblResults.gridy = 0;
 		resultsPanel.add(resultsLabel, gbc_lblResults);
@@ -971,13 +974,84 @@ public class PunnettMeGUI {
 		resultsJTA.setForeground(textColor);
 		resultsJTA.setEditable(false);
 		GridBagConstraints gbc_resultsJTA = new GridBagConstraints();
-		gbc_resultsJTA.weightx = 0.6;
-		gbc_resultsJTA.weighty = 0.99;
+		gbc_resultsJTA.weightx = 1.0;
 		gbc_resultsJTA.fill = GridBagConstraints.BOTH;
+		gbc_resultsJTA.weighty = 1.0;
 		gbc_resultsJTA.gridx = 0;
 		gbc_resultsJTA.gridy = 1;
 		resultsPanel.add(resultsJTA, gbc_resultsJTA);
 		
+		//COMMENT OUT FOR DESIGN
+		window.pack();
+		window.setVisible(true);
+		
 	}
 
+	//For Mouse clicks on the Radials &
+	//Calculate and Reset Buttons.
+	public void mouseClicked(MouseEvent e) 
+	{
+		if (e.getSource().equals(calcButton))
+		{
+			System.out.println("CALCULATE BUTTON");
+		/*Error Check the combo boxes/radials
+		 *1: Make sure each gene has a radial selected.
+		 * NOTE: Make each Item Selection remove itself from the
+		 * combo box list? Is that doable? 
+		 */
+		
+		}
+		else if (e.getSource().equals(resetButton))
+		{
+			System.out.println("RESET BUTTON");
+		}
+	}
+
+	public void mouseEntered(MouseEvent arg0) 
+	{
+		
+	}
+
+	public void mouseExited(MouseEvent arg0) 
+	{
+		
+	}
+
+	public void mousePressed(MouseEvent arg0) 
+	{
+		
+	}
+
+	public void mouseReleased(MouseEvent arg0) 
+	{
+		
+	}
+
+	//For ComboBoxes' selection changes.
+	public void itemStateChanged(ItemEvent e) 
+	{
+		if (e.getSource().equals(geneOnePOneCombo))
+		{
+			if (e.getStateChange() == ItemEvent.SELECTED)
+			{
+				System.out.println("G1P1: Selected Item: " + e.getItem().toString());
+			}
+			else
+			{
+				System.out.println("G1P1: Other");
+			}
+			
+//			if (geneOnePOneCombo.getSelectedItem().equals(defaultComboItem))
+//			{
+//				System.out.println("G1P1: Reselected default item.");
+//			}
+//			else if (!(geneOnePOneCombo.getSelectedItem().equals(defaultComboItem)))
+//			{
+//				System.out.println("G1P1: New Item Selected.");
+//			}
+		}
+	}
+
+	
+	
 }
