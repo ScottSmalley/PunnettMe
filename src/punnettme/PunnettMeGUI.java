@@ -26,25 +26,30 @@ import javax.swing.JTextArea;
 import java.awt.Component;
 import java.awt.BorderLayout;
 import javax.swing.DropMode;
+import javax.swing.JComboBox;
 
 public class PunnettMeGUI {
 
 	private JFrame window;
-	private JTextField geneOnePOneTF;
-	private JTextField geneTwoPOneTF;
-	private JTextField geneThreePOneTF;
-	private JTextField geneFourPOneTF;
-	private JTextField geneFivePOneTF;
-	private JTextField geneOnePTwoTF;
-	private JTextField geneTwoPTwoTF;
-	private JTextField geneThreePTwoTF;
-	private JTextField geneFourPTwoTF;
-	private JTextField geneFivePTwoTF;
-
+	private JComboBox<String> geneOnePOneCombo;
+	private JComboBox<String> geneTwoPOneCombo;
+	private JComboBox<String> geneThreePOneCombo;
+	private JComboBox<String> geneFourPOneCombo;
+	private JComboBox<String> geneFivePOneCombo;
+	private JComboBox<String> geneOnePTwoCombo;
+	private JComboBox<String> geneTwoPTwoCombo;
+	private JComboBox<String> geneThreePTwoCombo;
+	private JComboBox<String> geneFourPTwoCombo;
+	private JComboBox<String> geneFivePTwoCombo;
+	
 	private Color textColor = Color.WHITE;
 	private Color backgroundColor = Color.DARK_GRAY;
 	private Color textFieldColor = Color.GRAY;
-	
+	private String[] geneOptions = {"Select Symbol","A","B","C","D","E",
+									"F","G","H","I","J","K",
+									"L","M","N","O","P","Q",
+									"R","S","T","U","V","W",
+									"X","Y","Z",};
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -59,9 +64,45 @@ public class PunnettMeGUI {
 		});
 	}
 
+	
+	
+	/*
+	 * NOTES AUGUST 12 2018
+	 * GUI PROGRESS GOING WELL
+	 * NEED TO CONTINUE BUILDING,
+	 * WE NEED TO:
+	 * FIGURE OUT SIZING FOR THE COMBO BOXES
+	 * Q: DO WE NEED A COMBO BOX FOR EACH PARENT?
+	 * 	  MAYBE ONE COMBO BOX WITH RADIALS LEFT/RIGHT SIDES
+	 * 	  FOR EACH PARENT? TOO CONFUSING?
+	 * 
+	 * NEED TO SET UP ACTIONLISTENERS FOR:
+	 * ALL 10 COMBO BOXES
+	 * ALL 25 RADIAL BUTTONS
+	 * 	SIDE NOTE: ON THE RADIAL BUTTONS--NEED TO MAKE 
+	 * 			   WHEN YOU CLICK ONE THE OTHERS ARE DISABLED.
+	 * 			   YOU DESELECT THAT RADIAL TO UNLOCK THE OTHERS(BOOLEAN FLAG MBBE?)
+	 * CALCULATE BUTTON
+	 * RESET BUTTON
+	 * 
+	 * NEED TO BUILD HELPER METHODS TO GET:
+	 * ALL 10 COMBO BOXES' INFORMATION
+	 * EACH OF THE 10 GENES' SELECTED GENETIC SELECTION (AA/Aa/aa)
+	 * 
+	 * 
+	 * 
+	 */
+	
+	
+	
+	
+	
+	
+	
 
 	public PunnettMeGUI() {
 		initialize();
+		
 	}
 
 	/* Builds the GUI.
@@ -90,10 +131,11 @@ public class PunnettMeGUI {
 		
 		//Main Content Panel (includes everything)
 		JPanel content = new JPanel();
-//		content.setForeground(Color.BLACK);
+		content.setBackground(backgroundColor);
+		content.setForeground(textColor);
 		GridBagConstraints gbc_content = new GridBagConstraints();
-		gbc_content.gridwidth = 0;
 		gbc_content.fill = GridBagConstraints.BOTH;
+		gbc_content.gridwidth = 0;
 		gbc_content.gridheight = 0;
 		gbc_content.weighty = 1.0;
 		gbc_content.weightx = 1.0;
@@ -114,7 +156,7 @@ public class PunnettMeGUI {
 		GridBagConstraints gbc_parentOne = new GridBagConstraints();
 		gbc_parentOne.weighty = 1.0;
 		gbc_parentOne.weightx = 0.2;
-		gbc_parentOne.fill = GridBagConstraints.BOTH;
+		gbc_parentOne.fill = GridBagConstraints.HORIZONTAL;
 		gbc_parentOne.gridx = 0;
 		gbc_parentOne.gridy = 0;
 		content.add(parentOne, gbc_parentOne);
@@ -138,6 +180,7 @@ public class PunnettMeGUI {
 		gbc_parentOneLabel.gridx = 0;
 		gbc_parentOneLabel.gridy = 0;
 		parentOne.add(parentOneLabel, gbc_parentOneLabel);
+		
 		//Gene One Parent One Label
 		JLabel geneOnePOneLabel = new JLabel("Gene 1");
 		geneOnePOneLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -152,19 +195,22 @@ public class PunnettMeGUI {
 		gbc_geneOnePOneLabel.gridy = 2;
 		parentOne.add(geneOnePOneLabel, gbc_geneOnePOneLabel);
 		
-		//Gene One Parent One TextField
-		geneOnePOneTF = new JTextField();
-		geneOnePOneTF.setBackground(textFieldColor);
-		geneOnePOneTF.setForeground(textColor);
-		geneOnePOneTF.setHorizontalAlignment(SwingConstants.CENTER);
-		GridBagConstraints gbc_geneOnePOneTF = new GridBagConstraints();
-		gbc_geneOnePOneTF.insets = new Insets(0, 0, 5, 5);
-		gbc_geneOnePOneTF.weightx = 0.25;
-		gbc_geneOnePOneTF.fill = GridBagConstraints.BOTH;
-		gbc_geneOnePOneTF.gridx = 0;
-		gbc_geneOnePOneTF.gridy = 3;
-		parentOne.add(geneOnePOneTF, gbc_geneOnePOneTF);
-		geneOnePOneTF.setColumns(10);
+		//Gene One Parent One Combo
+		geneOnePOneCombo = new JComboBox<String>();
+		geneOnePOneCombo.setMaximumRowCount(26);
+		for (int init = 0; init < geneOptions.length; init++)
+		{
+			geneOnePOneCombo.addItem(geneOptions[init]);
+		}
+		geneOnePOneCombo.setBackground(textFieldColor);
+		geneOnePOneCombo.setForeground(textColor);
+		GridBagConstraints gbc_geneOnePOneCombo = new GridBagConstraints();
+		gbc_geneOnePOneCombo.insets = new Insets(0, 0, 5, 5);
+		gbc_geneOnePOneCombo.weightx = 0.25;
+		gbc_geneOnePOneCombo.fill = GridBagConstraints.BOTH;
+		gbc_geneOnePOneCombo.gridx = 0;
+		gbc_geneOnePOneCombo.gridy = 3;
+		parentOne.add(geneOnePOneCombo, gbc_geneOnePOneCombo);
 		
 		//Gene One Parent One Radial HomoD
 		JRadioButton geneOnePOneRadHomoD = new JRadioButton("AA");
@@ -205,14 +251,6 @@ public class PunnettMeGUI {
 		gbc_geneOnePOneRadHomoR.gridy = 3;
 		parentOne.add(geneOnePOneRadHomoR, gbc_geneOnePOneRadHomoR);
 		
-		JLabel instructPOneLabel = new JLabel("1 Letter A-Z a-z");
-		instructPOneLabel.setBackground(backgroundColor);
-		instructPOneLabel.setForeground(textColor);
-		GridBagConstraints gbc_instructPOneLabel = new GridBagConstraints();
-		gbc_instructPOneLabel.gridx = 0;
-		gbc_instructPOneLabel.gridy = 4;
-		parentOne.add(instructPOneLabel, gbc_instructPOneLabel);
-		
 		//Gene Two Parent One Label
 		JLabel geneTwoPOneLabel = new JLabel("Gene 2");
 		geneTwoPOneLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -227,19 +265,21 @@ public class PunnettMeGUI {
 		gbc_geneTwoPOneLabel.gridy = 5;
 		parentOne.add(geneTwoPOneLabel, gbc_geneTwoPOneLabel);
 		
-		//Gene Two Parent One TextField
-		geneTwoPOneTF = new JTextField();
-		geneTwoPOneTF.setHorizontalAlignment(SwingConstants.CENTER);
-		geneTwoPOneTF.setBackground(textFieldColor);
-		geneTwoPOneTF.setForeground(textColor);
-		GridBagConstraints gbc_geneTwoPOneTF = new GridBagConstraints();
-		gbc_geneTwoPOneTF.insets = new Insets(0, 0, 5, 5);
-		gbc_geneTwoPOneTF.weightx = 0.25;
-		gbc_geneTwoPOneTF.fill = GridBagConstraints.BOTH;
-		gbc_geneTwoPOneTF.gridx = 0;
-		gbc_geneTwoPOneTF.gridy = 6;
-		parentOne.add(geneTwoPOneTF, gbc_geneTwoPOneTF);
-		geneTwoPOneTF.setColumns(10);
+		//Gene Two Parent One Combo
+		geneTwoPOneCombo = new JComboBox<String>();
+		geneTwoPOneCombo.setMaximumRowCount(26);
+		for (int init = 0; init < geneOptions.length; init++)
+		{
+			geneTwoPOneCombo.addItem(geneOptions[init]);
+		}
+		geneTwoPOneCombo.setBackground(textFieldColor);
+		geneTwoPOneCombo.setForeground(textColor);
+		GridBagConstraints gbc_geneTwoPOneCombo = new GridBagConstraints();
+		gbc_geneTwoPOneCombo.insets = new Insets(0, 0, 5, 5);
+		gbc_geneTwoPOneCombo.fill = GridBagConstraints.HORIZONTAL;
+		gbc_geneTwoPOneCombo.gridx = 0;
+		gbc_geneTwoPOneCombo.gridy = 6;
+		parentOne.add(geneTwoPOneCombo, gbc_geneTwoPOneCombo);
 		
 		//Gene Two Parent One Radial HomoD
 		JRadioButton geneTwoPOneRadHomoD = new JRadioButton("AA");
@@ -294,19 +334,21 @@ public class PunnettMeGUI {
 		gbc_geneThreePOneLabel.gridy = 8;
 		parentOne.add(geneThreePOneLabel, gbc_geneThreePOneLabel);
 		
-		//Gene Three Parent One TextField
-		geneThreePOneTF = new JTextField();
-		geneThreePOneTF.setHorizontalAlignment(SwingConstants.CENTER);
-		geneThreePOneTF.setBackground(textFieldColor);
-		geneThreePOneTF.setForeground(textColor);
-		geneThreePOneTF.setColumns(10);
-		GridBagConstraints gbc_geneThreePOneTF = new GridBagConstraints();
-		gbc_geneThreePOneTF.insets = new Insets(0, 0, 5, 5);
-		gbc_geneThreePOneTF.weightx = 0.25;
-		gbc_geneThreePOneTF.fill = GridBagConstraints.BOTH;
-		gbc_geneThreePOneTF.gridx = 0;
-		gbc_geneThreePOneTF.gridy = 9;
-		parentOne.add(geneThreePOneTF, gbc_geneThreePOneTF);
+		//Gene Three Parent One Combo
+		geneThreePOneCombo = new JComboBox<String>();
+		geneThreePOneCombo.setMaximumRowCount(26);
+		for (int init = 0; init < geneOptions.length; init++)
+		{
+			geneThreePOneCombo.addItem(geneOptions[init]);
+		}
+		geneThreePOneCombo.setBackground(textFieldColor);
+		geneThreePOneCombo.setForeground(textColor);
+		GridBagConstraints gbc_geneThreePOneCombo = new GridBagConstraints();
+		gbc_geneThreePOneCombo.insets = new Insets(0, 0, 5, 5);
+		gbc_geneThreePOneCombo.fill = GridBagConstraints.HORIZONTAL;
+		gbc_geneThreePOneCombo.gridx = 0;
+		gbc_geneThreePOneCombo.gridy = 9;
+		parentOne.add(geneThreePOneCombo, gbc_geneThreePOneCombo);
 		
 		//Gene Three Parent One Radial HomoD
 		JRadioButton geneThreePOneRadHomoD = new JRadioButton("AA");
@@ -360,19 +402,21 @@ public class PunnettMeGUI {
 		gbc_geneFourPOneLabel.gridy = 11;
 		parentOne.add(geneFourPOneLabel, gbc_geneFourPOneLabel);
 		
-		//Gene Four Parent One TextField
-		geneFourPOneTF = new JTextField();
-		geneFourPOneTF.setHorizontalAlignment(SwingConstants.CENTER);
-		geneFourPOneTF.setBackground(textFieldColor);
-		geneFourPOneTF.setForeground(textColor);
-		geneFourPOneTF.setColumns(10);
-		GridBagConstraints gbc_geneFourPOneTF = new GridBagConstraints();
-		gbc_geneFourPOneTF.insets = new Insets(0, 0, 5, 5);
-		gbc_geneFourPOneTF.weightx = 0.25;
-		gbc_geneFourPOneTF.fill = GridBagConstraints.BOTH;
-		gbc_geneFourPOneTF.gridx = 0;
-		gbc_geneFourPOneTF.gridy = 12;
-		parentOne.add(geneFourPOneTF, gbc_geneFourPOneTF);
+		//Gene Four Parent One Combo
+		geneFourPOneCombo = new JComboBox<String>();
+		geneFourPOneCombo.setMaximumRowCount(26);
+		for (int init = 0; init < geneOptions.length; init++)
+		{
+			geneFourPOneCombo.addItem(geneOptions[init]);
+		}
+		geneFourPOneCombo.setBackground(textFieldColor);
+		geneFourPOneCombo.setForeground(textColor);
+		GridBagConstraints gbc_geneFourPOneCombo = new GridBagConstraints();
+		gbc_geneFourPOneCombo.insets = new Insets(0, 0, 5, 5);
+		gbc_geneFourPOneCombo.fill = GridBagConstraints.HORIZONTAL;
+		gbc_geneFourPOneCombo.gridx = 0;
+		gbc_geneFourPOneCombo.gridy = 12;
+		parentOne.add(geneFourPOneCombo, gbc_geneFourPOneCombo);
 		
 		//Gene Four Parent One Radial HomoD
 		JRadioButton geneFourPOneRadHomoD = new JRadioButton("AA");
@@ -426,19 +470,21 @@ public class PunnettMeGUI {
 		gbc_geneFivePOneLabel.gridy = 14;
 		parentOne.add(geneFivePOneLabel, gbc_geneFivePOneLabel);
 		
-		//Gene Five Parent One TextField
-		geneFivePOneTF = new JTextField();
-		geneFivePOneTF.setHorizontalAlignment(SwingConstants.CENTER);
-		geneFivePOneTF.setBackground(textFieldColor);
-		geneFivePOneTF.setForeground(textColor);
-		geneFivePOneTF.setColumns(10);
-		GridBagConstraints gbc_geneFivePOneTF = new GridBagConstraints();
-		gbc_geneFivePOneTF.insets = new Insets(0, 0, 5, 5);
-		gbc_geneFivePOneTF.weightx = 0.25;
-		gbc_geneFivePOneTF.fill = GridBagConstraints.BOTH;
-		gbc_geneFivePOneTF.gridx = 0;
-		gbc_geneFivePOneTF.gridy = 15;
-		parentOne.add(geneFivePOneTF, gbc_geneFivePOneTF);
+		//Gene Five Parent One Combo
+		geneFivePOneCombo = new JComboBox<String>();
+		geneFivePOneCombo.setMaximumRowCount(26);
+		for (int init = 0; init < geneOptions.length; init++)
+		{
+			geneFivePOneCombo.addItem(geneOptions[init]);
+		}
+		geneFivePOneCombo.setBackground(textFieldColor);
+		geneFivePOneCombo.setForeground(textColor);
+		GridBagConstraints gbc_geneFivePOneCombo = new GridBagConstraints();
+		gbc_geneFivePOneCombo.insets = new Insets(0, 0, 5, 5);
+		gbc_geneFivePOneCombo.fill = GridBagConstraints.HORIZONTAL;
+		gbc_geneFivePOneCombo.gridx = 0;
+		gbc_geneFivePOneCombo.gridy = 15;
+		parentOne.add(geneFivePOneCombo, gbc_geneFivePOneCombo);
 		
 		//Gene Five Parent One Radial HomoD
 		JRadioButton geneFivePOneRadHomoD = new JRadioButton("AA");
@@ -501,7 +547,7 @@ public class PunnettMeGUI {
 		GridBagConstraints gbc_parentTwo = new GridBagConstraints();
 		gbc_parentTwo.weighty = 1.0;
 		gbc_parentTwo.weightx = 0.2;
-		gbc_parentTwo.fill = GridBagConstraints.BOTH;
+		gbc_parentTwo.fill = GridBagConstraints.HORIZONTAL;
 		gbc_parentTwo.gridx = 1;
 		gbc_parentTwo.gridy = 0;
 		content.add(parentTwo, gbc_parentTwo);
@@ -540,19 +586,21 @@ public class PunnettMeGUI {
 		gbc_geneOnePTwoLabel.gridy = 2;
 		parentTwo.add(geneOnePTwoLabel, gbc_geneOnePTwoLabel);
 		
-		//Gene One Parent Two TextField
-		geneOnePTwoTF = new JTextField();
-		geneOnePTwoTF.setBackground(textFieldColor);
-		geneOnePTwoTF.setForeground(textColor);
-		geneOnePTwoTF.setHorizontalAlignment(SwingConstants.CENTER);
-		geneOnePTwoTF.setColumns(10);
-		GridBagConstraints gbc_geneOnePTwoTF = new GridBagConstraints();
-		gbc_geneOnePTwoTF.weightx = 0.25;
-		gbc_geneOnePTwoTF.fill = GridBagConstraints.BOTH;
-		gbc_geneOnePTwoTF.insets = new Insets(0, 0, 5, 5);
-		gbc_geneOnePTwoTF.gridx = 0;
-		gbc_geneOnePTwoTF.gridy = 3;
-		parentTwo.add(geneOnePTwoTF, gbc_geneOnePTwoTF);
+		//Gene One Parent Two Combo
+		geneOnePTwoCombo = new JComboBox<String>();
+		geneOnePTwoCombo.setMaximumRowCount(26);
+		for (int init = 0; init < geneOptions.length; init++)
+		{
+			geneOnePTwoCombo.addItem(geneOptions[init]);
+		}
+		geneOnePTwoCombo.setBackground(textFieldColor);
+		geneOnePTwoCombo.setForeground(textColor);
+		GridBagConstraints gbc_geneOnePTwoCombo = new GridBagConstraints();
+		gbc_geneOnePTwoCombo.insets = new Insets(0, 0, 5, 5);
+		gbc_geneOnePTwoCombo.fill = GridBagConstraints.HORIZONTAL;
+		gbc_geneOnePTwoCombo.gridx = 0;
+		gbc_geneOnePTwoCombo.gridy = 3;
+		parentTwo.add(geneOnePTwoCombo, gbc_geneOnePTwoCombo);
 		
 		//Gene One Parent Two Radial HomoD
 		JRadioButton geneOnePTwoRadHomoD = new JRadioButton("AA");
@@ -593,14 +641,6 @@ public class PunnettMeGUI {
 		gbc_geneOnePTwoRadHomoR.gridy = 3;
 		parentTwo.add(geneOnePTwoRadHomoR, gbc_geneOnePTwoRadHomoR);
 		
-		JLabel instructPTwoLabel = new JLabel("1 Letter A-Z a-z");
-		instructPTwoLabel.setBackground(backgroundColor);
-		instructPTwoLabel.setForeground(textColor);
-		GridBagConstraints gbc_instructPTwoLabel = new GridBagConstraints();
-		gbc_instructPTwoLabel.gridx = 0;
-		gbc_instructPTwoLabel.gridy = 4;
-		parentTwo.add(instructPTwoLabel, gbc_instructPTwoLabel);
-		
 		//Gene Two Parent Two Label
 		JLabel geneTwoPTwoLabel = new JLabel("Gene 2");
 		geneTwoPTwoLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -615,19 +655,21 @@ public class PunnettMeGUI {
 		gbc_geneTwoPTwoLabel.gridy = 5;
 		parentTwo.add(geneTwoPTwoLabel, gbc_geneTwoPTwoLabel);
 		
-		//Gene Two Parent Two TextField
-		geneTwoPTwoTF = new JTextField();
-		geneTwoPTwoTF.setHorizontalAlignment(SwingConstants.CENTER);
-		geneTwoPTwoTF.setBackground(textFieldColor);
-		geneTwoPTwoTF.setForeground(textColor);
-		geneTwoPTwoTF.setColumns(10);
-		GridBagConstraints gbc_geneTwoPTwoTF = new GridBagConstraints();
-		gbc_geneTwoPTwoTF.weightx = 0.25;
-		gbc_geneTwoPTwoTF.fill = GridBagConstraints.BOTH;
-		gbc_geneTwoPTwoTF.insets = new Insets(0, 0, 5, 5);
-		gbc_geneTwoPTwoTF.gridx = 0;
-		gbc_geneTwoPTwoTF.gridy = 6;
-		parentTwo.add(geneTwoPTwoTF, gbc_geneTwoPTwoTF);
+		//Gene Two Parent Two Combo
+		geneTwoPTwoCombo = new JComboBox<String>();
+		geneTwoPTwoCombo.setMaximumRowCount(26);
+		for (int init = 0; init < geneOptions.length; init++)
+		{
+			geneTwoPTwoCombo.addItem(geneOptions[init]);
+		}
+		geneTwoPTwoCombo.setBackground(textFieldColor);
+		geneTwoPTwoCombo.setForeground(textColor);
+		GridBagConstraints gbc_geneTwoPTwoCombo = new GridBagConstraints();
+		gbc_geneTwoPTwoCombo.insets = new Insets(0, 0, 5, 5);
+		gbc_geneTwoPTwoCombo.fill = GridBagConstraints.HORIZONTAL;
+		gbc_geneTwoPTwoCombo.gridx = 0;
+		gbc_geneTwoPTwoCombo.gridy = 6;
+		parentTwo.add(geneTwoPTwoCombo, gbc_geneTwoPTwoCombo);
 		
 		//Gene Two Parent Two Radial HomoD
 		JRadioButton geneTwoPTwoRadHomoD = new JRadioButton("AA");
@@ -682,19 +724,21 @@ public class PunnettMeGUI {
 		gbc_geneThreePTwoLabel.gridy = 8;
 		parentTwo.add(geneThreePTwoLabel, gbc_geneThreePTwoLabel);
 		
-		//Gene Three Parent Two TextField
-		geneThreePTwoTF = new JTextField();
-		geneThreePTwoTF.setHorizontalAlignment(SwingConstants.CENTER);
-		geneThreePTwoTF.setBackground(textFieldColor);
-		geneThreePTwoTF.setForeground(textColor);
-		geneThreePTwoTF.setColumns(10);
-		GridBagConstraints gbc_geneThreePTwoTF = new GridBagConstraints();
-		gbc_geneThreePTwoTF.weightx = 0.25;
-		gbc_geneThreePTwoTF.fill = GridBagConstraints.BOTH;
-		gbc_geneThreePTwoTF.insets = new Insets(0, 0, 5, 5);
-		gbc_geneThreePTwoTF.gridx = 0;
-		gbc_geneThreePTwoTF.gridy = 9;
-		parentTwo.add(geneThreePTwoTF, gbc_geneThreePTwoTF);
+		//Gene Three Parent Two Combo
+		geneThreePTwoCombo = new JComboBox<String>();
+		geneThreePTwoCombo.setMaximumRowCount(26);
+		for (int init = 0; init < geneOptions.length; init++)
+		{
+			geneThreePTwoCombo.addItem(geneOptions[init]);
+		}
+		geneThreePTwoCombo.setBackground(textFieldColor);
+		geneThreePTwoCombo.setForeground(textColor);		
+		GridBagConstraints gbc_geneThreePTwoCombo = new GridBagConstraints();
+		gbc_geneThreePTwoCombo.insets = new Insets(0, 0, 5, 5);
+		gbc_geneThreePTwoCombo.fill = GridBagConstraints.HORIZONTAL;
+		gbc_geneThreePTwoCombo.gridx = 0;
+		gbc_geneThreePTwoCombo.gridy = 9;
+		parentTwo.add(geneThreePTwoCombo, gbc_geneThreePTwoCombo);
 		
 		//Gene Three Parent Two Radial HomoD
 		JRadioButton geneThreePTwoRadHomoD = new JRadioButton("AA");
@@ -748,19 +792,21 @@ public class PunnettMeGUI {
 		gbc_geneFourPTwoLabel.gridy = 11;
 		parentTwo.add(geneFourPTwoLabel, gbc_geneFourPTwoLabel);
 		
-		//Gene Four Parent Two TextField
-		geneFourPTwoTF = new JTextField();
-		geneFourPTwoTF.setHorizontalAlignment(SwingConstants.CENTER);
-		geneFourPTwoTF.setBackground(textFieldColor);
-		geneFourPTwoTF.setForeground(textColor);
-		geneFourPTwoTF.setColumns(10);
-		GridBagConstraints gbc_geneFourPTwoTF = new GridBagConstraints();
-		gbc_geneFourPTwoTF.weightx = 0.25;
-		gbc_geneFourPTwoTF.fill = GridBagConstraints.BOTH;
-		gbc_geneFourPTwoTF.insets = new Insets(0, 0, 5, 5);
-		gbc_geneFourPTwoTF.gridx = 0;
-		gbc_geneFourPTwoTF.gridy = 12;
-		parentTwo.add(geneFourPTwoTF, gbc_geneFourPTwoTF);
+		//Gene Four Parent Two Combo
+		geneFourPTwoCombo = new JComboBox<String>();
+		geneFourPTwoCombo.setMaximumRowCount(26);
+		for (int init = 0; init < geneOptions.length; init++)
+		{
+			geneFourPTwoCombo.addItem(geneOptions[init]);
+		}
+		geneFourPTwoCombo.setBackground(textFieldColor);
+		geneFourPTwoCombo.setForeground(textColor);
+		GridBagConstraints gbc_geneFourPTwoCombo = new GridBagConstraints();
+		gbc_geneFourPTwoCombo.insets = new Insets(0, 0, 5, 5);
+		gbc_geneFourPTwoCombo.fill = GridBagConstraints.HORIZONTAL;
+		gbc_geneFourPTwoCombo.gridx = 0;
+		gbc_geneFourPTwoCombo.gridy = 12;
+		parentTwo.add(geneFourPTwoCombo, gbc_geneFourPTwoCombo);
 		
 		//Gene Four Parent Two Radial HomoD
 		JRadioButton geneFourPTwoRadHomoD = new JRadioButton("AA");
@@ -814,19 +860,21 @@ public class PunnettMeGUI {
 		gbc_geneFivePTwoLabel.gridy = 14;
 		parentTwo.add(geneFivePTwoLabel, gbc_geneFivePTwoLabel);
 		
-		//Gene Five Parent Two TextField
-		geneFivePTwoTF = new JTextField();
-		geneFivePTwoTF.setHorizontalAlignment(SwingConstants.CENTER);
-		geneFivePTwoTF.setBackground(textFieldColor);
-		geneFivePTwoTF.setForeground(textColor);
-		geneFivePTwoTF.setColumns(10);
-		GridBagConstraints gbc_geneFivePTwoTF = new GridBagConstraints();
-		gbc_geneFivePTwoTF.weightx = 0.25;
-		gbc_geneFivePTwoTF.fill = GridBagConstraints.BOTH;
-		gbc_geneFivePTwoTF.insets = new Insets(0, 0, 5, 5);
-		gbc_geneFivePTwoTF.gridx = 0;
-		gbc_geneFivePTwoTF.gridy = 15;
-		parentTwo.add(geneFivePTwoTF, gbc_geneFivePTwoTF);
+		//Gene Five Parent Two Combo
+		geneFivePTwoCombo = new JComboBox<String>();
+		geneFivePTwoCombo.setMaximumRowCount(26);
+		for (int init = 0; init < geneOptions.length; init++)
+		{
+			geneFivePTwoCombo.addItem(geneOptions[init]);
+		}
+		geneFivePTwoCombo.setBackground(textFieldColor);
+		geneFivePTwoCombo.setForeground(textColor);
+		GridBagConstraints gbc_geneFivePTwoCombo = new GridBagConstraints();
+		gbc_geneFivePTwoCombo.insets = new Insets(0, 0, 5, 5);
+		gbc_geneFivePTwoCombo.fill = GridBagConstraints.HORIZONTAL;
+		gbc_geneFivePTwoCombo.gridx = 0;
+		gbc_geneFivePTwoCombo.gridy = 15;
+		parentTwo.add(geneFivePTwoCombo, gbc_geneFivePTwoCombo);
 		
 		//Gene Five Parent Two Radial HomoD 
 		JRadioButton geneFivePTwoRadHomoD = new JRadioButton("AA");
@@ -887,7 +935,8 @@ public class PunnettMeGUI {
 		//Results Column
 		JPanel resultsPanel = new JPanel();
 		//temp, fix color later.
-		resultsPanel.setBackground(Color.BLUE);
+		resultsPanel.setBackground(backgroundColor);
+		resultsPanel.setForeground(textColor);
 		GridBagConstraints gbc_resultsPanel = new GridBagConstraints();
 		gbc_resultsPanel.gridwidth = 2;
 		gbc_resultsPanel.weighty = 1.0;
@@ -909,6 +958,7 @@ public class PunnettMeGUI {
 		resultsLabel.setForeground(textColor);
 		resultsLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_lblResults = new GridBagConstraints();
+		gbc_lblResults.weighty = 0.01;
 		gbc_lblResults.fill = GridBagConstraints.BOTH;
 		gbc_lblResults.gridwidth = 2;
 		gbc_lblResults.gridx = 0;
@@ -917,13 +967,12 @@ public class PunnettMeGUI {
 		
 		//Results JTextArea
 		JTextArea resultsJTA = new JTextArea();
-		resultsJTA.setDropMode(DropMode.ON);
 		resultsJTA.setBackground(textFieldColor);
 		resultsJTA.setForeground(textColor);
 		resultsJTA.setEditable(false);
 		GridBagConstraints gbc_resultsJTA = new GridBagConstraints();
-		gbc_resultsJTA.gridheight = 2;
-		gbc_resultsJTA.gridwidth = 2;
+		gbc_resultsJTA.weightx = 0.6;
+		gbc_resultsJTA.weighty = 0.99;
 		gbc_resultsJTA.fill = GridBagConstraints.BOTH;
 		gbc_resultsJTA.gridx = 0;
 		gbc_resultsJTA.gridy = 1;
