@@ -26,7 +26,9 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.Vector;
 import java.awt.event.ActionEvent;
 import com.jgoodies.forms.layout.FormLayout;
@@ -131,6 +133,17 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 	private JRadioButton geneFivePTwoRadHetero;
 	private JRadioButton geneFivePTwoRadHomoR;
 	
+	private List<JComboBox<String>> comboBoxPOneList;
+	private List<JComboBox<String>> comboBoxPTwoList;
+	private List<JLabel> geneLabelList;
+	private List<ButtonGroup> buttonGroupList;
+	
+	private boolean geneOneIsReady;
+	private boolean geneTwoIsReady;
+	private boolean geneThreeIsReady;
+	private boolean geneFourIsReady;
+	private boolean geneFiveIsReady;
+	
 	private JButton resetButton;
 	private JButton calcButton;
 	
@@ -200,6 +213,16 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		
 		//*********** PunnettMe Code init ***********
 		pm = new PunnettMe();
+		comboBoxPOneList = new ArrayList<>();
+		comboBoxPTwoList = new ArrayList<>();
+		geneLabelList = new ArrayList<>();
+		buttonGroupList = new ArrayList<>();
+		
+		geneOneIsReady = false;
+		geneTwoIsReady = false;
+		geneThreeIsReady = false;
+		geneFourIsReady = false;
+		geneFiveIsReady = false;
 		//*********** GUI START ***********
 		
 		//Window 
@@ -295,6 +318,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneOnePOneCombo.setBackground(textFieldColor);
 		geneOnePOneCombo.setForeground(textColor);
 		geneOnePOneCombo.addItemListener(this);
+		comboBoxPOneList.add(geneOnePOneCombo);
 		GridBagConstraints gbc_geneOnePOneCombo = new GridBagConstraints();
 		gbc_geneOnePOneCombo.insets = new Insets(0, 0, 5, 5);
 		gbc_geneOnePOneCombo.weightx = 0.25;
@@ -354,6 +378,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneTwoPOneLabel.setBackground(backgroundColor);
 		geneTwoPOneLabel.setForeground(textColor);
 		geneTwoPOneLabel.setEnabled(inDebugMode);
+		geneLabelList.add(geneTwoPOneLabel);
 		GridBagConstraints gbc_geneTwoPOneLabel = new GridBagConstraints();
 		gbc_geneTwoPOneLabel.gridwidth = 4;
 		gbc_geneTwoPOneLabel.insets = new Insets(0, 0, 5, 0);
@@ -372,8 +397,9 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		}
 		geneTwoPOneCombo.setBackground(textFieldColor);
 		geneTwoPOneCombo.setForeground(textColor);
-		geneTwoPOneCombo.addItemListener(this);
+//		geneTwoPOneCombo.addItemListener(this);
 		geneTwoPOneCombo.setEnabled(inDebugMode);
+		comboBoxPOneList.add(geneTwoPOneCombo);
 		GridBagConstraints gbc_geneTwoPOneCombo = new GridBagConstraints();
 		gbc_geneTwoPOneCombo.insets = new Insets(0, 0, 5, 5);
 		gbc_geneTwoPOneCombo.fill = GridBagConstraints.HORIZONTAL;
@@ -386,7 +412,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneTwoPOneRadHomoD.setHorizontalAlignment(SwingConstants.CENTER);
 		geneTwoPOneRadHomoD.setBackground(backgroundColor);
 		geneTwoPOneRadHomoD.setForeground(textColor);
-		geneTwoPOneRadHomoD.addItemListener(this);
+//		geneTwoPOneRadHomoD.addItemListener(this);
 		geneTwoPOneRadHomoD.setEnabled(inDebugMode);
 		GridBagConstraints gbc_geneTwoPOneRadHomoD = new GridBagConstraints();
 		gbc_geneTwoPOneRadHomoD.insets = new Insets(0, 0, 5, 5);
@@ -401,7 +427,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneTwoPOneRadHetero.setHorizontalAlignment(SwingConstants.CENTER);
 		geneTwoPOneRadHetero.setBackground(backgroundColor);
 		geneTwoPOneRadHetero.setForeground(textColor);
-		geneTwoPOneRadHetero.addItemListener(this);
+//		geneTwoPOneRadHetero.addItemListener(this);
 		geneTwoPOneRadHetero.setEnabled(inDebugMode);
 		GridBagConstraints gbc_geneTwoPOneRadHetero = new GridBagConstraints();
 		gbc_geneTwoPOneRadHetero.insets = new Insets(0, 0, 5, 5);
@@ -416,7 +442,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneTwoPOneRadHomoR.setHorizontalAlignment(SwingConstants.CENTER);
 		geneTwoPOneRadHomoR.setBackground(backgroundColor);
 		geneTwoPOneRadHomoR.setForeground(textColor);
-		geneTwoPOneRadHomoR.addItemListener(this);
+//		geneTwoPOneRadHomoR.addItemListener(this);
 		geneTwoPOneRadHomoR.setEnabled(inDebugMode);
 		GridBagConstraints gbc_geneTwoPOneRadHomoR = new GridBagConstraints();
 		gbc_geneTwoPOneRadHomoR.insets = new Insets(0, 0, 5, 0);
@@ -432,6 +458,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneThreePOneLabel.setBackground(backgroundColor);
 		geneThreePOneLabel.setForeground(textColor);
 		geneThreePOneLabel.setEnabled(inDebugMode);
+		geneLabelList.add(geneThreePOneLabel);
 		GridBagConstraints gbc_geneThreePOneLabel = new GridBagConstraints();
 		gbc_geneThreePOneLabel.gridwidth = 4;
 		gbc_geneThreePOneLabel.insets = new Insets(0, 0, 5, 0);
@@ -450,8 +477,9 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		}
 		geneThreePOneCombo.setBackground(textFieldColor);
 		geneThreePOneCombo.setForeground(textColor);
-		geneThreePOneCombo.addItemListener(this);
+//		geneThreePOneCombo.addItemListener(this);
 		geneThreePOneCombo.setEnabled(inDebugMode);
+		comboBoxPOneList.add(geneThreePOneCombo);
 		GridBagConstraints gbc_geneThreePOneCombo = new GridBagConstraints();
 		gbc_geneThreePOneCombo.insets = new Insets(0, 0, 5, 5);
 		gbc_geneThreePOneCombo.fill = GridBagConstraints.HORIZONTAL;
@@ -464,7 +492,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneThreePOneRadHomoD.setHorizontalAlignment(SwingConstants.CENTER);
 		geneThreePOneRadHomoD.setBackground(backgroundColor);
 		geneThreePOneRadHomoD.setForeground(textColor);
-		geneThreePOneRadHomoD.addItemListener(this);
+//		geneThreePOneRadHomoD.addItemListener(this);
 		geneThreePOneRadHomoD.setEnabled(inDebugMode);
 		GridBagConstraints gbc_geneThreePOneRadHomoD = new GridBagConstraints();
 		gbc_geneThreePOneRadHomoD.insets = new Insets(0, 0, 5, 5);
@@ -479,7 +507,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneThreePOneRadHetero.setHorizontalAlignment(SwingConstants.CENTER);
 		geneThreePOneRadHetero.setBackground(backgroundColor);
 		geneThreePOneRadHetero.setForeground(textColor);
-		geneThreePOneRadHetero.addItemListener(this);
+//		geneThreePOneRadHetero.addItemListener(this);
 		geneThreePOneRadHetero.setEnabled(inDebugMode);
 		GridBagConstraints gbc_geneThreePOneRadHetero = new GridBagConstraints();
 		gbc_geneThreePOneRadHetero.insets = new Insets(0, 0, 5, 5);
@@ -494,7 +522,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneThreePOneRadHomoR.setHorizontalAlignment(SwingConstants.CENTER);
 		geneThreePOneRadHomoR.setBackground(backgroundColor);
 		geneThreePOneRadHomoR.setForeground(textColor);
-		geneThreePOneRadHomoR.addItemListener(this);
+//		geneThreePOneRadHomoR.addItemListener(this);
 		geneThreePOneRadHomoR.setEnabled(inDebugMode);
 		GridBagConstraints gbc_geneThreePOneRadHomoR = new GridBagConstraints();
 		gbc_geneThreePOneRadHomoR.insets = new Insets(0, 0, 5, 0);
@@ -510,6 +538,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneFourPOneLabel.setBackground(backgroundColor);
 		geneFourPOneLabel.setForeground(textColor);
 		geneFourPOneLabel.setEnabled(inDebugMode);
+		geneLabelList.add(geneFourPOneLabel);
 		GridBagConstraints gbc_geneFourPOneLabel = new GridBagConstraints();
 		gbc_geneFourPOneLabel.gridwidth = 4;
 		gbc_geneFourPOneLabel.insets = new Insets(0, 0, 5, 0);
@@ -527,8 +556,9 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		}
 		geneFourPOneCombo.setBackground(textFieldColor);
 		geneFourPOneCombo.setForeground(textColor);
-		geneFourPOneCombo.addItemListener(this);
+//		geneFourPOneCombo.addItemListener(this);
 		geneFourPOneCombo.setEnabled(inDebugMode);
+		comboBoxPOneList.add(geneFourPOneCombo);
 		GridBagConstraints gbc_geneFourPOneCombo = new GridBagConstraints();
 		gbc_geneFourPOneCombo.insets = new Insets(0, 0, 5, 5);
 		gbc_geneFourPOneCombo.fill = GridBagConstraints.HORIZONTAL;
@@ -541,7 +571,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneFourPOneRadHomoD.setHorizontalAlignment(SwingConstants.CENTER);
 		geneFourPOneRadHomoD.setBackground(backgroundColor);
 		geneFourPOneRadHomoD.setForeground(textColor);
-		geneFourPOneRadHomoD.addItemListener(this);
+//		geneFourPOneRadHomoD.addItemListener(this);
 		geneFourPOneRadHomoD.setEnabled(inDebugMode);
 		GridBagConstraints gbc_geneFourPOneRadHomoD = new GridBagConstraints();
 		gbc_geneFourPOneRadHomoD.insets = new Insets(0, 0, 5, 5);
@@ -556,7 +586,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneFourPOneRadHetero.setHorizontalAlignment(SwingConstants.CENTER);
 		geneFourPOneRadHetero.setBackground(backgroundColor);
 		geneFourPOneRadHetero.setForeground(textColor);
-		geneFourPOneRadHetero.addItemListener(this);
+//		geneFourPOneRadHetero.addItemListener(this);
 		geneFourPOneRadHetero.setEnabled(inDebugMode);
 		GridBagConstraints gbc_geneFourPOneRadHetero = new GridBagConstraints();
 		gbc_geneFourPOneRadHetero.insets = new Insets(0, 0, 5, 5);
@@ -571,7 +601,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneFourPOneRadHomoR.setHorizontalAlignment(SwingConstants.CENTER);
 		geneFourPOneRadHomoR.setBackground(backgroundColor);
 		geneFourPOneRadHomoR.setForeground(textColor);
-		geneFourPOneRadHomoR.addItemListener(this);
+//		geneFourPOneRadHomoR.addItemListener(this);
 		geneFourPOneRadHomoR.setEnabled(inDebugMode);
 		GridBagConstraints gbc_geneFourPOneRadHomoR = new GridBagConstraints();
 		gbc_geneFourPOneRadHomoR.insets = new Insets(0, 0, 5, 0);
@@ -587,6 +617,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneFivePOneLabel.setBackground(backgroundColor);
 		geneFivePOneLabel.setForeground(textColor);
 		geneFivePOneLabel.setEnabled(inDebugMode);
+		geneLabelList.add(geneFivePOneLabel);
 		GridBagConstraints gbc_geneFivePOneLabel = new GridBagConstraints();
 		gbc_geneFivePOneLabel.gridwidth = 4;
 		gbc_geneFivePOneLabel.insets = new Insets(0, 0, 5, 0);
@@ -604,8 +635,9 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		}
 		geneFivePOneCombo.setBackground(textFieldColor);
 		geneFivePOneCombo.setForeground(textColor);
-		geneFivePOneCombo.addItemListener(this);
+//		geneFivePOneCombo.addItemListener(this);
 		geneFivePOneCombo.setEnabled(inDebugMode);
+		comboBoxPOneList.add(geneFivePOneCombo);
 		GridBagConstraints gbc_geneFivePOneCombo = new GridBagConstraints();
 		gbc_geneFivePOneCombo.insets = new Insets(0, 0, 5, 5);
 		gbc_geneFivePOneCombo.fill = GridBagConstraints.HORIZONTAL;
@@ -618,7 +650,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneFivePOneRadHomoD.setHorizontalAlignment(SwingConstants.CENTER);
 		geneFivePOneRadHomoD.setBackground(backgroundColor);
 		geneFivePOneRadHomoD.setForeground(textColor);
-		geneFivePOneRadHomoD.addItemListener(this);
+//		geneFivePOneRadHomoD.addItemListener(this);
 		geneFivePOneRadHomoD.setEnabled(inDebugMode);
 		GridBagConstraints gbc_geneFivePOneRadHomoD = new GridBagConstraints();
 		gbc_geneFivePOneRadHomoD.insets = new Insets(0, 0, 5, 5);
@@ -633,7 +665,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneFivePOneRadHetero.setHorizontalAlignment(SwingConstants.CENTER);
 		geneFivePOneRadHetero.setBackground(backgroundColor);
 		geneFivePOneRadHetero.setForeground(textColor);
-		geneFivePOneRadHetero.addItemListener(this);
+//		geneFivePOneRadHetero.addItemListener(this);
 		geneFivePOneRadHetero.setEnabled(inDebugMode);
 		GridBagConstraints gbc_geneFivePOneRadHetero = new GridBagConstraints();
 		gbc_geneFivePOneRadHetero.insets = new Insets(0, 0, 5, 5);
@@ -648,7 +680,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneFivePOneRadHomoR.setHorizontalAlignment(SwingConstants.CENTER);
 		geneFivePOneRadHomoR.setBackground(backgroundColor);
 		geneFivePOneRadHomoR.setForeground(textColor);
-		geneFivePOneRadHomoR.addItemListener(this);
+//		geneFivePOneRadHomoR.addItemListener(this);
 		geneFivePOneRadHomoR.setEnabled(inDebugMode);
 		GridBagConstraints gbc_geneFivePOneRadHomoR = new GridBagConstraints();
 		gbc_geneFivePOneRadHomoR.insets = new Insets(0, 0, 5, 0);
@@ -663,7 +695,8 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		calcButton.setBackground(backgroundColor);
 		calcButton.setForeground(textColor);
 		calcButton.setEnabled(inDebugMode);
-//		calcButton.addMouseListener(this);
+		calcButton.setEnabled(true);
+		calcButton.addMouseListener(this);
 		GridBagConstraints gbc_calcButton = new GridBagConstraints();
 		gbc_calcButton.gridwidth = 4;
 		gbc_calcButton.weightx = 1.0;
@@ -678,30 +711,39 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneOnePOneBG.add(geneOnePOneRadHomoD);
 		geneOnePOneBG.add(geneOnePOneRadHetero);
 		geneOnePOneBG.add(geneOnePOneRadHomoR);
-
+		buttonGroupList.add(geneOnePOneBG);
+		
 		//Gene Two 
 		geneTwoPOneBG = new ButtonGroup();
 		geneTwoPOneBG.add(geneTwoPOneRadHomoD);
 		geneTwoPOneBG.add(geneTwoPOneRadHetero);
 		geneTwoPOneBG.add(geneTwoPOneRadHomoR);
+		buttonGroupList.add(geneTwoPOneBG);
+		
 		
 		//Gene Three 
 		geneThreePOneBG = new ButtonGroup();
 		geneThreePOneBG.add(geneThreePOneRadHomoD);
 		geneThreePOneBG.add(geneThreePOneRadHetero);
 		geneThreePOneBG.add(geneThreePOneRadHomoR);
+		buttonGroupList.add(geneThreePOneBG);
+		
 		
 		//Gene Four
 		geneFourPOneBG = new ButtonGroup();
 		geneFourPOneBG.add(geneFourPOneRadHomoD);
 		geneFourPOneBG.add(geneFourPOneRadHetero);
 		geneFourPOneBG.add(geneFourPOneRadHomoR);
+		buttonGroupList.add(geneFourPOneBG);
+		
 		
 		//Gene Five
 		geneFivePOneBG = new ButtonGroup();
 		geneFivePOneBG.add(geneFivePOneRadHomoD);
 		geneFivePOneBG.add(geneFivePOneRadHetero);
 		geneFivePOneBG.add(geneFivePOneRadHomoR);
+		buttonGroupList.add(geneFivePOneBG);
+		
 		
 		
 		
@@ -744,6 +786,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneOnePTwoLabel.setBackground(backgroundColor);
 		geneOnePTwoLabel.setForeground(textColor);
 		geneOnePTwoLabel.setEnabled(inDebugMode);
+		geneLabelList.add(geneOnePTwoLabel);
 		GridBagConstraints gbc_geneOnePTwoLabel = new GridBagConstraints();
 		gbc_geneOnePTwoLabel.gridwidth = 4;
 		gbc_geneOnePTwoLabel.weightx = 1.0;
@@ -763,6 +806,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneOnePTwoCombo.setBackground(textFieldColor);
 		geneOnePTwoCombo.setForeground(textColor);
 		geneOnePTwoCombo.setEnabled(inDebugMode);
+		comboBoxPTwoList.add(geneOnePTwoCombo);
 		GridBagConstraints gbc_geneOnePTwoCombo = new GridBagConstraints();
 		gbc_geneOnePTwoCombo.insets = new Insets(0, 0, 5, 5);
 		gbc_geneOnePTwoCombo.fill = GridBagConstraints.HORIZONTAL;
@@ -775,7 +819,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneOnePTwoRadHomoD.setHorizontalAlignment(SwingConstants.CENTER);
 		geneOnePTwoRadHomoD.setBackground(backgroundColor);
 		geneOnePTwoRadHomoD.setForeground(textColor);
-		geneOnePTwoRadHomoD.addItemListener(this);
+//		geneOnePTwoRadHomoD.addItemListener(this);
 		geneOnePTwoRadHomoD.setEnabled(inDebugMode);
 		GridBagConstraints gbc_geneOnePTwoRadHomoD = new GridBagConstraints();
 		gbc_geneOnePTwoRadHomoD.weightx = 0.25;
@@ -790,7 +834,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneOnePTwoRadHetero.setHorizontalAlignment(SwingConstants.CENTER);
 		geneOnePTwoRadHetero.setBackground(backgroundColor);
 		geneOnePTwoRadHetero.setForeground(textColor);
-		geneOnePTwoRadHetero.addItemListener(this);
+//		geneOnePTwoRadHetero.addItemListener(this);
 		geneOnePTwoRadHetero.setEnabled(inDebugMode);
 		GridBagConstraints gbc_geneOnePTwoRadHetero = new GridBagConstraints();
 		gbc_geneOnePTwoRadHetero.weightx = 0.25;
@@ -805,7 +849,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneOnePTwoRadHomoR.setHorizontalAlignment(SwingConstants.CENTER);
 		geneOnePTwoRadHomoR.setBackground(backgroundColor);
 		geneOnePTwoRadHomoR.setForeground(textColor);
-		geneOnePTwoRadHomoR.addItemListener(this);
+//		geneOnePTwoRadHomoR.addItemListener(this);
 		geneOnePTwoRadHomoR.setEnabled(inDebugMode);
 		GridBagConstraints gbc_geneOnePTwoRadHomoR = new GridBagConstraints();
 		gbc_geneOnePTwoRadHomoR.weightx = 0.25;
@@ -821,6 +865,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneTwoPTwoLabel.setBackground(backgroundColor);
 		geneTwoPTwoLabel.setForeground(textColor);
 		geneTwoPTwoLabel.setEnabled(inDebugMode);
+		geneLabelList.add(geneTwoPTwoLabel);
 		GridBagConstraints gbc_geneTwoPTwoLabel = new GridBagConstraints();
 		gbc_geneTwoPTwoLabel.gridwidth = 4;
 		gbc_geneTwoPTwoLabel.weightx = 1.0;
@@ -840,6 +885,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneTwoPTwoCombo.setBackground(textFieldColor);
 		geneTwoPTwoCombo.setForeground(textColor);
 		geneTwoPTwoCombo.setEnabled(inDebugMode);
+		comboBoxPTwoList.add(geneTwoPTwoCombo);
 		GridBagConstraints gbc_geneTwoPTwoCombo = new GridBagConstraints();
 		gbc_geneTwoPTwoCombo.insets = new Insets(0, 0, 5, 5);
 		gbc_geneTwoPTwoCombo.fill = GridBagConstraints.HORIZONTAL;
@@ -852,7 +898,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneTwoPTwoRadHomoD.setHorizontalAlignment(SwingConstants.CENTER);
 		geneTwoPTwoRadHomoD.setBackground(backgroundColor);
 		geneTwoPTwoRadHomoD.setForeground(textColor);
-		geneTwoPTwoRadHomoD.addItemListener(this);
+//		geneTwoPTwoRadHomoD.addItemListener(this);
 		geneTwoPTwoRadHomoD.setEnabled(inDebugMode);
 		GridBagConstraints gbc_geneTwoPTwoRadHomoD = new GridBagConstraints();
 		gbc_geneTwoPTwoRadHomoD.weightx = 0.25;
@@ -867,7 +913,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneTwoPTwoRadHetero.setHorizontalAlignment(SwingConstants.CENTER);
 		geneTwoPTwoRadHetero.setBackground(backgroundColor);
 		geneTwoPTwoRadHetero.setForeground(textColor);
-		geneTwoPTwoRadHetero.addItemListener(this);
+//		geneTwoPTwoRadHetero.addItemListener(this);
 		geneTwoPTwoRadHetero.setEnabled(inDebugMode);
 		GridBagConstraints gbc_geneTwoPTwoRadHetero = new GridBagConstraints();
 		gbc_geneTwoPTwoRadHetero.weightx = 0.25;
@@ -882,7 +928,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneTwoPTwoRadHomoR.setHorizontalAlignment(SwingConstants.CENTER);
 		geneTwoPTwoRadHomoR.setBackground(backgroundColor);
 		geneTwoPTwoRadHomoR.setForeground(textColor);
-		geneTwoPTwoRadHomoR.addItemListener(this);
+//		geneTwoPTwoRadHomoR.addItemListener(this);
 		geneTwoPTwoRadHomoR.setEnabled(inDebugMode);
 		GridBagConstraints gbc_geneTwoPTwoRadHomoR = new GridBagConstraints();
 		gbc_geneTwoPTwoRadHomoR.weightx = 0.25;
@@ -898,6 +944,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneThreePTwoLabel.setBackground(backgroundColor);
 		geneThreePTwoLabel.setForeground(textColor);
 		geneThreePTwoLabel.setEnabled(inDebugMode);
+		geneLabelList.add(geneThreePTwoLabel);
 		GridBagConstraints gbc_geneThreePTwoLabel = new GridBagConstraints();
 		gbc_geneThreePTwoLabel.gridwidth = 4;
 		gbc_geneThreePTwoLabel.weightx = 1.0;
@@ -917,6 +964,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneThreePTwoCombo.setBackground(textFieldColor);
 		geneThreePTwoCombo.setForeground(textColor);
 		geneThreePTwoCombo.setEnabled(inDebugMode);
+		comboBoxPTwoList.add(geneThreePTwoCombo);
 		GridBagConstraints gbc_geneThreePTwoCombo = new GridBagConstraints();
 		gbc_geneThreePTwoCombo.insets = new Insets(0, 0, 5, 5);
 		gbc_geneThreePTwoCombo.fill = GridBagConstraints.HORIZONTAL;
@@ -929,7 +977,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneThreePTwoRadHomoD.setHorizontalAlignment(SwingConstants.CENTER);
 		geneThreePTwoRadHomoD.setBackground(backgroundColor);
 		geneThreePTwoRadHomoD.setForeground(textColor);
-		geneThreePTwoRadHomoD.addItemListener(this);
+//		geneThreePTwoRadHomoD.addItemListener(this);
 		geneThreePTwoRadHomoD.setEnabled(inDebugMode);
 		GridBagConstraints gbc_geneThreePTwoRadHomoD = new GridBagConstraints();
 		gbc_geneThreePTwoRadHomoD.weightx = 0.25;
@@ -944,7 +992,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneThreePTwoRadHetero.setHorizontalAlignment(SwingConstants.CENTER);
 		geneThreePTwoRadHetero.setBackground(backgroundColor);
 		geneThreePTwoRadHetero.setForeground(textColor);
-		geneThreePTwoRadHetero.addItemListener(this);
+//		geneThreePTwoRadHetero.addItemListener(this);
 		geneThreePTwoRadHetero.setEnabled(inDebugMode);
 		GridBagConstraints gbc_geneThreePTwoRadHetero = new GridBagConstraints();
 		gbc_geneThreePTwoRadHetero.weightx = 0.25;
@@ -959,7 +1007,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneThreePTwoRadHomoR.setHorizontalAlignment(SwingConstants.CENTER);
 		geneThreePTwoRadHomoR.setBackground(backgroundColor);
 		geneThreePTwoRadHomoR.setForeground(textColor);
-		geneThreePTwoRadHomoR.addItemListener(this);
+//		geneThreePTwoRadHomoR.addItemListener(this);
 		geneThreePTwoRadHomoR.setEnabled(inDebugMode);
 		GridBagConstraints gbc_geneThreePTwoRadHomoR = new GridBagConstraints();
 		gbc_geneThreePTwoRadHomoR.weightx = 0.25;
@@ -975,6 +1023,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneFourPTwoLabel.setBackground(backgroundColor);
 		geneFourPTwoLabel.setForeground(textColor);
 		geneFourPTwoLabel.setEnabled(inDebugMode);
+		geneLabelList.add(geneFourPTwoLabel);
 		GridBagConstraints gbc_geneFourPTwoLabel = new GridBagConstraints();
 		gbc_geneFourPTwoLabel.gridwidth = 4;
 		gbc_geneFourPTwoLabel.fill = GridBagConstraints.BOTH;
@@ -993,6 +1042,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneFourPTwoCombo.setBackground(textFieldColor);
 		geneFourPTwoCombo.setForeground(textColor);
 		geneFourPTwoCombo.setEnabled(inDebugMode);
+		comboBoxPTwoList.add(geneFourPTwoCombo);
 		GridBagConstraints gbc_geneFourPTwoCombo = new GridBagConstraints();
 		gbc_geneFourPTwoCombo.insets = new Insets(0, 0, 5, 5);
 		gbc_geneFourPTwoCombo.fill = GridBagConstraints.HORIZONTAL;
@@ -1005,7 +1055,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneFourPTwoRadHomoD.setHorizontalAlignment(SwingConstants.CENTER);
 		geneFourPTwoRadHomoD.setBackground(backgroundColor);
 		geneFourPTwoRadHomoD.setForeground(textColor);
-		geneFourPTwoRadHomoD.addItemListener(this);
+//		geneFourPTwoRadHomoD.addItemListener(this);
 		geneFourPTwoRadHomoD.setEnabled(inDebugMode);
 		GridBagConstraints gbc_geneFourPTwoRadHomoD = new GridBagConstraints();
 		gbc_geneFourPTwoRadHomoD.weightx = 0.25;
@@ -1020,7 +1070,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneFourPTwoRadHetero.setHorizontalAlignment(SwingConstants.CENTER);
 		geneFourPTwoRadHetero.setBackground(backgroundColor);
 		geneFourPTwoRadHetero.setForeground(textColor);
-		geneFourPTwoRadHetero.addItemListener(this);
+//		geneFourPTwoRadHetero.addItemListener(this);
 		geneFourPTwoRadHetero.setEnabled(inDebugMode);
 		GridBagConstraints gbc_geneFourPTwoRadHetero = new GridBagConstraints();
 		gbc_geneFourPTwoRadHetero.weightx = 0.25;
@@ -1035,7 +1085,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneFourPTwoRadHomoR.setHorizontalAlignment(SwingConstants.CENTER);
 		geneFourPTwoRadHomoR.setBackground(backgroundColor);
 		geneFourPTwoRadHomoR.setForeground(textColor);
-		geneFourPTwoRadHomoR.addItemListener(this);
+//		geneFourPTwoRadHomoR.addItemListener(this);
 		geneFourPTwoRadHomoR.setEnabled(inDebugMode);
 		GridBagConstraints gbc_geneFourPTwoRadHomoR = new GridBagConstraints();
 		gbc_geneFourPTwoRadHomoR.weightx = 0.25;
@@ -1051,6 +1101,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneFivePTwoLabel.setBackground(backgroundColor);
 		geneFivePTwoLabel.setForeground(textColor);
 		geneFivePTwoLabel.setEnabled(inDebugMode);
+		geneLabelList.add(geneFivePTwoLabel);
 		GridBagConstraints gbc_geneFivePTwoLabel = new GridBagConstraints();
 		gbc_geneFivePTwoLabel.gridwidth = 4;
 		gbc_geneFivePTwoLabel.fill = GridBagConstraints.BOTH;
@@ -1069,6 +1120,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneFivePTwoCombo.setBackground(textFieldColor);
 		geneFivePTwoCombo.setForeground(textColor);
 		geneFivePTwoCombo.setEnabled(inDebugMode);
+		comboBoxPTwoList.add(geneFivePTwoCombo);
 		GridBagConstraints gbc_geneFivePTwoCombo = new GridBagConstraints();
 		gbc_geneFivePTwoCombo.insets = new Insets(0, 0, 5, 5);
 		gbc_geneFivePTwoCombo.fill = GridBagConstraints.HORIZONTAL;
@@ -1081,7 +1133,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneFivePTwoRadHomoD.setHorizontalAlignment(SwingConstants.CENTER);
 		geneFivePTwoRadHomoD.setBackground(backgroundColor);
 		geneFivePTwoRadHomoD.setForeground(textColor);
-		geneFivePTwoRadHomoD.addItemListener(this);
+//		geneFivePTwoRadHomoD.addItemListener(this);
 		geneFivePTwoRadHomoD.setEnabled(inDebugMode);
 		GridBagConstraints gbc_geneFivePTwoRadHomoD = new GridBagConstraints();
 		gbc_geneFivePTwoRadHomoD.weightx = 0.25;
@@ -1096,7 +1148,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneFivePTwoRadHetero.setHorizontalAlignment(SwingConstants.CENTER);
 		geneFivePTwoRadHetero.setBackground(backgroundColor);
 		geneFivePTwoRadHetero.setForeground(textColor);
-		geneFivePTwoRadHetero.addItemListener(this);
+//		geneFivePTwoRadHetero.addItemListener(this);
 		geneFivePTwoRadHetero.setEnabled(inDebugMode);
 		GridBagConstraints gbc_geneFivePTwoRadHetero = new GridBagConstraints();
 		gbc_geneFivePTwoRadHetero.weightx = 0.25;
@@ -1111,7 +1163,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneFivePTwoRadHomoR.setHorizontalAlignment(SwingConstants.CENTER);
 		geneFivePTwoRadHomoR.setBackground(backgroundColor);
 		geneFivePTwoRadHomoR.setForeground(textColor);
-		geneFivePTwoRadHomoR.addItemListener(this);
+//		geneFivePTwoRadHomoR.addItemListener(this);
 		geneFivePTwoRadHomoR.setEnabled(inDebugMode);
 		GridBagConstraints gbc_geneFivePTwoRadHomoR = new GridBagConstraints();
 		gbc_geneFivePTwoRadHomoR.weightx = 0.25;
@@ -1140,30 +1192,35 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneOnePTwoBG.add(geneOnePTwoRadHomoD);
 		geneOnePTwoBG.add(geneOnePTwoRadHetero);
 		geneOnePTwoBG.add(geneOnePTwoRadHomoR);
+		buttonGroupList.add(geneOnePTwoBG);
 
 		//Gene Two
 		geneTwoPTwoBG = new ButtonGroup();
 		geneTwoPTwoBG.add(geneTwoPTwoRadHomoD);
 		geneTwoPTwoBG.add(geneTwoPTwoRadHetero);
 		geneTwoPTwoBG.add(geneTwoPTwoRadHomoR);
+		buttonGroupList.add(geneTwoPTwoBG);
 		
 		//Gene Three
 		geneThreePTwoBG = new ButtonGroup();
 		geneThreePTwoBG.add(geneThreePTwoRadHomoD);
 		geneThreePTwoBG.add(geneThreePTwoRadHetero);
 		geneThreePTwoBG.add(geneThreePTwoRadHomoR);
+		buttonGroupList.add(geneThreePTwoBG);
 		
 		//Gene Four
 		geneFourPTwoBG = new ButtonGroup();
 		geneFourPTwoBG.add(geneFourPTwoRadHomoD);
 		geneFourPTwoBG.add(geneFourPTwoRadHetero);
 		geneFourPTwoBG.add(geneFourPTwoRadHomoR);
+		buttonGroupList.add(geneFourPTwoBG);
 		
 		//Gene Five
 		geneFivePTwoBG = new ButtonGroup();
 		geneFivePTwoBG.add(geneFivePTwoRadHomoD);
 		geneFivePTwoBG.add(geneFivePTwoRadHetero);
 		geneFivePTwoBG.add(geneFivePTwoRadHomoR);
+		buttonGroupList.add(geneFivePTwoBG);
 		
 		
 		
@@ -1235,6 +1292,8 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 			System.out.print(geneFourPOneCombo.getSelectedItem().toString() + "| |");
 			System.out.print(geneFivePOneCombo.getSelectedItem().toString() + "|\n");
 			
+			System.out.println("Calculation ready: " + errorCheckGenes());
+			
 		/*Error Check the combo boxes/radials
 		 *1: Make sure each gene has a radial selected.
 		 * NOTE: Make each Item Selection remove itself from the
@@ -1245,16 +1304,13 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		else if (e.getSource().equals(resetButton))
 		{
 			System.out.println("RESET BUTTON");
-//			clearAllCombosAndRadios();
+			resetAll();
 		}
 	}
 
 	public void mouseEntered(MouseEvent arg0){}
-
 	public void mouseExited(MouseEvent arg0) {}
-
 	public void mousePressed(MouseEvent arg0){}
-
 	public void mouseReleased(MouseEvent arg0){}
 
 	//For ComboBoxes' selection changes and Radio Button Selections.
@@ -1265,6 +1321,8 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 			
 			if (e.getSource() instanceof JComboBox)
 			{
+				
+				//Gene One 
 				System.out.println("Action is a JComboBox");
 				if (e.getSource().equals(geneOnePOneCombo))
 				{
@@ -1274,48 +1332,157 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 						if (geneOnePOneCombo.getSelectedIndex() != 0 && !geneTwoPOneCombo.isEnabled())
 						{
 							geneOnePTwoLabel.setEnabled(true);
+							geneTwoPOneLabel.setEnabled(true);
 							toggleButtonGroup(geneOnePOneBG);
 							toggleButtonGroup(geneOnePTwoBG);
 							toggleNextComboBox(geneTwoPOneCombo);
-							
 						}
-						calcButton.addMouseListener(this);
-						calcButton.setEnabled(true);
+						updateParentTwoComboBox(geneOnePTwoCombo, geneOnePOneCombo.getSelectedIndex());
+						updateButtonGroup((String)geneOnePOneCombo.getSelectedItem(), geneOnePOneBG, geneOnePTwoBG);
+//						calcButton.addMouseListener(this);
+//						calcButton.setEnabled(true);
 					}
 					else 
 					{
-						geneOnePTwoLabel.setEnabled(true);
+						geneOnePTwoLabel.setEnabled(false);
+						geneTwoPOneLabel.setEnabled(false);
 						toggleButtonGroup(geneOnePOneBG);
 						toggleButtonGroup(geneOnePTwoBG);
 						toggleNextComboBox(geneTwoPOneCombo);
-
-						calcButton.removeMouseListener(this);
-						calcButton.setEnabled(false);
+						updateParentTwoComboBox(geneOnePTwoCombo, geneOnePOneCombo.getSelectedIndex());
+						updateButtonGroup((String)geneOnePOneCombo.getSelectedItem(), geneOnePOneBG, geneOnePTwoBG);
+						
+//						calcButton.removeMouseListener(this);
+//						calcButton.setEnabled(false);
 					}
 				}
+				
+				//Gene Two
 				else if (e.getSource().equals(geneTwoPOneCombo))
 				{
 					System.out.println("G2P1: Selected Item: " + e.getItem().toString());
+					if (!(e.getItem().equals(defaultComboItem)))
+					{
+						if (geneTwoPOneCombo.getSelectedIndex() != 0 && !geneThreePOneCombo.isEnabled())
+						{
+							geneTwoPTwoLabel.setEnabled(true);
+							geneThreePOneLabel.setEnabled(true);
+							toggleButtonGroup(geneTwoPOneBG);
+							toggleButtonGroup(geneTwoPTwoBG);
+							toggleNextComboBox(geneThreePOneCombo);
+						}
+						updateParentTwoComboBox(geneTwoPTwoCombo, geneTwoPOneCombo.getSelectedIndex());
+						updateButtonGroup((String)geneTwoPOneCombo.getSelectedItem(), geneTwoPOneBG, geneTwoPTwoBG);
+					}
+					else 
+					{
+						geneTwoPTwoLabel.setEnabled(false);
+						geneThreePOneLabel.setEnabled(false);
+						toggleButtonGroup(geneTwoPOneBG);
+						toggleButtonGroup(geneTwoPTwoBG);
+						toggleNextComboBox(geneThreePOneCombo);
+						updateParentTwoComboBox(geneTwoPTwoCombo, geneTwoPOneCombo.getSelectedIndex());
+						updateButtonGroup((String)geneTwoPOneCombo.getSelectedItem(), geneTwoPOneBG, geneTwoPTwoBG);
+						
+					}
 				}
-				if (e.getSource().equals(geneThreePOneCombo))
+				
+				//Gene Three
+				else if (e.getSource().equals(geneThreePOneCombo))
 				{
 					System.out.println("G3P1: Selected Item: " + e.getItem().toString());
+					if (!(e.getItem().equals(defaultComboItem)))
+					{
+						if (geneThreePOneCombo.getSelectedIndex() != 0 && !geneFourPOneCombo.isEnabled())
+						{
+							geneThreePTwoLabel.setEnabled(true);
+							geneFourPOneLabel.setEnabled(true);
+							toggleButtonGroup(geneThreePOneBG);
+							toggleButtonGroup(geneThreePTwoBG);
+							toggleNextComboBox(geneFourPOneCombo);
+						}
+						updateParentTwoComboBox(geneThreePTwoCombo, geneThreePOneCombo.getSelectedIndex());
+						updateButtonGroup((String)geneThreePOneCombo.getSelectedItem(), geneThreePOneBG, geneThreePTwoBG);
+					}
+					else 
+					{
+						geneThreePTwoLabel.setEnabled(false);
+						geneFourPOneLabel.setEnabled(false);
+						toggleButtonGroup(geneThreePOneBG);
+						toggleButtonGroup(geneThreePTwoBG);
+						toggleNextComboBox(geneFourPOneCombo);
+						updateParentTwoComboBox(geneThreePTwoCombo, geneThreePOneCombo.getSelectedIndex());
+						updateButtonGroup((String)geneThreePOneCombo.getSelectedItem(), geneThreePOneBG, geneThreePTwoBG);
+						
+					}
 				}
-				if (e.getSource().equals(geneFourPOneCombo))
+				
+				//Gene Four
+				else if (e.getSource().equals(geneFourPOneCombo))
 				{
 					System.out.println("G4P1: Selected Item: " + e.getItem().toString());
+					if (!(e.getItem().equals(defaultComboItem)))
+					{
+						if (geneFourPOneCombo.getSelectedIndex() != 0 && !geneFivePOneCombo.isEnabled())
+						{
+							geneFourPTwoLabel.setEnabled(true);
+							geneFivePOneLabel.setEnabled(true);
+							toggleButtonGroup(geneFourPOneBG);
+							toggleButtonGroup(geneFourPTwoBG);
+							toggleNextComboBox(geneFivePOneCombo);
+						}
+						updateParentTwoComboBox(geneFourPTwoCombo, geneFourPOneCombo.getSelectedIndex());
+						updateButtonGroup((String)geneFourPOneCombo.getSelectedItem(), geneFourPOneBG, geneFourPTwoBG);
+					}
+					else 
+					{
+						geneFourPTwoLabel.setEnabled(false);
+						geneFivePOneLabel.setEnabled(false);
+						toggleButtonGroup(geneFourPOneBG);
+						toggleButtonGroup(geneFourPTwoBG);
+						toggleNextComboBox(geneFivePOneCombo);
+						updateParentTwoComboBox(geneFourPTwoCombo, geneFourPOneCombo.getSelectedIndex());
+						updateButtonGroup((String)geneFourPOneCombo.getSelectedItem(), geneFourPOneBG, geneFourPTwoBG);
+						
+					}
 				}
-				if (e.getSource().equals(geneFivePOneCombo))
+				
+				//Gene Five
+				else if (e.getSource().equals(geneFivePOneCombo))
 				{
 					System.out.println("G5P1: Selected Item: " + e.getItem().toString());
+					if (!(e.getItem().equals(defaultComboItem)))
+					{
+						if (geneFourPOneCombo.getSelectedIndex() != 0)
+						{
+							geneFivePTwoLabel.setEnabled(true);
+//							geneSixPOneLabel.setEnabled(true);
+							toggleButtonGroup(geneFivePOneBG);
+							toggleButtonGroup(geneFivePTwoBG);
+//							toggleNextComboBox(geneSixPOneCombo);
+						}
+						updateParentTwoComboBox(geneFivePTwoCombo, geneFivePOneCombo.getSelectedIndex());
+						updateButtonGroup((String)geneFivePOneCombo.getSelectedItem(), geneFivePOneBG, geneFivePTwoBG);
+					}
+					else 
+					{
+						geneFivePTwoLabel.setEnabled(false);
+//						geneSixPOneLabel.setEnabled(false);
+						toggleButtonGroup(geneFivePOneBG);
+						toggleButtonGroup(geneFivePTwoBG);
+//						toggleNextComboBox(geneSixPOneCombo);
+						updateParentTwoComboBox(geneFivePTwoCombo, geneFivePOneCombo.getSelectedIndex());
+						updateButtonGroup((String)geneFivePOneCombo.getSelectedItem(), geneFivePOneBG, geneFivePTwoBG);
+						
+					}
 				}
 			}
 			else if (e.getSource() instanceof JRadioButton)
 			{
-				System.out.println("Action is a JRadioButton");
+//				System.out.println("Action is a JRadioButton");
 				JRadioButton jrb = (JRadioButton)e.getSource();
 				System.out.println("Selected Source = " + jrb.getText());
-				
+												
 			}
 		}
 		
@@ -1324,6 +1491,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 	private void toggleButtonGroup(ButtonGroup buttonGroup)
 	{
 		Enumeration<AbstractButton> buttons = buttonGroup.getElements();
+		
 		while (buttons.hasMoreElements())
 		{
 			JRadioButton jrb = (JRadioButton)buttons.nextElement();
@@ -1332,13 +1500,13 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 				buttonGroup.clearSelection();
 				jrb.setEnabled(false);
 				jrb.removeItemListener(this);
-				System.out.println("Button Row Deactivated.");
+//				System.out.println("Button Row Deactivated.");
 			}
 			else
 			{
 				jrb.setEnabled(true);
 				jrb.addItemListener(this);
-				System.out.println("Button Row Activated.");
+//				System.out.println("Button Row Activated.");
 				
 			}
 		}
@@ -1361,4 +1529,169 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		}
 	}
 	
+	private void updateParentTwoComboBox(JComboBox<String> comboBox, int indexPos)
+	{
+		comboBox.setEnabled(true);
+		comboBox.setSelectedIndex(indexPos);
+		comboBox.setEnabled(false);
+	}
+	
+	private void updateButtonGroup(String newText, ButtonGroup parentOne, ButtonGroup parentTwo)
+	{
+		//If default selected item, use this default text.
+		//Else use what's in newText as the new text for each radio button.
+		if (newText.equals(defaultComboItem))
+		{
+//			System.out.println("Default text--using A to reset JRBs");
+			newText = "A";
+		}
+			String newTextLowerCase = newText.toLowerCase();
+			
+			//ParentOne Button Group
+			Enumeration<AbstractButton> parentOneButtons = parentOne.getElements();
+			int buttonPOneCtr = 0;
+			while (parentOneButtons.hasMoreElements() && buttonPOneCtr < 3)
+			{
+				JRadioButton jrb = (JRadioButton)parentOneButtons.nextElement();
+				if (buttonPOneCtr == 0)
+				{
+					jrb.setText(newText + newText);
+					
+				}
+				else if (buttonPOneCtr == 1)
+				{
+					jrb.setText(newText + newTextLowerCase);
+					
+				}
+				else if (buttonPOneCtr == 2)
+				{
+					jrb.setText(newTextLowerCase + newTextLowerCase);
+					
+				}
+				
+				buttonPOneCtr++;
+			}
+			
+			//ParentTwo Button Group
+			Enumeration<AbstractButton> parentTwoButtons = parentTwo.getElements();
+			int buttonPTwoCtr = 0;
+			while (parentTwoButtons.hasMoreElements() && buttonPTwoCtr < 3)
+			{
+				JRadioButton jrb = (JRadioButton)parentTwoButtons.nextElement();
+				if (buttonPTwoCtr == 0)
+				{
+					jrb.setText(newText + newText);
+					
+				}
+				else if (buttonPTwoCtr == 1)
+				{
+					jrb.setText(newText + newTextLowerCase);
+					
+				}
+				else if (buttonPTwoCtr == 2)
+				{
+					jrb.setText(newTextLowerCase + newTextLowerCase);
+					
+				}
+				
+				buttonPTwoCtr++;
+			}
+	}
+	
+	private void resetAll()
+	{
+		//Uses ItemListener's Deselect ActionListener to toggle
+		//the JComboBoxes and ButtonGroups
+		geneOnePOneCombo.setSelectedIndex(0);
+		
+	}
+
+	
+	
+/*
+ * August 15 2018 NOTES
+ * ERRORCHECKGENES WORKS IF THERE'S A SELECTION MADE, IF NONE
+ * ARE USED IT STILL CHECKS OKAY--GOTTA FIGURE OUT HOW TO 
+ * REWORK IT SO THE DEFAULT IS FALSE.	
+ */
+	
+	
+	private boolean errorCheckGenes()
+	{
+		boolean hasNoErrors = true;
+		
+		for (int geneCheck = 0; geneCheck < 5; geneCheck++)
+		{
+			JComboBox<String> jcb = comboBoxPOneList.get(geneCheck);
+			if (jcb.isEnabled() && jcb.getSelectedIndex() != 0)
+			{
+				System.out.println("ComboBox " + geneCheck + " is Enabled and Not on Default Selection");
+				if (geneCheck == 0)
+				{
+					if (!hasOneSelected(geneOnePOneBG) || !hasOneSelected(geneOnePTwoBG))
+					{
+						System.out.println("ErrorCheckGenes GENE ONE HAS MISSING SELECTION");
+						return false;
+					}
+				}
+				else if (geneCheck == 1)
+				{
+					if (!hasOneSelected(geneTwoPOneBG) || !hasOneSelected(geneTwoPTwoBG))
+					{
+						System.out.println("ErrorCheckGenes GENE TWO HAS MISSING SELECTION");
+						return false;
+					}
+				}
+				else if (geneCheck == 2)
+				{
+					if (!hasOneSelected(geneThreePOneBG) || !hasOneSelected(geneThreePTwoBG))
+					{
+						System.out.println("ErrorCheckGenes GENE THREE HAS MISSING SELECTION");
+						return false;
+					}
+				}
+				else if (geneCheck == 3)
+				{
+					if (!hasOneSelected(geneFourPOneBG) || !hasOneSelected(geneFourPTwoBG))
+					{
+						System.out.println("ErrorCheckGenes GENE FOUR HAS MISSING SELECTION");
+						return false;
+					}
+				}
+				else if (geneCheck == 4)
+				{
+					if (!hasOneSelected(geneFivePOneBG) || !hasOneSelected(geneFivePTwoBG))
+					{
+						System.out.println("ErrorCheckGenes GENE FIVE HAS MISSING SELECTION");
+						return false;
+					}
+				}
+				
+			}
+			else
+			{
+				System.out.println("ComboBox " + geneCheck + " isn't Enabled or it's on Default Selection");
+				
+			}
+		}
+		
+		return hasNoErrors;
+	}
+	
+	private boolean hasOneSelected(ButtonGroup bg)
+	{
+		Enumeration<AbstractButton> buttons = bg.getElements();
+		boolean hasOneSelected = false;
+		while (buttons.hasMoreElements())
+		{
+			JRadioButton jrb = (JRadioButton)buttons.nextElement();
+			if (jrb.isSelected())
+			{
+				System.out.println("hasOneSelected: FOUND ONE");
+				hasOneSelected = true;
+			}
+		}
+				
+		return hasOneSelected;
+	}
 }
