@@ -44,7 +44,7 @@ public class PunnettMe
 
 		buildPunnettSquare(parentOne.getGeneCombinations(), parentTwo.getGeneCombinations());
 		
-		tree.inOrderTraversal();
+//		tree.inOrderTraversal();
 	}
 	
 //	public void setParents(Parent parentOne, Parent parentTwo)

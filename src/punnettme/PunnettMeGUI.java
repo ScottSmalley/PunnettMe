@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import java.awt.GridBagConstraints;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Insets;
 
 import javax.swing.AbstractButton;
@@ -20,6 +21,7 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -40,6 +42,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.BorderLayout;
 import javax.swing.DropMode;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JComboBox;
 
 public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
@@ -146,6 +149,10 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 	
 	private JButton resetButton;
 	private JButton calcButton;
+	
+	//Results
+	JPanel resultsPanel;
+	JTextArea resultsJTA;
 	
 	private Color textColor = Color.WHITE;
 	private Color backgroundColor = Color.DARK_GRAY;
@@ -1225,7 +1232,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		
 		
 		//Results Column
-		JPanel resultsPanel = new JPanel();
+		resultsPanel = new JPanel();
 		//temp, fix color later.
 		resultsPanel.setBackground(backgroundColor);
 		resultsPanel.setForeground(textColor);
@@ -1261,17 +1268,24 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		resultsPanel.add(resultsLabel, gbc_lblResults);
 		
 		//Results JTextArea
-		JTextArea resultsJTA = new JTextArea();
+		resultsJTA = new JTextArea();
 		resultsJTA.setBackground(textFieldColor);
 		resultsJTA.setForeground(textColor);
 		resultsJTA.setEditable(false);
+		resultsJTA.setColumns(1);
+		resultsJTA.setLineWrap(false);
+		resultsJTA.setFont(new Font(javax.swing.UIManager.getDefaults().getFont("Label.font").getFontName(), Font.PLAIN, 14));
 		GridBagConstraints gbc_resultsJTA = new GridBagConstraints();
 		gbc_resultsJTA.weightx = 1.0;
 		gbc_resultsJTA.fill = GridBagConstraints.BOTH;
 		gbc_resultsJTA.weighty = 1.0;
 		gbc_resultsJTA.gridx = 0;
 		gbc_resultsJTA.gridy = 1;
-		resultsPanel.add(resultsJTA, gbc_resultsJTA);
+//		resultsPanel.add(resultsJTA, gbc_resultsJTA);
+		JScrollPane jsp = new JScrollPane(resultsJTA, 
+				JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, 
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		resultsPanel.add(jsp, gbc_resultsJTA);
 		
 		//COMMENT OUT FOR DESIGN
 		window.pack();
@@ -1292,7 +1306,18 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 			System.out.print(geneFourPOneCombo.getSelectedItem().toString() + "| |");
 			System.out.print(geneFivePOneCombo.getSelectedItem().toString() + "|\n");
 			
-			System.out.println("Calculation ready: " + errorCheckGenes());
+//			System.out.println("Calculation ready: " + errorCheckGenes());
+			
+			if (errorCheckGenes())
+			{
+				System.out.println("Initiating Calculation...");
+				startCalculation();
+			}
+			else
+			{
+				System.out.println("Cannot Initiate Calculation");
+				
+			}
 			
 		/*Error Check the combo boxes/radials
 		 *1: Make sure each gene has a radial selected.
@@ -1453,7 +1478,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 					System.out.println("G5P1: Selected Item: " + e.getItem().toString());
 					if (!(e.getItem().equals(defaultComboItem)))
 					{
-						if (geneFourPOneCombo.getSelectedIndex() != 0)
+						if (geneFourPOneCombo.getSelectedIndex() != 0 && geneFivePTwoLabel.isEnabled() == false)
 						{
 							geneFivePTwoLabel.setEnabled(true);
 //							geneSixPOneLabel.setEnabled(true);
@@ -1603,35 +1628,28 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		//Uses ItemListener's Deselect ActionListener to toggle
 		//the JComboBoxes and ButtonGroups
 		geneOnePOneCombo.setSelectedIndex(0);
+		resultsJTA.setText("");
 		
 	}
 
-	
-	
-/*
- * August 15 2018 NOTES
- * ERRORCHECKGENES WORKS IF THERE'S A SELECTION MADE, IF NONE
- * ARE USED IT STILL CHECKS OKAY--GOTTA FIGURE OUT HOW TO 
- * REWORK IT SO THE DEFAULT IS FALSE.	
- */
-	
-	
 	private boolean errorCheckGenes()
 	{
 		boolean hasNoErrors = true;
+		int numberOfInactiveGenes = 0;
 		
 		for (int geneCheck = 0; geneCheck < 5; geneCheck++)
 		{
 			JComboBox<String> jcb = comboBoxPOneList.get(geneCheck);
 			if (jcb.isEnabled() && jcb.getSelectedIndex() != 0)
 			{
-				System.out.println("ComboBox " + geneCheck + " is Enabled and Not on Default Selection");
+//				System.out.println("ComboBox " + geneCheck + " is Enabled and Not on Default Selection");
 				if (geneCheck == 0)
 				{
 					if (!hasOneSelected(geneOnePOneBG) || !hasOneSelected(geneOnePTwoBG))
 					{
 						System.out.println("ErrorCheckGenes GENE ONE HAS MISSING SELECTION");
-						return false;
+						hasNoErrors = false;
+//						return false;
 					}
 				}
 				else if (geneCheck == 1)
@@ -1639,7 +1657,8 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 					if (!hasOneSelected(geneTwoPOneBG) || !hasOneSelected(geneTwoPTwoBG))
 					{
 						System.out.println("ErrorCheckGenes GENE TWO HAS MISSING SELECTION");
-						return false;
+						hasNoErrors = false;
+//						return false;
 					}
 				}
 				else if (geneCheck == 2)
@@ -1647,7 +1666,8 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 					if (!hasOneSelected(geneThreePOneBG) || !hasOneSelected(geneThreePTwoBG))
 					{
 						System.out.println("ErrorCheckGenes GENE THREE HAS MISSING SELECTION");
-						return false;
+						hasNoErrors = false;
+//						return false;
 					}
 				}
 				else if (geneCheck == 3)
@@ -1655,7 +1675,8 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 					if (!hasOneSelected(geneFourPOneBG) || !hasOneSelected(geneFourPTwoBG))
 					{
 						System.out.println("ErrorCheckGenes GENE FOUR HAS MISSING SELECTION");
-						return false;
+						hasNoErrors = false;
+//						return false;
 					}
 				}
 				else if (geneCheck == 4)
@@ -1663,18 +1684,25 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 					if (!hasOneSelected(geneFivePOneBG) || !hasOneSelected(geneFivePTwoBG))
 					{
 						System.out.println("ErrorCheckGenes GENE FIVE HAS MISSING SELECTION");
-						return false;
+						hasNoErrors = false;
+//						return false;
 					}
 				}
 				
 			}
 			else
 			{
-				System.out.println("ComboBox " + geneCheck + " isn't Enabled or it's on Default Selection");
-				
+//				System.out.println("ComboBox " + geneCheck + " isn't Enabled or it's on Default Selection");
+				numberOfInactiveGenes++;
 			}
 		}
 		
+		//No genes have been selected.
+		//At least one gene must be used to Calculate.
+		if (numberOfInactiveGenes > 4)
+		{
+			hasNoErrors = false;
+		}
 		return hasNoErrors;
 	}
 	
@@ -1687,11 +1715,116 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 			JRadioButton jrb = (JRadioButton)buttons.nextElement();
 			if (jrb.isSelected())
 			{
-				System.out.println("hasOneSelected: FOUND ONE");
+//				System.out.println("hasOneSelected: FOUND ONE");
 				hasOneSelected = true;
 			}
 		}
 				
 		return hasOneSelected;
 	}
+	
+	private void startCalculation()
+	{
+		Gene[] rawGenePOne = new Gene[5];
+		Gene[] rawGenePTwo = new Gene[5];
+		if (geneOnePOneCombo.getSelectedIndex() != 0)
+		{
+			rawGenePOne[0] = new Gene(geneOnePOneCombo.getSelectedItem().toString(), 
+									geneOnePOneRadHetero.isSelected(), 
+									geneOnePOneRadHomoD.isSelected(),
+									geneOnePOneRadHomoR.isSelected());
+			
+			rawGenePTwo[0] = new Gene(geneOnePOneCombo.getSelectedItem().toString(), 
+										geneOnePTwoRadHetero.isSelected(), 
+										geneOnePTwoRadHomoD.isSelected(),
+										geneOnePTwoRadHomoR.isSelected());
+		}
+		
+		if (geneTwoPOneCombo.getSelectedIndex() != 0)
+		{
+			rawGenePOne[1] = new Gene(geneTwoPOneCombo.getSelectedItem().toString(), 
+					geneTwoPOneRadHetero.isSelected(), 
+					geneTwoPOneRadHomoD.isSelected(),
+					geneTwoPOneRadHomoR.isSelected());
+			
+			rawGenePTwo[1] = new Gene(geneTwoPOneCombo.getSelectedItem().toString(), 
+					geneTwoPTwoRadHetero.isSelected(), 
+					geneTwoPTwoRadHomoD.isSelected(),
+					geneTwoPTwoRadHomoR.isSelected());
+		}
+		
+		if (geneThreePOneCombo.getSelectedIndex() != 0)
+		{
+			rawGenePOne[2] = new Gene(geneThreePOneCombo.getSelectedItem().toString(), 
+					geneThreePOneRadHetero.isSelected(), 
+					geneThreePOneRadHomoD.isSelected(),
+					geneThreePOneRadHomoR.isSelected());
+			
+			rawGenePTwo[2] = new Gene(geneThreePOneCombo.getSelectedItem().toString(), 
+					geneThreePTwoRadHetero.isSelected(), 
+					geneThreePTwoRadHomoD.isSelected(),
+					geneThreePTwoRadHomoR.isSelected());
+		}
+		
+		if (geneFourPOneCombo.getSelectedIndex() != 0)
+		{
+			rawGenePOne[3] = new Gene(geneFourPOneCombo.getSelectedItem().toString(), 
+					geneFourPOneRadHetero.isSelected(), 
+					geneFourPOneRadHomoD.isSelected(),
+					geneFourPOneRadHomoR.isSelected());
+			
+			rawGenePTwo[3] = new Gene(geneFourPOneCombo.getSelectedItem().toString(), 
+					geneFourPTwoRadHetero.isSelected(), 
+					geneFourPTwoRadHomoD.isSelected(),
+					geneFourPTwoRadHomoR.isSelected());
+		}
+		
+		if (geneFivePOneCombo.getSelectedIndex() != 0)
+		{
+			rawGenePOne[4] = new Gene(geneFivePOneCombo.getSelectedItem().toString(), 
+					geneFivePOneRadHetero.isSelected(), 
+					geneFivePOneRadHomoD.isSelected(),
+					geneFivePOneRadHomoR.isSelected());
+			
+			rawGenePTwo[4] = new Gene(geneFivePOneCombo.getSelectedItem().toString(), 
+					geneFivePTwoRadHetero.isSelected(), 
+					geneFivePTwoRadHomoD.isSelected(),
+					geneFivePTwoRadHomoR.isSelected());
+		}
+
+		Parent parentOne = new Parent();
+		parentOne.setRawGenes(rawGenePOne);
+		
+		Parent parentTwo = new Parent();
+		parentTwo.setRawGenes(rawGenePTwo);
+
+		pm.build(parentOne, parentTwo);
+	
+		List<String> output = pm.getResults();
+		
+		for (int i = 0; i < output.size(); i++)
+		{
+			System.out.println(output.get(i));
+		}
+		System.out.println("output size = " + output.size());
+		
+		outputResults(pm.getResults());
+	}
+	
+	private void outputResults(List<String> results)
+	{
+//		JScrollPane jsp = new JScrollPane(resultsJTA, 
+//				JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, 
+//				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+//		resultsPanel.add(jsp);
+		resultsJTA.setText("");
+		for (int output = results.size()-1; output >= 0 ; output--)
+		{
+			resultsJTA.append(results.get(output) + "\n");
+		}
+		resultsJTA.repaint();
+		
+		
+	}
+	
 }

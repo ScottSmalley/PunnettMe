@@ -160,24 +160,7 @@ public class AVLTree
 			}
 
 		}
-		
-		
-		/*
-		 * NOTES FROM JULY 21
-		 * 
-		 * HOLY SHIT WE GOT IT
-		 * 
-		 * OLD NODE NEEDED IT'S PARENT VARIABLE UPDATED BOOM.
-		 * 
-		 * RIGHTROTATE IS PULLING NULL POINTERS ON LINE 268.
-		 * 
-		 * FIGURE OUT HOW TO JUNIT TEST STRING ARRAYS, OR
-		 * USE THE OLD AN INNEFICIENT WAY OF A FOR LOOP OR SOMETHING.....ANNOYING
-		 * 
-		 * DOUBLE CHECK OLD JUNIT TESTS ARE STILL VIABLE & WORKING
-		 * 
-		 * 
-		 */
+
 		private Node rebalance(Node node)
 		{
 			if (getHeight(node.left) - getHeight(node.right) > 1)
@@ -336,7 +319,7 @@ public class AVLTree
 //			output.add(root.data);
 			for (int add = 0; add <= root.duplicate; add++)
 			{
-				System.out.println(root.data);
+//				System.out.println(root.data);
 				output.add(root.data);
 			}
 				getInOrderTraversal(root.right);
