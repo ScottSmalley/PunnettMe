@@ -67,42 +67,18 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 	private JComboBox<String> geneThreePOneCombo;
 	private JComboBox<String> geneFourPOneCombo;
 	private JComboBox<String> geneFivePOneCombo;
-
-	//Parent Two
-	private JComboBox<String> geneOnePTwoCombo;
-	private JComboBox<String> geneTwoPTwoCombo;
-	private JComboBox<String> geneThreePTwoCombo;
-	private JComboBox<String> geneFourPTwoCombo;
-	private JComboBox<String> geneFivePTwoCombo;
 	
-	//Parent One 
 	private JLabel geneTwoPOneLabel;
 	private JLabel geneThreePOneLabel;
 	private JLabel geneFourPOneLabel;
 	private JLabel geneFivePOneLabel;
-	
-	//Parent Two 
-	private JLabel geneOnePTwoLabel;
-	private JLabel geneTwoPTwoLabel;
-	private JLabel geneThreePTwoLabel;
-	private JLabel geneFourPTwoLabel;
-	private JLabel geneFivePTwoLabel;
-	
-	//Parent One
+
 	private ButtonGroup geneOnePOneBG;
 	private ButtonGroup geneTwoPOneBG;
 	private ButtonGroup geneThreePOneBG;
 	private ButtonGroup geneFourPOneBG;
 	private ButtonGroup geneFivePOneBG;
-
-	//Parent Two
-	private ButtonGroup geneOnePTwoBG;
-	private ButtonGroup geneTwoPTwoBG;
-	private ButtonGroup geneThreePTwoBG;
-	private ButtonGroup geneFourPTwoBG;
-	private ButtonGroup geneFivePTwoBG;
 	
-	//Parent One
 	private JRadioButton geneOnePOneRadHomoD;
 	private JRadioButton geneOnePOneRadHetero;
 	private JRadioButton geneOnePOneRadHomoR;
@@ -120,6 +96,24 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 	private JRadioButton geneFivePOneRadHomoR;
 
 	//Parent Two
+	private JComboBox<String> geneOnePTwoCombo;
+	private JComboBox<String> geneTwoPTwoCombo;
+	private JComboBox<String> geneThreePTwoCombo;
+	private JComboBox<String> geneFourPTwoCombo;
+	private JComboBox<String> geneFivePTwoCombo;
+	
+	private JLabel geneOnePTwoLabel;
+	private JLabel geneTwoPTwoLabel;
+	private JLabel geneThreePTwoLabel;
+	private JLabel geneFourPTwoLabel;
+	private JLabel geneFivePTwoLabel;
+	
+	private ButtonGroup geneOnePTwoBG;
+	private ButtonGroup geneTwoPTwoBG;
+	private ButtonGroup geneThreePTwoBG;
+	private ButtonGroup geneFourPTwoBG;
+	private ButtonGroup geneFivePTwoBG;
+	
 	private JRadioButton geneOnePTwoRadHomoD;
 	private JRadioButton geneOnePTwoRadHetero;
 	private JRadioButton geneOnePTwoRadHomoR;
@@ -141,11 +135,11 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 	private List<JLabel> geneLabelList;
 	private List<ButtonGroup> buttonGroupList;
 	
-	private boolean geneOneIsReady;
-	private boolean geneTwoIsReady;
-	private boolean geneThreeIsReady;
-	private boolean geneFourIsReady;
-	private boolean geneFiveIsReady;
+//	private boolean geneOneIsReady;
+//	private boolean geneTwoIsReady;
+//	private boolean geneThreeIsReady;
+//	private boolean geneFourIsReady;
+//	private boolean geneFiveIsReady;
 	
 	private JButton resetButton;
 	private JButton calcButton;
@@ -166,8 +160,8 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 	
 	//*********** PunnettMe Globals ***********
 	private PunnettMe pm;
-	private Parent parentOne;
-	private Parent parentTwo;
+//	private Parent parentOne;
+//	private Parent parentTwo;
 	
 	//*********** Debug Switches *********** 
 	private boolean inDebugMode = false;
@@ -213,6 +207,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 	 * POne = Parent One identifier
 	 * Label == Description of the Object
 	 */
+	
 	//COMMENT OUT FOR DESIGN
 //	private void initialize() {
 	private void start() 
@@ -225,11 +220,11 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		geneLabelList = new ArrayList<>();
 		buttonGroupList = new ArrayList<>();
 		
-		geneOneIsReady = false;
-		geneTwoIsReady = false;
-		geneThreeIsReady = false;
-		geneFourIsReady = false;
-		geneFiveIsReady = false;
+//		geneOneIsReady = false;
+//		geneTwoIsReady = false;
+//		geneThreeIsReady = false;
+//		geneFourIsReady = false;
+//		geneFiveIsReady = false;
 		//*********** GUI START ***********
 		
 		//Window 
@@ -713,46 +708,40 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		parentOne.add(calcButton, gbc_calcButton);
 		
 		//Adding all Parent One radio buttons to their corresponding ButtonGroups
-		//Gene One 
+		//Gene One Parent One
 		geneOnePOneBG = new ButtonGroup();
 		geneOnePOneBG.add(geneOnePOneRadHomoD);
 		geneOnePOneBG.add(geneOnePOneRadHetero);
 		geneOnePOneBG.add(geneOnePOneRadHomoR);
 		buttonGroupList.add(geneOnePOneBG);
 		
-		//Gene Two 
+		//Gene Two Parent One
 		geneTwoPOneBG = new ButtonGroup();
 		geneTwoPOneBG.add(geneTwoPOneRadHomoD);
 		geneTwoPOneBG.add(geneTwoPOneRadHetero);
 		geneTwoPOneBG.add(geneTwoPOneRadHomoR);
 		buttonGroupList.add(geneTwoPOneBG);
 		
-		
-		//Gene Three 
+		//Gene Three Parent One
 		geneThreePOneBG = new ButtonGroup();
 		geneThreePOneBG.add(geneThreePOneRadHomoD);
 		geneThreePOneBG.add(geneThreePOneRadHetero);
 		geneThreePOneBG.add(geneThreePOneRadHomoR);
 		buttonGroupList.add(geneThreePOneBG);
 		
-		
-		//Gene Four
+		//Gene Four Parent One
 		geneFourPOneBG = new ButtonGroup();
 		geneFourPOneBG.add(geneFourPOneRadHomoD);
 		geneFourPOneBG.add(geneFourPOneRadHetero);
 		geneFourPOneBG.add(geneFourPOneRadHomoR);
 		buttonGroupList.add(geneFourPOneBG);
 		
-		
-		//Gene Five
+		//Gene Five Parent One
 		geneFivePOneBG = new ButtonGroup();
 		geneFivePOneBG.add(geneFivePOneRadHomoD);
 		geneFivePOneBG.add(geneFivePOneRadHetero);
 		geneFivePOneBG.add(geneFivePOneRadHomoR);
 		buttonGroupList.add(geneFivePOneBG);
-		
-		
-		
 		
 		//Parent Two Column
 		JPanel parentTwo = new JPanel();
@@ -1194,46 +1183,43 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		parentTwo.add(resetButton, gbc_resetButton);
 		
 		//Adding all Parent Two radio buttons to their corresponding ButtonGroups
-		//Gene One 
+		//Gene One Parent Two
 		geneOnePTwoBG = new ButtonGroup();
 		geneOnePTwoBG.add(geneOnePTwoRadHomoD);
 		geneOnePTwoBG.add(geneOnePTwoRadHetero);
 		geneOnePTwoBG.add(geneOnePTwoRadHomoR);
 		buttonGroupList.add(geneOnePTwoBG);
 
-		//Gene Two
+		//Gene Two Parent Two
 		geneTwoPTwoBG = new ButtonGroup();
 		geneTwoPTwoBG.add(geneTwoPTwoRadHomoD);
 		geneTwoPTwoBG.add(geneTwoPTwoRadHetero);
 		geneTwoPTwoBG.add(geneTwoPTwoRadHomoR);
 		buttonGroupList.add(geneTwoPTwoBG);
 		
-		//Gene Three
+		//Gene Three Parent Two
 		geneThreePTwoBG = new ButtonGroup();
 		geneThreePTwoBG.add(geneThreePTwoRadHomoD);
 		geneThreePTwoBG.add(geneThreePTwoRadHetero);
 		geneThreePTwoBG.add(geneThreePTwoRadHomoR);
 		buttonGroupList.add(geneThreePTwoBG);
 		
-		//Gene Four
+		//Gene Four Parent Two
 		geneFourPTwoBG = new ButtonGroup();
 		geneFourPTwoBG.add(geneFourPTwoRadHomoD);
 		geneFourPTwoBG.add(geneFourPTwoRadHetero);
 		geneFourPTwoBG.add(geneFourPTwoRadHomoR);
 		buttonGroupList.add(geneFourPTwoBG);
 		
-		//Gene Five
+		//Gene Five Parent Two
 		geneFivePTwoBG = new ButtonGroup();
 		geneFivePTwoBG.add(geneFivePTwoRadHomoD);
 		geneFivePTwoBG.add(geneFivePTwoRadHetero);
 		geneFivePTwoBG.add(geneFivePTwoRadHomoR);
 		buttonGroupList.add(geneFivePTwoBG);
 		
-		
-		
 		//Results Column
 		resultsPanel = new JPanel();
-		//temp, fix color later.
 		resultsPanel.setBackground(backgroundColor);
 		resultsPanel.setForeground(textColor);
 		GridBagConstraints gbc_resultsPanel = new GridBagConstraints();
@@ -1290,7 +1276,6 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		//COMMENT OUT FOR DESIGN
 		window.pack();
 		window.setVisible(true);
-		
 	}
 
 	//For Mouse clicks on the Radials &
@@ -1299,14 +1284,12 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 	{
 		if (e.getSource().equals(calcButton))
 		{
-			System.out.print("CALCULATE BUTTON using: |");
-			System.out.print(geneOnePOneCombo.getSelectedItem().toString() + "| |");
-			System.out.print(geneTwoPOneCombo.getSelectedItem().toString() + "| |");
-			System.out.print(geneThreePOneCombo.getSelectedItem().toString() + "| |");
-			System.out.print(geneFourPOneCombo.getSelectedItem().toString() + "| |");
-			System.out.print(geneFivePOneCombo.getSelectedItem().toString() + "|\n");
-			
-//			System.out.println("Calculation ready: " + errorCheckGenes());
+//			System.out.print("CALCULATE BUTTON using: |");
+//			System.out.print(geneOnePOneCombo.getSelectedItem().toString() + "| |");
+//			System.out.print(geneTwoPOneCombo.getSelectedItem().toString() + "| |");
+//			System.out.print(geneThreePOneCombo.getSelectedItem().toString() + "| |");
+//			System.out.print(geneFourPOneCombo.getSelectedItem().toString() + "| |");
+//			System.out.print(geneFivePOneCombo.getSelectedItem().toString() + "|\n");
 			
 			if (errorCheckGenes())
 			{
@@ -1316,7 +1299,6 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 			else
 			{
 				System.out.println("Cannot Initiate Calculation");
-				
 			}
 			
 		/*Error Check the combo boxes/radials
@@ -1343,10 +1325,8 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 	{
 		if (e.getStateChange() == ItemEvent.SELECTED)
 		{
-			
 			if (e.getSource() instanceof JComboBox)
 			{
-				
 				//Gene One 
 				System.out.println("Action is a JComboBox");
 				if (e.getSource().equals(geneOnePOneCombo))
@@ -1364,8 +1344,6 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 						}
 						updateParentTwoComboBox(geneOnePTwoCombo, geneOnePOneCombo.getSelectedIndex());
 						updateButtonGroup((String)geneOnePOneCombo.getSelectedItem(), geneOnePOneBG, geneOnePTwoBG);
-//						calcButton.addMouseListener(this);
-//						calcButton.setEnabled(true);
 					}
 					else 
 					{
@@ -1376,9 +1354,6 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 						toggleNextComboBox(geneTwoPOneCombo);
 						updateParentTwoComboBox(geneOnePTwoCombo, geneOnePOneCombo.getSelectedIndex());
 						updateButtonGroup((String)geneOnePOneCombo.getSelectedItem(), geneOnePOneBG, geneOnePTwoBG);
-						
-//						calcButton.removeMouseListener(this);
-//						calcButton.setEnabled(false);
 					}
 				}
 				
@@ -1408,7 +1383,6 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 						toggleNextComboBox(geneThreePOneCombo);
 						updateParentTwoComboBox(geneTwoPTwoCombo, geneTwoPOneCombo.getSelectedIndex());
 						updateButtonGroup((String)geneTwoPOneCombo.getSelectedItem(), geneTwoPOneBG, geneTwoPTwoBG);
-						
 					}
 				}
 				
@@ -1438,7 +1412,6 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 						toggleNextComboBox(geneFourPOneCombo);
 						updateParentTwoComboBox(geneThreePTwoCombo, geneThreePOneCombo.getSelectedIndex());
 						updateButtonGroup((String)geneThreePOneCombo.getSelectedItem(), geneThreePOneBG, geneThreePTwoBG);
-						
 					}
 				}
 				
@@ -1468,7 +1441,6 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 						toggleNextComboBox(geneFivePOneCombo);
 						updateParentTwoComboBox(geneFourPTwoCombo, geneFourPOneCombo.getSelectedIndex());
 						updateButtonGroup((String)geneFourPOneCombo.getSelectedItem(), geneFourPOneBG, geneFourPTwoBG);
-						
 					}
 				}
 				
@@ -1498,7 +1470,6 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 //						toggleNextComboBox(geneSixPOneCombo);
 						updateParentTwoComboBox(geneFivePTwoCombo, geneFivePOneCombo.getSelectedIndex());
 						updateButtonGroup((String)geneFivePOneCombo.getSelectedItem(), geneFivePOneBG, geneFivePTwoBG);
-						
 					}
 				}
 			}
@@ -1507,10 +1478,8 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 //				System.out.println("Action is a JRadioButton");
 				JRadioButton jrb = (JRadioButton)e.getSource();
 				System.out.println("Selected Source = " + jrb.getText());
-												
 			}
 		}
-		
 	}
 
 	private void toggleButtonGroup(ButtonGroup buttonGroup)
@@ -1532,7 +1501,6 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 				jrb.setEnabled(true);
 				jrb.addItemListener(this);
 //				System.out.println("Button Row Activated.");
-				
 			}
 		}
 	}
@@ -1581,17 +1549,14 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 				if (buttonPOneCtr == 0)
 				{
 					jrb.setText(newText + newText);
-					
 				}
 				else if (buttonPOneCtr == 1)
 				{
 					jrb.setText(newText + newTextLowerCase);
-					
 				}
 				else if (buttonPOneCtr == 2)
 				{
 					jrb.setText(newTextLowerCase + newTextLowerCase);
-					
 				}
 				
 				buttonPOneCtr++;
@@ -1606,17 +1571,14 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 				if (buttonPTwoCtr == 0)
 				{
 					jrb.setText(newText + newText);
-					
 				}
 				else if (buttonPTwoCtr == 1)
 				{
 					jrb.setText(newText + newTextLowerCase);
-					
 				}
 				else if (buttonPTwoCtr == 2)
 				{
 					jrb.setText(newTextLowerCase + newTextLowerCase);
-					
 				}
 				
 				buttonPTwoCtr++;
@@ -1715,7 +1677,6 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 			JRadioButton jrb = (JRadioButton)buttons.nextElement();
 			if (jrb.isSelected())
 			{
-//				System.out.println("hasOneSelected: FOUND ONE");
 				hasOneSelected = true;
 			}
 		}
@@ -1730,14 +1691,14 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		if (geneOnePOneCombo.getSelectedIndex() != 0)
 		{
 			rawGenePOne[0] = new Gene(geneOnePOneCombo.getSelectedItem().toString(), 
-									geneOnePOneRadHetero.isSelected(), 
-									geneOnePOneRadHomoD.isSelected(),
-									geneOnePOneRadHomoR.isSelected());
+					geneOnePOneRadHetero.isSelected(), 
+					geneOnePOneRadHomoD.isSelected(),
+					geneOnePOneRadHomoR.isSelected());
 			
 			rawGenePTwo[0] = new Gene(geneOnePOneCombo.getSelectedItem().toString(), 
-										geneOnePTwoRadHetero.isSelected(), 
-										geneOnePTwoRadHomoD.isSelected(),
-										geneOnePTwoRadHomoR.isSelected());
+					geneOnePTwoRadHetero.isSelected(), 
+					geneOnePTwoRadHomoD.isSelected(),
+					geneOnePTwoRadHomoR.isSelected());
 		}
 		
 		if (geneTwoPOneCombo.getSelectedIndex() != 0)
@@ -1813,18 +1774,12 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 	
 	private void outputResults(List<String> results)
 	{
-//		JScrollPane jsp = new JScrollPane(resultsJTA, 
-//				JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, 
-//				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-//		resultsPanel.add(jsp);
 		resultsJTA.setText("");
 		for (int output = results.size()-1; output >= 0 ; output--)
 		{
 			resultsJTA.append(results.get(output) + "\n");
 		}
-		resultsJTA.repaint();
-		
-		
+		resultsJTA.setCaretPosition(0);
 	}
 	
 }
