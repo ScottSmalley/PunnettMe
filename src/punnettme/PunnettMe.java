@@ -71,24 +71,30 @@ public class PunnettMe
 				if (rawGenes[index].getHeterozygous())
 				{
 //					System.out.println("Hetero");
+//					System.out.println("Current Alleles: " + alleles);
 					alleles += rawGenes[index].getName().toUpperCase();
 					alleles += rawGenes[index].getName().toLowerCase();
+//					System.out.println("Updated Alleles: " + alleles);
 				}
 				else if (rawGenes[index].getHomozygousDominant())
 				{
 //					System.out.println("HomoD");
+//					System.out.println("Current Alleles: " + alleles);
 					alleles += rawGenes[index].getName().toUpperCase();
 					alleles += rawGenes[index].getName().toUpperCase();
+//					System.out.println("Updated Alleles: " + alleles);
 				}
 				else if (rawGenes[index].getHomozygousRecessive())
 				{
 //					System.out.println("HomoR");
+//					System.out.println("Current Alleles: " + alleles);
 					alleles += rawGenes[index].getName().toLowerCase();
 					alleles += rawGenes[index].getName().toLowerCase();
+//					System.out.println("Updated Alleles: " + alleles);
 				}
 				else
 				{
-//					System.out.println("ERROR ALL BOOL TYPES ARE FALSE");
+					System.out.println("ERROR ALL BOOL TYPES ARE FALSE");
 				}
 			}
 		}
@@ -121,6 +127,7 @@ public class PunnettMe
 //			System.out.println("longer");
 			String tempAlleles = alleles;
 			result =  buildAlleleCombinations(result, tempAlleles);
+			
 		}
 //		System.out.println("NONE");
 		return result;
@@ -148,17 +155,28 @@ public class PunnettMe
 				{
 					newCombinations[newCombinationsCtr] = result[i] + alleles.substring(0, 1);
 					newCombinations[newCombinationsCtr+1] = result[i] + alleles.substring(1, 2);
+//					System.out.println("DEBUG !null : " + result[i] + alleles.substring(0, 1));
+//					System.out.println("DEBUG !null : " + result[i] + alleles.substring(1, 2));
 				}
 				else
 				{
 					newCombinations[newCombinationsCtr] = alleles.substring(0, 1);
 					newCombinations[newCombinationsCtr+1] = alleles.substring(1, 2);
+//					System.out.println("DEBUG null : " + alleles.substring(0, 1));
+//					System.out.println("DEBUG null : " + alleles.substring(1, 2));
 				}
 				newCombinationsCtr += 2;
 			}
 			String updatedParent = alleles.substring(2);
+
+			
 			return buildAlleleCombinations(newCombinations, updatedParent);
 		}
+//		System.out.println("DEBUGGED BUILDALLELECOMBINATIONS");
+//		for (int j = 0; j < result.length; j++)
+//		{
+//			System.out.println(result[j]);
+//		}
 		return result;
 	}
 	
@@ -172,6 +190,7 @@ public class PunnettMe
 			{
 				String result =	buildPunnettSquare("", parentOne[i], parentTwo[j]);
 //				offspring.add(result);
+//				System.out.println("storeInTree sending result: " + result);
 				tree.storeInTree(result);
 			}
 		}
@@ -197,6 +216,7 @@ public class PunnettMe
 			}
 			buildPunnettSquare(result, parentOne.substring(1), parentTwo.substring(1));
 		}
+//		System.out.println("BPS result: " + result);
 		return result;
 	}
 	

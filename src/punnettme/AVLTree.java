@@ -6,8 +6,8 @@ import java.util.List;
 public class AVLTree 
 {
 	private Node root;
-	//For Testing purposes only.
 	private List<String> output = new ArrayList<>();
+//	private int scoretotal = 0;
 	
 	public AVLTree()
 	{
@@ -30,7 +30,8 @@ public class AVLTree
 					 * If a duplicate is found, it will return true and 
 					 * increment the counter for that Node in the traverseForDuplicates() method. 
 					 */
-					if (!traverseForDuplicates(score, root, false))
+					if (!traverseForDuplicates(score, data, root, false))
+//					if (!traverseForDuplicates(score, root, false))
 					{
 						insert(new Node(score, data), root);
 					}
@@ -54,45 +55,75 @@ public class AVLTree
 		{
 			int score = 0;
 			
-			for (int i = 0; i < result.length(); i++)
+//			int binary = result.length();
+			int binary = result.length()-1;
+
+			//			System.out.println("binary " + binary);
+			
+			for (int i = 0; i < result.length() && binary > -1; i++)
 			{
+//				System.out.println("Looking at char: " + result.charAt(i));
+//				System.out.println("PRE Score: " + score + " result: " + result);
+//				System.out.println("Binary: " + binary);
+				
 				if (Character.isUpperCase(result.charAt(i)))
 				{
-					score += result.length() - i;
+//					System.out.println("PreScore: " + score);
+//					score += result.length() - i;
+//					score += 2 ^ binary;
+					score += Math.pow(2, binary);
+//					System.out.println("PostScore: " + score);
 				}
+				binary--;
 			}
-			
+			System.out.println("POST Score: " + score + " result: " + result);
+//			scoretotal++;
 			return score;
 		}
 		
-		private boolean traverseForDuplicates(int score, Node root, boolean hasDuplicate)
+		private boolean traverseForDuplicates(int score, String data, Node root, boolean hasDuplicate)
+//		private boolean traverseForDuplicates(int score, Node root, boolean hasDuplicate)
 		{
 			if (root.left != null)
 			{
 				if (!(root.left.score == score))
 				{
-					traverseForDuplicates(score, root.left, hasDuplicate);
+					traverseForDuplicates(score, data, root.left, hasDuplicate);
+//					traverseForDuplicates(score, root.left, hasDuplicate);
 				}
-				else
+				else if (root.left.data.equals(data))
 				{
+//					System.out.println("DUPLICATE FOUND - ROOT: " + root.data + " - Score: " + score);
+//					System.out.println("DUPLICATE FOUND - ROOT.LEFT: " + root.left.data +  " - newData: " + data + " - Score: " + score );
 					root.left.increment();
 					hasDuplicate = true;
 					return true;
 				}
+//				else
+//				{
+//					System.out.println("****************NO SCORE OR DATA MATCH LEFT***************");
+//				}
 			}
 
 			if (root.right != null)
 			{
 				if (!(root.right.score == score))
 				{
-					traverseForDuplicates(score, root.right, hasDuplicate);
+					traverseForDuplicates(score, data, root.right, hasDuplicate);
+//					traverseForDuplicates(score, root.right, hasDuplicate);
 				}
-				else
+				else if (root.right.data.equals(data))
 				{
+//					System.out.println("DUPLICATE FOUND - ROOT: " + root.data + " - Score: " + score);
+//					System.out.println("DUPLICATE FOUND - ROOT.RIGHT: " + root.right.data + " - newData: " + data + " - Score: " + score);
 					root.right.increment();
 					hasDuplicate = true;
 					return true;
 				}
+//				else
+//				{
+//					System.out.println("****************NO SCORE OR DATA MATCH RIGHT***************");
+//				}
 			}
 			return hasDuplicate;
 		}
@@ -132,6 +163,10 @@ public class AVLTree
 //					System.out.println("Data Stored in Right: " + newNode.data); 
 				}
 			}
+//			else
+//			{
+//				System.out.println("*****************************************INSERTION ERROR***************************************");
+//			}
 			
 			checkBalance(newNode);
 		}
@@ -305,6 +340,9 @@ public class AVLTree
 		{
 			output = new ArrayList<>();
 			getInOrderTraversal(root);
+			
+//			System.out.println("Scored results: " + scoretotal);
+			
 			return output;
 		}
 		
@@ -316,18 +354,23 @@ public class AVLTree
 			}
 				getInOrderTraversal(root.left);
 //			System.out.println(root.data);
-//			output.add(root.data);
-			for (int add = 0; add <= root.duplicate; add++)
-			{
-//				System.out.println(root.data);
-				output.add(root.data);
-			}
+			output.add(root.data);
+//			if (root.duplicate != 0)
+//			{
+//				System.out.println("I HAVE " + root.duplicate + " BROTHERS AND SISTERS");
+//			}
+//			for (int add = 0; add <= root.duplicate; add++)
+//			{
+////				System.out.println(root.data);
+//				output.add(root.data);
+//			}
 				getInOrderTraversal(root.right);
 		}
 		
 		public class Node
 		{
-			private int score, duplicate;
+			private int score;
+			private int duplicate = 0;
 			private String data;
 			private Node parent, left, right;
 			

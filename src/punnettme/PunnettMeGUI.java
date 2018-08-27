@@ -1310,7 +1310,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		}
 		else if (e.getSource().equals(resetButton))
 		{
-			System.out.println("RESET BUTTON");
+//			System.out.println("RESET BUTTON");
 			resetAll();
 		}
 	}
@@ -1328,10 +1328,10 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 			if (e.getSource() instanceof JComboBox)
 			{
 				//Gene One 
-				System.out.println("Action is a JComboBox");
+//				System.out.println("Action is a JComboBox");
 				if (e.getSource().equals(geneOnePOneCombo))
 				{
-					System.out.println("G1P1: Selected Item: " + e.getItem().toString());
+//					System.out.println("G1P1: Selected Item: " + e.getItem().toString());
 					if (!(e.getItem().equals(defaultComboItem)))
 					{
 						if (geneOnePOneCombo.getSelectedIndex() != 0 && !geneTwoPOneCombo.isEnabled())
@@ -1360,7 +1360,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 				//Gene Two
 				else if (e.getSource().equals(geneTwoPOneCombo))
 				{
-					System.out.println("G2P1: Selected Item: " + e.getItem().toString());
+//					System.out.println("G2P1: Selected Item: " + e.getItem().toString());
 					if (!(e.getItem().equals(defaultComboItem)))
 					{
 						if (geneTwoPOneCombo.getSelectedIndex() != 0 && !geneThreePOneCombo.isEnabled())
@@ -1389,7 +1389,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 				//Gene Three
 				else if (e.getSource().equals(geneThreePOneCombo))
 				{
-					System.out.println("G3P1: Selected Item: " + e.getItem().toString());
+//					System.out.println("G3P1: Selected Item: " + e.getItem().toString());
 					if (!(e.getItem().equals(defaultComboItem)))
 					{
 						if (geneThreePOneCombo.getSelectedIndex() != 0 && !geneFourPOneCombo.isEnabled())
@@ -1418,7 +1418,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 				//Gene Four
 				else if (e.getSource().equals(geneFourPOneCombo))
 				{
-					System.out.println("G4P1: Selected Item: " + e.getItem().toString());
+//					System.out.println("G4P1: Selected Item: " + e.getItem().toString());
 					if (!(e.getItem().equals(defaultComboItem)))
 					{
 						if (geneFourPOneCombo.getSelectedIndex() != 0 && !geneFivePOneCombo.isEnabled())
@@ -1447,7 +1447,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 				//Gene Five
 				else if (e.getSource().equals(geneFivePOneCombo))
 				{
-					System.out.println("G5P1: Selected Item: " + e.getItem().toString());
+//					System.out.println("G5P1: Selected Item: " + e.getItem().toString());
 					if (!(e.getItem().equals(defaultComboItem)))
 					{
 						if (geneFourPOneCombo.getSelectedIndex() != 0 && geneFivePTwoLabel.isEnabled() == false)
@@ -1477,7 +1477,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 			{
 //				System.out.println("Action is a JRadioButton");
 				JRadioButton jrb = (JRadioButton)e.getSource();
-				System.out.println("Selected Source = " + jrb.getText());
+//				System.out.println("Selected Source = " + jrb.getText());
 			}
 		}
 	}
@@ -1512,13 +1512,13 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 			comboBox.setSelectedIndex(0);
 			comboBox.setEnabled(false);
 			comboBox.removeItemListener(this);
-			System.out.println("Combo Box Deactivated.");
+//			System.out.println("Combo Box Deactivated.");
 		}
 		else
 		{
 			comboBox.setEnabled(true);
 			comboBox.addItemListener(this);
-			System.out.println("Combo Box Activated.");
+//			System.out.println("Combo Box Activated.");
 		}
 	}
 	
