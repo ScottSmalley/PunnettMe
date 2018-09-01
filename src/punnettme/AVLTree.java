@@ -1,3 +1,16 @@
+/*
+ * Punnett Me is an app to use for Punnett Squares for Genetic Trait Calculations.
+ * You can calculate up to 5 different traits at once.
+ * You can quickly change from Homozygous parents and Heterozygous parents 
+ * for comparisons.
+ * 
+ * Uses Model View Controller design pattern, with Design by Contract programming.
+ * 
+ * Scott Smalley, BS Software Engineering student at Utah Valley University
+ * Fall 2020 expected graduation
+ * scottsmalley90@gmail.com
+ * 
+ */
 package punnettme;
 
 import java.util.ArrayList;
@@ -7,7 +20,6 @@ public class AVLTree
 {
 	private Node root;
 	private List<String> output = new ArrayList<>();
-//	private int scoretotal = 0;
 	
 	public AVLTree()
 	{
@@ -30,8 +42,8 @@ public class AVLTree
 					 * If a duplicate is found, it will return true and 
 					 * increment the counter for that Node in the traverseForDuplicates() method. 
 					 */
-					if (!traverseForDuplicates(score, data, root, false))
-//					if (!traverseForDuplicates(score, root, false))
+//					if (!traverseForDuplicates(score, data, root, false))
+					if (!traverseForDuplicates(score, root, false))
 					{
 						insert(new Node(score, data), root);
 					}
@@ -81,17 +93,18 @@ public class AVLTree
 			return score;
 		}
 		
-		private boolean traverseForDuplicates(int score, String data, Node root, boolean hasDuplicate)
-//		private boolean traverseForDuplicates(int score, Node root, boolean hasDuplicate)
+//		private boolean traverseForDuplicates(int score, String data, Node root, boolean hasDuplicate)
+		private boolean traverseForDuplicates(int score, Node root, boolean hasDuplicate)
 		{
 			if (root.left != null)
 			{
 				if (!(root.left.score == score))
 				{
-					traverseForDuplicates(score, data, root.left, hasDuplicate);
-//					traverseForDuplicates(score, root.left, hasDuplicate);
+//					traverseForDuplicates(score, data, root.left, hasDuplicate);
+					traverseForDuplicates(score, root.left, hasDuplicate);
 				}
-				else if (root.left.data.equals(data))
+//				else if (root.left.data.equals(data))
+				else
 				{
 //					System.out.println("DUPLICATE FOUND - ROOT: " + root.data + " - Score: " + score);
 //					System.out.println("DUPLICATE FOUND - ROOT.LEFT: " + root.left.data +  " - newData: " + data + " - Score: " + score );
@@ -109,10 +122,11 @@ public class AVLTree
 			{
 				if (!(root.right.score == score))
 				{
-					traverseForDuplicates(score, data, root.right, hasDuplicate);
-//					traverseForDuplicates(score, root.right, hasDuplicate);
+//					traverseForDuplicates(score, data, root.right, hasDuplicate);
+					traverseForDuplicates(score, root.right, hasDuplicate);
 				}
-				else if (root.right.data.equals(data))
+//				else if (root.right.data.equals(data))
+				else
 				{
 //					System.out.println("DUPLICATE FOUND - ROOT: " + root.data + " - Score: " + score);
 //					System.out.println("DUPLICATE FOUND - ROOT.RIGHT: " + root.right.data + " - newData: " + data + " - Score: " + score);
@@ -188,23 +202,23 @@ public class AVLTree
 //				if ((getHeight(node.left) - getHeight(node.right) > 1) || (getHeight(node.left) - getHeight(node.right) < -1))
 			{
 				node = rebalance(node);
-				if (node.equals(node.parent))
-				{
-					System.out.println("POST REBALANCE I'M MY OWN PARENT WTF: " + node.data + " " + node.score);
-					if (node.left != null)
-					{
-						System.out.println("Left: " + node.left.data + " " + node.left.score);
-					}
-					if (node.right != null)
-					{
-						System.out.println("Right: " + node.right.data + " " + node.right.score);
-					}
-				}
+//				if (node.equals(node.parent))
+//				{
+//					System.out.println("POST REBALANCE I'M MY OWN PARENT WTF: " + node.data + " " + node.score);
+//					if (node.left != null)
+//					{
+//						System.out.println("Left: " + node.left.data + " " + node.left.score);
+//					}
+//					if (node.right != null)
+//					{
+//						System.out.println("Right: " + node.right.data + " " + node.right.score);
+//					}
+//				}
 			}
-			if (node.equals(node.parent))
-			{
-				System.out.println("OUTSIDE OF REBALANCE I'M MY OWN PARENT WTF: " + node.data + " " + node.score);
-			}
+//			if (node.equals(node.parent))
+//			{
+//				System.out.println("OUTSIDE OF REBALANCE I'M MY OWN PARENT WTF: " + node.data + " " + node.score);
+//			}
 			if (node.parent != null)
 			{
 				checkBalance(node.parent);
@@ -219,28 +233,28 @@ public class AVLTree
 				//Left left case.
 				if (getHeight(node.left.left) > getHeight(node.left.right))
 				{
-					if (node.parent != null)
-					{
-						System.out.println("PRE LEFTLEFT CASE Parent: " + node.parent.data + " Score: " + node.parent.score);
-					}
+//					if (node.parent != null)
+//					{
+//						System.out.println("PRE LEFTLEFT CASE Parent: " + node.parent.data + " Score: " + node.parent.score);
+//					}
 					node = rotateRight(node);
-					if (node.parent != null)
-					{
-						System.out.println("POST LEFTLEFT CASE Parent: " + node.parent.data + " Score: " + node.parent.score);
-					}
+//					if (node.parent != null)
+//					{
+//						System.out.println("POST LEFTLEFT CASE Parent: " + node.parent.data + " Score: " + node.parent.score);
+//					}
 				}
 				//Left Right case.
 				else
 				{
-					if (node.parent != null)
-					{
-						System.out.println("PRE LEFTRIGHT CASE Parent: " + node.parent.data + " Score: " + node.parent.score);
-					}
+//					if (node.parent != null)
+//					{
+//						System.out.println("PRE LEFTRIGHT CASE Parent: " + node.parent.data + " Score: " + node.parent.score);
+//					}
 					node = rotateLeftRight(node);
-					if (node.parent != null)
-					{
-						System.out.println("POST LEFTRIGHT CASE Parent: " + node.parent.data + " Score: " + node.parent.score);
-					}
+//					if (node.parent != null)
+//					{
+//						System.out.println("POST LEFTRIGHT CASE Parent: " + node.parent.data + " Score: " + node.parent.score);
+//					}
 				}
 			}
 			else
@@ -248,28 +262,28 @@ public class AVLTree
 				//Right Left case.
 				if (getHeight(node.right.left) > getHeight(node.right.right))
 				{
-					if (node.parent != null)
-					{
-						System.out.println("PRE RIGHTLEFT CASE Parent: " + node.parent.data + " Score: " + node.parent.score);
-					}
+//					if (node.parent != null)
+//					{
+//						System.out.println("PRE RIGHTLEFT CASE Parent: " + node.parent.data + " Score: " + node.parent.score);
+//					}
 					node = rotateRightLeft(node);
-					if (node.parent != null)
-					{
-						System.out.println("POST RIGHTLEFT CASE Parent: " + node.parent.data + " Score: " + node.parent.score);
-					}
+//					if (node.parent != null)
+//					{
+//						System.out.println("POST RIGHTLEFT CASE Parent: " + node.parent.data + " Score: " + node.parent.score);
+//					}
 				}
 				//Right Right case.
 				else
 				{
-					if (node.parent != null)
-					{
-						System.out.println("PRE RIGHTRIGHT CASE Parent: " + node.parent.data + " Score: " + node.parent.score);
-					}
+//					if (node.parent != null)
+//					{
+//						System.out.println("PRE RIGHTRIGHT CASE Parent: " + node.parent.data + " Score: " + node.parent.score);
+//					}
 					node = rotateLeft(node);
-					if (node.parent != null)
-					{
-						System.out.println("POST RIGHTRIGHT CASE Parent: " + node.parent.data + " Score: " + node.parent.score);
-					}
+//					if (node.parent != null)
+//					{
+//						System.out.println("POST RIGHTRIGHT CASE Parent: " + node.parent.data + " Score: " + node.parent.score);
+//					}
 				}
 			}
 

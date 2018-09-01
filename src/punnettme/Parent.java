@@ -1,5 +1,6 @@
 package punnettme;
 
+
 public class Parent 
 {
 	private Gene[] rawGenes;

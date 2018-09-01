@@ -1,3 +1,16 @@
+/*
+ * Punnett Me is an app to use for Punnett Squares for Genetic Trait Calculations.
+ * You can calculate up to 5 different traits at once.
+ * You can quickly change from Homozygous parents and Heterozygous parents 
+ * for comparisons.
+ * 
+ * Uses Model View Controller design pattern, with Design by Contract programming.
+ * 
+ * Scott Smalley, BS Software Engineering student at Utah Valley University
+ * Fall 2020 expected graduation
+ * scottsmalley90@gmail.com
+ * 
+ */
 package punnettme;
 
 public class Gene 
