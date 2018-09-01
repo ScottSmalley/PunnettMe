@@ -76,7 +76,7 @@ public class AVLTree
 				}
 				binary--;
 			}
-			System.out.println("POST Score: " + score + " result: " + result);
+//			System.out.println("POST Score: " + score + " result: " + result);
 //			scoretotal++;
 			return score;
 		}
@@ -184,11 +184,27 @@ public class AVLTree
 		
 		private void checkBalance(Node node)
 		{
-			if ((getHeight(node.left) - getHeight(node.right) > 1) || (getHeight(node.left) - getHeight(node.right) < -1))
+			if ((getHeight(node) > 1) || getHeight(node) < -1)
+//				if ((getHeight(node.left) - getHeight(node.right) > 1) || (getHeight(node.left) - getHeight(node.right) < -1))
 			{
 				node = rebalance(node);
+				if (node.equals(node.parent))
+				{
+					System.out.println("POST REBALANCE I'M MY OWN PARENT WTF: " + node.data + " " + node.score);
+					if (node.left != null)
+					{
+						System.out.println("Left: " + node.left.data + " " + node.left.score);
+					}
+					if (node.right != null)
+					{
+						System.out.println("Right: " + node.right.data + " " + node.right.score);
+					}
+				}
 			}
-			
+			if (node.equals(node.parent))
+			{
+				System.out.println("OUTSIDE OF REBALANCE I'M MY OWN PARENT WTF: " + node.data + " " + node.score);
+			}
 			if (node.parent != null)
 			{
 				checkBalance(node.parent);
@@ -203,12 +219,28 @@ public class AVLTree
 				//Left left case.
 				if (getHeight(node.left.left) > getHeight(node.left.right))
 				{
+					if (node.parent != null)
+					{
+						System.out.println("PRE LEFTLEFT CASE Parent: " + node.parent.data + " Score: " + node.parent.score);
+					}
 					node = rotateRight(node);
+					if (node.parent != null)
+					{
+						System.out.println("POST LEFTLEFT CASE Parent: " + node.parent.data + " Score: " + node.parent.score);
+					}
 				}
 				//Left Right case.
 				else
 				{
+					if (node.parent != null)
+					{
+						System.out.println("PRE LEFTRIGHT CASE Parent: " + node.parent.data + " Score: " + node.parent.score);
+					}
 					node = rotateLeftRight(node);
+					if (node.parent != null)
+					{
+						System.out.println("POST LEFTRIGHT CASE Parent: " + node.parent.data + " Score: " + node.parent.score);
+					}
 				}
 			}
 			else
@@ -216,12 +248,28 @@ public class AVLTree
 				//Right Left case.
 				if (getHeight(node.right.left) > getHeight(node.right.right))
 				{
+					if (node.parent != null)
+					{
+						System.out.println("PRE RIGHTLEFT CASE Parent: " + node.parent.data + " Score: " + node.parent.score);
+					}
 					node = rotateRightLeft(node);
+					if (node.parent != null)
+					{
+						System.out.println("POST RIGHTLEFT CASE Parent: " + node.parent.data + " Score: " + node.parent.score);
+					}
 				}
 				//Right Right case.
 				else
 				{
+					if (node.parent != null)
+					{
+						System.out.println("PRE RIGHTRIGHT CASE Parent: " + node.parent.data + " Score: " + node.parent.score);
+					}
 					node = rotateLeft(node);
+					if (node.parent != null)
+					{
+						System.out.println("POST RIGHTRIGHT CASE Parent: " + node.parent.data + " Score: " + node.parent.score);
+					}
 				}
 			}
 
@@ -240,6 +288,13 @@ public class AVLTree
 			
 			Node temp = node.right;
 			node.right = temp.left;
+
+			//New
+			if (node.right != null)
+			{
+				node.right.parent = node;
+			}
+			
 			temp.left = node;
 			node.parent = temp;
 
@@ -277,6 +332,13 @@ public class AVLTree
 			
 			Node temp = node.left;
 			node.left = temp.right;
+			
+			//New
+			if (node.left != null)
+			{
+				node.left.parent = node;
+			}
+			
 			temp.right = node;
 			node.parent = temp;
 			
@@ -354,16 +416,16 @@ public class AVLTree
 			}
 				getInOrderTraversal(root.left);
 //			System.out.println(root.data);
-			output.add(root.data);
+//			output.add(root.data);
 //			if (root.duplicate != 0)
 //			{
 //				System.out.println("I HAVE " + root.duplicate + " BROTHERS AND SISTERS");
 //			}
-//			for (int add = 0; add <= root.duplicate; add++)
-//			{
-////				System.out.println(root.data);
-//				output.add(root.data);
-//			}
+			for (int add = 0; add <= root.duplicate; add++)
+			{
+//				System.out.println(root.data);
+				output.add(root.data);
+			}
 				getInOrderTraversal(root.right);
 		}
 		
