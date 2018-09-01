@@ -1473,6 +1473,9 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 					}
 				}
 			}
+			/*
+			 * Needed below?
+			 */
 			else if (e.getSource() instanceof JRadioButton)
 			{
 //				System.out.println("Action is a JRadioButton");
