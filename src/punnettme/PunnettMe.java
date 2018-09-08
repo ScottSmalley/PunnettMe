@@ -19,16 +19,11 @@ public class PunnettMe
 {
 	private Parent parentOne;
 	private Parent parentTwo;
-	private AVLTree tree;
+	private OffspringTree tree;
 
-//	public static void main (String [] args)
-//	{
-//		SwingUtilities.invokeLater(new PunnettMe());
-//	}
-	
 	public void build(Parent one, Parent two) 
 	{
-		tree = new AVLTree();
+		tree = new OffspringTree();
 
 		parentOne = one;
 		parentTwo = two;
@@ -49,7 +44,7 @@ public class PunnettMe
 	 * it concatenates them into one string. 
 	 * 
 	 */
-	public String buildAlleles(Gene[] rawGenes)
+	private String buildAlleles(Gene[] rawGenes)
 	{
 		String alleles = "";
 		for (int index = 0; index < rawGenes.length; index++)
@@ -88,7 +83,7 @@ public class PunnettMe
 	 * @param parent, String
 	 * @return combinations, String[]
 	 */
-	public String[] buildAlleleCombinations(String alleles)
+	private String[] buildAlleleCombinations(String alleles)
 	{
 		String[] result = new String[1];
 		if (alleles.length() == 2)
@@ -143,7 +138,7 @@ public class PunnettMe
 		return result;
 	}
 	
-	public void buildPunnettSquare(String[] parentOne, String[] parentTwo)
+	private void buildPunnettSquare(String[] parentOne, String[] parentTwo)
 	{
 		//Cycle thru parentOne
 		for (int i = 0; i < parentOne.length; i++)
@@ -182,6 +177,6 @@ public class PunnettMe
 	
 	public List<String> getResults()
 	{
-		return tree.getTestingOutput();
+		return tree.getOffspring();
 	}
 }

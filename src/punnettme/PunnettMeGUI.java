@@ -25,6 +25,7 @@ import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.JRadioButton;
@@ -52,6 +53,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 	 *POne = Parent One
 	 *Combo = drop down menu(JComboBox<String>)
 	 *Rad = Radio Button(JRadioButton) for each allele type
+	 *BG = ButtonGroup (Radio Buttons only)
 	 *HomoD = Homozygous Dominant (Gene trait) 
 	 *Hetero = Heterozygous(Gene trait) 
 	 *HomoR = Homozygous Recessive (Gene trait) 
@@ -131,7 +133,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 	private List<JLabel> geneLabelList;
 	private List<ButtonGroup> buttonGroupList;
 	
-	
+	//Parent One and Two Buttons
 	private JButton resetButton;
 	private JButton calcButton;
 	
@@ -146,7 +148,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 									"F","G","H","I","J","K",
 									"L","M","N","O","P","Q",
 									"R","S","T","U","V","W",
-									"X","Y","Z",};
+									"X","Y","Z"};
 	private String defaultComboItem = "Select Symbol";
 	
 	//*********** PunnettMe Globals ***********
@@ -160,28 +162,6 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		SwingUtilities.invokeLater(new PunnettMeGUI());
 	}
 
-	//UNCOMMENT FOR DESIGN
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					PunnettMeGUI window = new PunnettMeGUI();
-//					window.window.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
-	//UNCOMMENT FOR DESIGN
-//	public PunnettMeGUI()
-//	{
-//		initialize();
-//	}
-	
-	
-	//COMMENT OUT FOR DESIGN
 	public void run() 
 	{
 		start();
@@ -197,8 +177,6 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 	 * Label == Description of the Object
 	 */
 	
-	//COMMENT OUT FOR DESIGN
-//	private void initialize() {
 	private void start() 
 	{
 		
@@ -245,9 +223,9 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		content.setLayout(gbl_content);
 		
 	//Parent One Column
-		JPanel parentOne = new JPanel();
-		parentOne.setBackground(backgroundColor);
-		parentOne.setForeground(backgroundColor);
+		JPanel parentOnePanel = new JPanel();
+		parentOnePanel.setBackground(backgroundColor);
+		parentOnePanel.setForeground(backgroundColor);
 		GridBagConstraints gbc_parentOne = new GridBagConstraints();
 		gbc_parentOne.insets = new Insets(0, 5, 0, 0);
 		gbc_parentOne.weighty = 1.0;
@@ -255,13 +233,13 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_parentOne.fill = GridBagConstraints.BOTH;
 		gbc_parentOne.gridx = 0;
 		gbc_parentOne.gridy = 0;
-		content.add(parentOne, gbc_parentOne);
+		content.add(parentOnePanel, gbc_parentOne);
 		GridBagLayout gbl_parentOne = new GridBagLayout();
 		gbl_parentOne.columnWidths = new int[]{0, 0, 0, 0, 0};
 		gbl_parentOne.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_parentOne.columnWeights = new double[]{1.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_parentOne.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		parentOne.setLayout(gbl_parentOne);
+		parentOnePanel.setLayout(gbl_parentOne);
 	
 		//Parent One Label
 		JLabel parentOneLabel = new JLabel("Parent One");
@@ -276,7 +254,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_parentOneLabel.fill = GridBagConstraints.BOTH;
 		gbc_parentOneLabel.gridx = 0;
 		gbc_parentOneLabel.gridy = 0;
-		parentOne.add(parentOneLabel, gbc_parentOneLabel);
+		parentOnePanel.add(parentOneLabel, gbc_parentOneLabel);
 		
 		//Gene One Parent One Label
 		JLabel geneOnePOneLabel = new JLabel("Gene 1");
@@ -290,7 +268,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneOnePOneLabel.fill = GridBagConstraints.BOTH;
 		gbc_geneOnePOneLabel.gridx = 0;
 		gbc_geneOnePOneLabel.gridy = 2;
-		parentOne.add(geneOnePOneLabel, gbc_geneOnePOneLabel);
+		parentOnePanel.add(geneOnePOneLabel, gbc_geneOnePOneLabel);
 		
 		//Gene One Parent One Combo
 		geneOnePOneCombo = new JComboBox<String>();
@@ -309,7 +287,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneOnePOneCombo.fill = GridBagConstraints.BOTH;
 		gbc_geneOnePOneCombo.gridx = 0;
 		gbc_geneOnePOneCombo.gridy = 3;
-		parentOne.add(geneOnePOneCombo, gbc_geneOnePOneCombo);
+		parentOnePanel.add(geneOnePOneCombo, gbc_geneOnePOneCombo);
 		
 		//Gene One Parent One Radio HomoD
 		geneOnePOneRadHomoD = new JRadioButton("AA");
@@ -323,7 +301,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneOnePOneRadHomoD.fill = GridBagConstraints.BOTH;
 		gbc_geneOnePOneRadHomoD.gridx = 1;
 		gbc_geneOnePOneRadHomoD.gridy = 3;
-		parentOne.add(geneOnePOneRadHomoD, gbc_geneOnePOneRadHomoD);
+		parentOnePanel.add(geneOnePOneRadHomoD, gbc_geneOnePOneRadHomoD);
 		
 		//Gene One Parent One Radio Hetero
 		geneOnePOneRadHetero = new JRadioButton("Aa");
@@ -337,7 +315,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneOnePOneRadHetero.fill = GridBagConstraints.BOTH;
 		gbc_geneOnePOneRadHetero.gridx = 2;
 		gbc_geneOnePOneRadHetero.gridy = 3;
-		parentOne.add(geneOnePOneRadHetero, gbc_geneOnePOneRadHetero);
+		parentOnePanel.add(geneOnePOneRadHetero, gbc_geneOnePOneRadHetero);
 		
 		//Gene One Parent One Radio HomoR
 		geneOnePOneRadHomoR = new JRadioButton("aa");
@@ -351,7 +329,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneOnePOneRadHomoR.fill = GridBagConstraints.BOTH;
 		gbc_geneOnePOneRadHomoR.gridx = 3;
 		gbc_geneOnePOneRadHomoR.gridy = 3;
-		parentOne.add(geneOnePOneRadHomoR, gbc_geneOnePOneRadHomoR);
+		parentOnePanel.add(geneOnePOneRadHomoR, gbc_geneOnePOneRadHomoR);
 		
 		//Gene Two Parent One Label
 		geneTwoPOneLabel = new JLabel("Gene 2");
@@ -367,7 +345,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneTwoPOneLabel.fill = GridBagConstraints.BOTH;
 		gbc_geneTwoPOneLabel.gridx = 0;
 		gbc_geneTwoPOneLabel.gridy = 5;
-		parentOne.add(geneTwoPOneLabel, gbc_geneTwoPOneLabel);
+		parentOnePanel.add(geneTwoPOneLabel, gbc_geneTwoPOneLabel);
 		
 		//Gene Two Parent One Combo
 		geneTwoPOneCombo = new JComboBox<String>();
@@ -385,7 +363,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneTwoPOneCombo.fill = GridBagConstraints.HORIZONTAL;
 		gbc_geneTwoPOneCombo.gridx = 0;
 		gbc_geneTwoPOneCombo.gridy = 6;
-		parentOne.add(geneTwoPOneCombo, gbc_geneTwoPOneCombo);
+		parentOnePanel.add(geneTwoPOneCombo, gbc_geneTwoPOneCombo);
 		
 		//Gene Two Parent One Radio HomoD
 		geneTwoPOneRadHomoD = new JRadioButton("AA");
@@ -399,7 +377,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneTwoPOneRadHomoD.fill = GridBagConstraints.BOTH;
 		gbc_geneTwoPOneRadHomoD.gridx = 1;
 		gbc_geneTwoPOneRadHomoD.gridy = 6;
-		parentOne.add(geneTwoPOneRadHomoD, gbc_geneTwoPOneRadHomoD);
+		parentOnePanel.add(geneTwoPOneRadHomoD, gbc_geneTwoPOneRadHomoD);
 		
 		//Gene Two Parent One Radio Hetero
 		geneTwoPOneRadHetero = new JRadioButton("Aa");
@@ -413,7 +391,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneTwoPOneRadHetero.fill = GridBagConstraints.BOTH;
 		gbc_geneTwoPOneRadHetero.gridx = 2;
 		gbc_geneTwoPOneRadHetero.gridy = 6;
-		parentOne.add(geneTwoPOneRadHetero, gbc_geneTwoPOneRadHetero);
+		parentOnePanel.add(geneTwoPOneRadHetero, gbc_geneTwoPOneRadHetero);
 		
 		//Gene Two Parent One Radio HomoR
 		geneTwoPOneRadHomoR = new JRadioButton("aa");
@@ -427,7 +405,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneTwoPOneRadHomoR.fill = GridBagConstraints.BOTH;
 		gbc_geneTwoPOneRadHomoR.gridx = 3;
 		gbc_geneTwoPOneRadHomoR.gridy = 6;
-		parentOne.add(geneTwoPOneRadHomoR, gbc_geneTwoPOneRadHomoR);
+		parentOnePanel.add(geneTwoPOneRadHomoR, gbc_geneTwoPOneRadHomoR);
 		
 		//Gene Three Parent One Label
 		geneThreePOneLabel = new JLabel("Gene 3");
@@ -443,7 +421,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneThreePOneLabel.fill = GridBagConstraints.BOTH;
 		gbc_geneThreePOneLabel.gridx = 0;
 		gbc_geneThreePOneLabel.gridy = 8;
-		parentOne.add(geneThreePOneLabel, gbc_geneThreePOneLabel);
+		parentOnePanel.add(geneThreePOneLabel, gbc_geneThreePOneLabel);
 		
 		//Gene Three Parent One Combo
 		geneThreePOneCombo = new JComboBox<String>();
@@ -461,7 +439,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneThreePOneCombo.fill = GridBagConstraints.HORIZONTAL;
 		gbc_geneThreePOneCombo.gridx = 0;
 		gbc_geneThreePOneCombo.gridy = 9;
-		parentOne.add(geneThreePOneCombo, gbc_geneThreePOneCombo);
+		parentOnePanel.add(geneThreePOneCombo, gbc_geneThreePOneCombo);
 		
 		//Gene Three Parent One Radio HomoD
 		geneThreePOneRadHomoD = new JRadioButton("AA");
@@ -475,7 +453,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneThreePOneRadHomoD.fill = GridBagConstraints.BOTH;
 		gbc_geneThreePOneRadHomoD.gridx = 1;
 		gbc_geneThreePOneRadHomoD.gridy = 9;
-		parentOne.add(geneThreePOneRadHomoD, gbc_geneThreePOneRadHomoD);
+		parentOnePanel.add(geneThreePOneRadHomoD, gbc_geneThreePOneRadHomoD);
 		
 		//Gene Three Parent One Radio Hetero
 		geneThreePOneRadHetero = new JRadioButton("Aa");
@@ -489,7 +467,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneThreePOneRadHetero.fill = GridBagConstraints.BOTH;
 		gbc_geneThreePOneRadHetero.gridx = 2;
 		gbc_geneThreePOneRadHetero.gridy = 9;
-		parentOne.add(geneThreePOneRadHetero, gbc_geneThreePOneRadHetero);
+		parentOnePanel.add(geneThreePOneRadHetero, gbc_geneThreePOneRadHetero);
 		
 		//Gene Three Parent One Radio HomoR
 		geneThreePOneRadHomoR = new JRadioButton("aa");
@@ -503,7 +481,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneThreePOneRadHomoR.fill = GridBagConstraints.BOTH;
 		gbc_geneThreePOneRadHomoR.gridx = 3;
 		gbc_geneThreePOneRadHomoR.gridy = 9;
-		parentOne.add(geneThreePOneRadHomoR, gbc_geneThreePOneRadHomoR);
+		parentOnePanel.add(geneThreePOneRadHomoR, gbc_geneThreePOneRadHomoR);
 		
 		//Gene Four Parent One Label
 		geneFourPOneLabel = new JLabel("Gene 4");
@@ -518,7 +496,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneFourPOneLabel.fill = GridBagConstraints.BOTH;
 		gbc_geneFourPOneLabel.gridx = 0;
 		gbc_geneFourPOneLabel.gridy = 11;
-		parentOne.add(geneFourPOneLabel, gbc_geneFourPOneLabel);
+		parentOnePanel.add(geneFourPOneLabel, gbc_geneFourPOneLabel);
 		
 		//Gene Four Parent One Combo
 		geneFourPOneCombo = new JComboBox<String>();
@@ -536,7 +514,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneFourPOneCombo.fill = GridBagConstraints.HORIZONTAL;
 		gbc_geneFourPOneCombo.gridx = 0;
 		gbc_geneFourPOneCombo.gridy = 12;
-		parentOne.add(geneFourPOneCombo, gbc_geneFourPOneCombo);
+		parentOnePanel.add(geneFourPOneCombo, gbc_geneFourPOneCombo);
 		
 		//Gene Four Parent One Radio HomoD
 		geneFourPOneRadHomoD = new JRadioButton("AA");
@@ -550,7 +528,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneFourPOneRadHomoD.fill = GridBagConstraints.BOTH;
 		gbc_geneFourPOneRadHomoD.gridx = 1;
 		gbc_geneFourPOneRadHomoD.gridy = 12;
-		parentOne.add(geneFourPOneRadHomoD, gbc_geneFourPOneRadHomoD);
+		parentOnePanel.add(geneFourPOneRadHomoD, gbc_geneFourPOneRadHomoD);
 		
 		//Gene Four Parent One Radio Hetero
 		geneFourPOneRadHetero = new JRadioButton("Aa");
@@ -564,7 +542,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneFourPOneRadHetero.fill = GridBagConstraints.BOTH;
 		gbc_geneFourPOneRadHetero.gridx = 2;
 		gbc_geneFourPOneRadHetero.gridy = 12;
-		parentOne.add(geneFourPOneRadHetero, gbc_geneFourPOneRadHetero);
+		parentOnePanel.add(geneFourPOneRadHetero, gbc_geneFourPOneRadHetero);
 		
 		//Gene Four Parent One Radio HomoR
 		geneFourPOneRadHomoR = new JRadioButton("aa");
@@ -578,7 +556,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneFourPOneRadHomoR.fill = GridBagConstraints.BOTH;
 		gbc_geneFourPOneRadHomoR.gridx = 3;
 		gbc_geneFourPOneRadHomoR.gridy = 12;
-		parentOne.add(geneFourPOneRadHomoR, gbc_geneFourPOneRadHomoR);
+		parentOnePanel.add(geneFourPOneRadHomoR, gbc_geneFourPOneRadHomoR);
 		
 		//Gene Five Parent One Label
 		geneFivePOneLabel = new JLabel("Gene 5");
@@ -593,7 +571,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneFivePOneLabel.fill = GridBagConstraints.BOTH;
 		gbc_geneFivePOneLabel.gridx = 0;
 		gbc_geneFivePOneLabel.gridy = 14;
-		parentOne.add(geneFivePOneLabel, gbc_geneFivePOneLabel);
+		parentOnePanel.add(geneFivePOneLabel, gbc_geneFivePOneLabel);
 		
 		//Gene Five Parent One Combo
 		geneFivePOneCombo = new JComboBox<String>();
@@ -611,7 +589,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneFivePOneCombo.fill = GridBagConstraints.HORIZONTAL;
 		gbc_geneFivePOneCombo.gridx = 0;
 		gbc_geneFivePOneCombo.gridy = 15;
-		parentOne.add(geneFivePOneCombo, gbc_geneFivePOneCombo);
+		parentOnePanel.add(geneFivePOneCombo, gbc_geneFivePOneCombo);
 		
 		//Gene Five Parent One Radio HomoD
 		geneFivePOneRadHomoD = new JRadioButton("AA");
@@ -625,7 +603,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneFivePOneRadHomoD.fill = GridBagConstraints.BOTH;
 		gbc_geneFivePOneRadHomoD.gridx = 1;
 		gbc_geneFivePOneRadHomoD.gridy = 15;
-		parentOne.add(geneFivePOneRadHomoD, gbc_geneFivePOneRadHomoD);
+		parentOnePanel.add(geneFivePOneRadHomoD, gbc_geneFivePOneRadHomoD);
 		
 		//Gene Five Parent One Radio Hetero
 		geneFivePOneRadHetero = new JRadioButton("Aa");
@@ -639,7 +617,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneFivePOneRadHetero.fill = GridBagConstraints.BOTH;
 		gbc_geneFivePOneRadHetero.gridx = 2;
 		gbc_geneFivePOneRadHetero.gridy = 15;
-		parentOne.add(geneFivePOneRadHetero, gbc_geneFivePOneRadHetero);
+		parentOnePanel.add(geneFivePOneRadHetero, gbc_geneFivePOneRadHetero);
 		
 		//Gene Five Parent One Radio HomoR
 		geneFivePOneRadHomoR = new JRadioButton("aa");
@@ -653,7 +631,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneFivePOneRadHomoR.fill = GridBagConstraints.BOTH;
 		gbc_geneFivePOneRadHomoR.gridx = 3;
 		gbc_geneFivePOneRadHomoR.gridy = 15;
-		parentOne.add(geneFivePOneRadHomoR, gbc_geneFivePOneRadHomoR);
+		parentOnePanel.add(geneFivePOneRadHomoR, gbc_geneFivePOneRadHomoR);
 		
 		//Parent One Calculation Button
 		calcButton = new JButton("Calculate");
@@ -668,7 +646,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_calcButton.fill = GridBagConstraints.BOTH;
 		gbc_calcButton.gridx = 0;
 		gbc_calcButton.gridy = 20;
-		parentOne.add(calcButton, gbc_calcButton);
+		parentOnePanel.add(calcButton, gbc_calcButton);
 		
 		//Adding all Parent One radio buttons to their corresponding ButtonGroups
 		//Gene One Parent One
@@ -707,8 +685,8 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		buttonGroupList.add(geneFivePOneBG);
 		
 		//Parent Two Column
-		JPanel parentTwo = new JPanel();
-		parentTwo.setBackground(Color.DARK_GRAY);
+		JPanel parentTwoPanel = new JPanel();
+		parentTwoPanel.setBackground(Color.DARK_GRAY);
 		GridBagConstraints gbc_parentTwo = new GridBagConstraints();
 		gbc_parentTwo.insets = new Insets(0, 5, 0, 0);
 		gbc_parentTwo.weighty = 1.0;
@@ -716,13 +694,13 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_parentTwo.fill = GridBagConstraints.BOTH;
 		gbc_parentTwo.gridx = 1;
 		gbc_parentTwo.gridy = 0;
-		content.add(parentTwo, gbc_parentTwo);
+		content.add(parentTwoPanel, gbc_parentTwo);
 		GridBagLayout gbl_parentTwo = new GridBagLayout();
 		gbl_parentTwo.columnWidths = new int[]{0, 0, 0, 0, 0};
 		gbl_parentTwo.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_parentTwo.columnWeights = new double[]{1.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_parentTwo.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		parentTwo.setLayout(gbl_parentTwo);
+		parentTwoPanel.setLayout(gbl_parentTwo);
 		
 		//Parent Two Label
 		JLabel parentTwoLabel = new JLabel("Parent Two");
@@ -737,7 +715,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_parentTwoLabel.insets = new Insets(0, 0, 5, 0);
 		gbc_parentTwoLabel.gridx = 0;
 		gbc_parentTwoLabel.gridy = 0;
-		parentTwo.add(parentTwoLabel, gbc_parentTwoLabel);
+		parentTwoPanel.add(parentTwoLabel, gbc_parentTwoLabel);
 		
 		//Gene One Parent Two Label
 		geneOnePTwoLabel = new JLabel("Gene 1");
@@ -753,7 +731,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneOnePTwoLabel.insets = new Insets(0, 0, 5, 0);
 		gbc_geneOnePTwoLabel.gridx = 0;
 		gbc_geneOnePTwoLabel.gridy = 2;
-		parentTwo.add(geneOnePTwoLabel, gbc_geneOnePTwoLabel);
+		parentTwoPanel.add(geneOnePTwoLabel, gbc_geneOnePTwoLabel);
 		
 		//Gene One Parent Two Combo
 		geneOnePTwoCombo = new JComboBox<String>();
@@ -771,7 +749,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneOnePTwoCombo.fill = GridBagConstraints.HORIZONTAL;
 		gbc_geneOnePTwoCombo.gridx = 0;
 		gbc_geneOnePTwoCombo.gridy = 3;
-		parentTwo.add(geneOnePTwoCombo, gbc_geneOnePTwoCombo);
+		parentTwoPanel.add(geneOnePTwoCombo, gbc_geneOnePTwoCombo);
 		
 		//Gene One Parent Two Radio HomoD
 		geneOnePTwoRadHomoD = new JRadioButton("AA");
@@ -785,7 +763,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneOnePTwoRadHomoD.insets = new Insets(0, 0, 5, 5);
 		gbc_geneOnePTwoRadHomoD.gridx = 1;
 		gbc_geneOnePTwoRadHomoD.gridy = 3;
-		parentTwo.add(geneOnePTwoRadHomoD, gbc_geneOnePTwoRadHomoD);
+		parentTwoPanel.add(geneOnePTwoRadHomoD, gbc_geneOnePTwoRadHomoD);
 		
 		//Gene One Parent Two Radio Hetero
 		geneOnePTwoRadHetero = new JRadioButton("Aa");
@@ -799,7 +777,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneOnePTwoRadHetero.insets = new Insets(0, 0, 5, 5);
 		gbc_geneOnePTwoRadHetero.gridx = 2;
 		gbc_geneOnePTwoRadHetero.gridy = 3;
-		parentTwo.add(geneOnePTwoRadHetero, gbc_geneOnePTwoRadHetero);
+		parentTwoPanel.add(geneOnePTwoRadHetero, gbc_geneOnePTwoRadHetero);
 		
 		//Gene One Parent Two Radio HomoR
 		geneOnePTwoRadHomoR = new JRadioButton("aa");
@@ -813,7 +791,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneOnePTwoRadHomoR.insets = new Insets(0, 0, 5, 0);
 		gbc_geneOnePTwoRadHomoR.gridx = 3;
 		gbc_geneOnePTwoRadHomoR.gridy = 3;
-		parentTwo.add(geneOnePTwoRadHomoR, gbc_geneOnePTwoRadHomoR);
+		parentTwoPanel.add(geneOnePTwoRadHomoR, gbc_geneOnePTwoRadHomoR);
 		
 		//Gene Two Parent Two Label
 		geneTwoPTwoLabel = new JLabel("Gene 2");
@@ -829,7 +807,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneTwoPTwoLabel.insets = new Insets(0, 0, 5, 0);
 		gbc_geneTwoPTwoLabel.gridx = 0;
 		gbc_geneTwoPTwoLabel.gridy = 5;
-		parentTwo.add(geneTwoPTwoLabel, gbc_geneTwoPTwoLabel);
+		parentTwoPanel.add(geneTwoPTwoLabel, gbc_geneTwoPTwoLabel);
 		
 		//Gene Two Parent Two Combo
 		geneTwoPTwoCombo = new JComboBox<String>();
@@ -847,7 +825,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneTwoPTwoCombo.fill = GridBagConstraints.HORIZONTAL;
 		gbc_geneTwoPTwoCombo.gridx = 0;
 		gbc_geneTwoPTwoCombo.gridy = 6;
-		parentTwo.add(geneTwoPTwoCombo, gbc_geneTwoPTwoCombo);
+		parentTwoPanel.add(geneTwoPTwoCombo, gbc_geneTwoPTwoCombo);
 		
 		//Gene Two Parent Two Radio HomoD
 		geneTwoPTwoRadHomoD = new JRadioButton("AA");
@@ -861,7 +839,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneTwoPTwoRadHomoD.insets = new Insets(0, 0, 5, 5);
 		gbc_geneTwoPTwoRadHomoD.gridx = 1;
 		gbc_geneTwoPTwoRadHomoD.gridy = 6;
-		parentTwo.add(geneTwoPTwoRadHomoD, gbc_geneTwoPTwoRadHomoD);
+		parentTwoPanel.add(geneTwoPTwoRadHomoD, gbc_geneTwoPTwoRadHomoD);
 		
 		//Gene Two Parent Two Radio Hetero
 		geneTwoPTwoRadHetero = new JRadioButton("Aa");
@@ -875,7 +853,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneTwoPTwoRadHetero.insets = new Insets(0, 0, 5, 5);
 		gbc_geneTwoPTwoRadHetero.gridx = 2;
 		gbc_geneTwoPTwoRadHetero.gridy = 6;
-		parentTwo.add(geneTwoPTwoRadHetero, gbc_geneTwoPTwoRadHetero);
+		parentTwoPanel.add(geneTwoPTwoRadHetero, gbc_geneTwoPTwoRadHetero);
 		
 		//Gene Two Parent Two Radio HomoR
 		geneTwoPTwoRadHomoR = new JRadioButton("aa");
@@ -889,7 +867,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneTwoPTwoRadHomoR.insets = new Insets(0, 0, 5, 0);
 		gbc_geneTwoPTwoRadHomoR.gridx = 3;
 		gbc_geneTwoPTwoRadHomoR.gridy = 6;
-		parentTwo.add(geneTwoPTwoRadHomoR, gbc_geneTwoPTwoRadHomoR);
+		parentTwoPanel.add(geneTwoPTwoRadHomoR, gbc_geneTwoPTwoRadHomoR);
 		
 		//Gene Three Parent Two Label
 		geneThreePTwoLabel = new JLabel("Gene 3");
@@ -905,7 +883,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneThreePTwoLabel.insets = new Insets(0, 0, 5, 0);
 		gbc_geneThreePTwoLabel.gridx = 0;
 		gbc_geneThreePTwoLabel.gridy = 8;
-		parentTwo.add(geneThreePTwoLabel, gbc_geneThreePTwoLabel);
+		parentTwoPanel.add(geneThreePTwoLabel, gbc_geneThreePTwoLabel);
 		
 		//Gene Three Parent Two Combo
 		geneThreePTwoCombo = new JComboBox<String>();
@@ -923,7 +901,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneThreePTwoCombo.fill = GridBagConstraints.HORIZONTAL;
 		gbc_geneThreePTwoCombo.gridx = 0;
 		gbc_geneThreePTwoCombo.gridy = 9;
-		parentTwo.add(geneThreePTwoCombo, gbc_geneThreePTwoCombo);
+		parentTwoPanel.add(geneThreePTwoCombo, gbc_geneThreePTwoCombo);
 		
 		//Gene Three Parent Two Radio HomoD
 		geneThreePTwoRadHomoD = new JRadioButton("AA");
@@ -937,7 +915,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneThreePTwoRadHomoD.insets = new Insets(0, 0, 5, 5);
 		gbc_geneThreePTwoRadHomoD.gridx = 1;
 		gbc_geneThreePTwoRadHomoD.gridy = 9;
-		parentTwo.add(geneThreePTwoRadHomoD, gbc_geneThreePTwoRadHomoD);
+		parentTwoPanel.add(geneThreePTwoRadHomoD, gbc_geneThreePTwoRadHomoD);
 		
 		//Gene Three Parent Two Radio Hetero
 		geneThreePTwoRadHetero = new JRadioButton("Aa");
@@ -951,7 +929,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneThreePTwoRadHetero.insets = new Insets(0, 0, 5, 5);
 		gbc_geneThreePTwoRadHetero.gridx = 2;
 		gbc_geneThreePTwoRadHetero.gridy = 9;
-		parentTwo.add(geneThreePTwoRadHetero, gbc_geneThreePTwoRadHetero);
+		parentTwoPanel.add(geneThreePTwoRadHetero, gbc_geneThreePTwoRadHetero);
 		
 		//Gene Three Parent Two Radio HomoR
 		geneThreePTwoRadHomoR = new JRadioButton("aa");
@@ -965,7 +943,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneThreePTwoRadHomoR.insets = new Insets(0, 0, 5, 0);
 		gbc_geneThreePTwoRadHomoR.gridx = 3;
 		gbc_geneThreePTwoRadHomoR.gridy = 9;
-		parentTwo.add(geneThreePTwoRadHomoR, gbc_geneThreePTwoRadHomoR);
+		parentTwoPanel.add(geneThreePTwoRadHomoR, gbc_geneThreePTwoRadHomoR);
 		
 		//Gene Four Parent Two Label
 		geneFourPTwoLabel = new JLabel("Gene 4");
@@ -980,7 +958,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneFourPTwoLabel.insets = new Insets(0, 0, 5, 0);
 		gbc_geneFourPTwoLabel.gridx = 0;
 		gbc_geneFourPTwoLabel.gridy = 11;
-		parentTwo.add(geneFourPTwoLabel, gbc_geneFourPTwoLabel);
+		parentTwoPanel.add(geneFourPTwoLabel, gbc_geneFourPTwoLabel);
 		
 		//Gene Four Parent Two Combo
 		geneFourPTwoCombo = new JComboBox<String>();
@@ -998,7 +976,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneFourPTwoCombo.fill = GridBagConstraints.HORIZONTAL;
 		gbc_geneFourPTwoCombo.gridx = 0;
 		gbc_geneFourPTwoCombo.gridy = 12;
-		parentTwo.add(geneFourPTwoCombo, gbc_geneFourPTwoCombo);
+		parentTwoPanel.add(geneFourPTwoCombo, gbc_geneFourPTwoCombo);
 		
 		//Gene Four Parent Two Radio HomoD
 		geneFourPTwoRadHomoD = new JRadioButton("AA");
@@ -1012,7 +990,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneFourPTwoRadHomoD.insets = new Insets(0, 0, 5, 5);
 		gbc_geneFourPTwoRadHomoD.gridx = 1;
 		gbc_geneFourPTwoRadHomoD.gridy = 12;
-		parentTwo.add(geneFourPTwoRadHomoD, gbc_geneFourPTwoRadHomoD);
+		parentTwoPanel.add(geneFourPTwoRadHomoD, gbc_geneFourPTwoRadHomoD);
 		
 		//Gene Four Parent Two Radio Hetero
 		geneFourPTwoRadHetero = new JRadioButton("Aa");
@@ -1026,7 +1004,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneFourPTwoRadHetero.insets = new Insets(0, 0, 5, 5);
 		gbc_geneFourPTwoRadHetero.gridx = 2;
 		gbc_geneFourPTwoRadHetero.gridy = 12;
-		parentTwo.add(geneFourPTwoRadHetero, gbc_geneFourPTwoRadHetero);
+		parentTwoPanel.add(geneFourPTwoRadHetero, gbc_geneFourPTwoRadHetero);
 		
 		//Gene Four Parent Two Radio HomoR
 		geneFourPTwoRadHomoR = new JRadioButton("aa");
@@ -1040,7 +1018,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneFourPTwoRadHomoR.insets = new Insets(0, 0, 5, 0);
 		gbc_geneFourPTwoRadHomoR.gridx = 3;
 		gbc_geneFourPTwoRadHomoR.gridy = 12;
-		parentTwo.add(geneFourPTwoRadHomoR, gbc_geneFourPTwoRadHomoR);
+		parentTwoPanel.add(geneFourPTwoRadHomoR, gbc_geneFourPTwoRadHomoR);
 		
 		//Gene Five Parent Two Label
 		geneFivePTwoLabel = new JLabel("Gene 5");
@@ -1055,7 +1033,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneFivePTwoLabel.insets = new Insets(0, 0, 5, 0);
 		gbc_geneFivePTwoLabel.gridx = 0;
 		gbc_geneFivePTwoLabel.gridy = 14;
-		parentTwo.add(geneFivePTwoLabel, gbc_geneFivePTwoLabel);
+		parentTwoPanel.add(geneFivePTwoLabel, gbc_geneFivePTwoLabel);
 		
 		//Gene Five Parent Two Combo
 		geneFivePTwoCombo = new JComboBox<String>();
@@ -1073,7 +1051,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneFivePTwoCombo.fill = GridBagConstraints.HORIZONTAL;
 		gbc_geneFivePTwoCombo.gridx = 0;
 		gbc_geneFivePTwoCombo.gridy = 15;
-		parentTwo.add(geneFivePTwoCombo, gbc_geneFivePTwoCombo);
+		parentTwoPanel.add(geneFivePTwoCombo, gbc_geneFivePTwoCombo);
 		
 		//Gene Five Parent Two Radio HomoD 
 		geneFivePTwoRadHomoD = new JRadioButton("AA");
@@ -1087,7 +1065,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneFivePTwoRadHomoD.insets = new Insets(0, 0, 5, 5);
 		gbc_geneFivePTwoRadHomoD.gridx = 1;
 		gbc_geneFivePTwoRadHomoD.gridy = 15;
-		parentTwo.add(geneFivePTwoRadHomoD, gbc_geneFivePTwoRadHomoD);
+		parentTwoPanel.add(geneFivePTwoRadHomoD, gbc_geneFivePTwoRadHomoD);
 		
 		//Gene Five Parent Two Radio Hetero
 		geneFivePTwoRadHetero = new JRadioButton("Aa");
@@ -1101,7 +1079,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneFivePTwoRadHetero.insets = new Insets(0, 0, 5, 5);
 		gbc_geneFivePTwoRadHetero.gridx = 2;
 		gbc_geneFivePTwoRadHetero.gridy = 15;
-		parentTwo.add(geneFivePTwoRadHetero, gbc_geneFivePTwoRadHetero);
+		parentTwoPanel.add(geneFivePTwoRadHetero, gbc_geneFivePTwoRadHetero);
 		
 		//Gene Five Parent Two Radio HomoR
 		geneFivePTwoRadHomoR = new JRadioButton("aa");
@@ -1115,7 +1093,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_geneFivePTwoRadHomoR.insets = new Insets(0, 0, 5, 0);
 		gbc_geneFivePTwoRadHomoR.gridx = 3;
 		gbc_geneFivePTwoRadHomoR.gridy = 15;
-		parentTwo.add(geneFivePTwoRadHomoR, gbc_geneFivePTwoRadHomoR);
+		parentTwoPanel.add(geneFivePTwoRadHomoR, gbc_geneFivePTwoRadHomoR);
 		
 		//Reset Button 
 		resetButton = new JButton("Reset");
@@ -1128,7 +1106,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbc_resetButton.fill = GridBagConstraints.BOTH;
 		gbc_resetButton.gridx = 0;
 		gbc_resetButton.gridy = 20;
-		parentTwo.add(resetButton, gbc_resetButton);
+		parentTwoPanel.add(resetButton, gbc_resetButton);
 		
 		//Adding all Parent Two radio buttons to their corresponding ButtonGroups
 		//Gene One Parent Two
@@ -1171,8 +1149,8 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		resultsPanel.setBackground(backgroundColor);
 		resultsPanel.setForeground(textColor);
 		GridBagConstraints gbc_resultsPanel = new GridBagConstraints();
-		gbc_resultsPanel.insets = new Insets(0, 5, 0, 0);
-		gbc_resultsPanel.gridwidth = 2;
+		gbc_resultsPanel.insets = new Insets(0, 5, 0, 5);
+		gbc_resultsPanel.gridwidth = 1;
 		gbc_resultsPanel.weighty = 1.0;
 		gbc_resultsPanel.weightx = 0.6;
 		gbc_resultsPanel.fill = GridBagConstraints.BOTH;
@@ -1210,8 +1188,9 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		resultsJTA.setLineWrap(false);
 		resultsJTA.setFont(new Font(javax.swing.UIManager.getDefaults().getFont("Label.font").getFontName(), Font.PLAIN, 14));
 		GridBagConstraints gbc_resultsJTA = new GridBagConstraints();
-		gbc_resultsJTA.weightx = 1.0;
 		gbc_resultsJTA.fill = GridBagConstraints.BOTH;
+		gbc_resultsJTA.gridwidth = 3;
+		gbc_resultsJTA.weightx = 1.0;
 		gbc_resultsJTA.weighty = 1.0;
 		gbc_resultsJTA.gridx = 0;
 		gbc_resultsJTA.gridy = 1;
@@ -1233,12 +1212,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		{
 			if (errorCheckGenes())
 			{
-				System.out.println("Initiating Calculation...");
 				startCalculation();
-			}
-			else
-			{
-				System.out.println("Cannot Initiate Calculation");
 			}
 		}
 		else if (e.getSource().equals(resetButton))
@@ -1400,10 +1374,6 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 					}
 				}
 			}
-			else if (e.getSource() instanceof JRadioButton)
-			{
-				JRadioButton jrb = (JRadioButton)e.getSource();
-			}
 		}
 	}
 
@@ -1518,6 +1488,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		boolean hasNoErrors = true;
 		int numberOfInactiveGenes = 0;
 		
+		String errorMsg = "ERROR: Please select an allele type for the following:\n";
 		for (int geneCheck = 0; geneCheck < 5; geneCheck++)
 		{
 			JComboBox<String> jcb = comboBoxPOneList.get(geneCheck);
@@ -1525,43 +1496,103 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 			{
 				if (geneCheck == 0)
 				{
-					if (!hasOneSelected(geneOnePOneBG) || !hasOneSelected(geneOnePTwoBG))
+					if (!hasOneSelected(geneOnePOneBG))
 					{
-						System.out.println("ErrorCheckGenes GENE ONE HAS MISSING SELECTION");
+						errorMsg += "Parent One Gene One\n";
 						hasNoErrors = false;
 					}
+					if (!hasOneSelected(geneOnePTwoBG))
+					{
+						
+						errorMsg += "Parent Two Gene One\n";
+						hasNoErrors = false;
+					}
+//					if (!hasOneSelected(geneOnePOneBG) || !hasOneSelected(geneOnePTwoBG))
+//					{
+//						System.out.println("ErrorCheckGenes GENE ONE HAS MISSING SELECTION");
+//						JOptionPane.showMessageDialog(window, "ERROR: Gene One must have a selected allele type.");
+//						hasNoErrors = false;
+//					}
 				}
 				else if (geneCheck == 1)
 				{
-					if (!hasOneSelected(geneTwoPOneBG) || !hasOneSelected(geneTwoPTwoBG))
+					if (!hasOneSelected(geneTwoPOneBG))
 					{
-						System.out.println("ErrorCheckGenes GENE TWO HAS MISSING SELECTION");
+						errorMsg += "Parent One Gene Two\n";
 						hasNoErrors = false;
 					}
+					if (!hasOneSelected(geneTwoPTwoBG))
+					{
+						
+						errorMsg += "Parent Two Gene Two\n";
+						hasNoErrors = false;
+					}
+//					if (!hasOneSelected(geneTwoPOneBG) || !hasOneSelected(geneTwoPTwoBG))
+//					{
+//						System.out.println("ErrorCheckGenes GENE TWO HAS MISSING SELECTION");
+//						JOptionPane.showMessageDialog(window, "ERROR: Gene Two must have a selected allele type.");
+//						hasNoErrors = false;
+//					}
 				}
 				else if (geneCheck == 2)
 				{
-					if (!hasOneSelected(geneThreePOneBG) || !hasOneSelected(geneThreePTwoBG))
+					if (!hasOneSelected(geneThreePOneBG))
 					{
-						System.out.println("ErrorCheckGenes GENE THREE HAS MISSING SELECTION");
+						errorMsg += "Parent One Gene Three\n";
 						hasNoErrors = false;
 					}
+					if (!hasOneSelected(geneThreePTwoBG))
+					{
+						
+						errorMsg += "Parent Two Gene Three\n";
+						hasNoErrors = false;
+					}
+//					if (!hasOneSelected(geneThreePOneBG) || !hasOneSelected(geneThreePTwoBG))
+//					{
+//						System.out.println("ErrorCheckGenes GENE THREE HAS MISSING SELECTION");
+//						JOptionPane.showMessageDialog(window, "ERROR: Gene Three must have a selected allele type.");
+//						hasNoErrors = false;
+//					}
 				}
 				else if (geneCheck == 3)
 				{
-					if (!hasOneSelected(geneFourPOneBG) || !hasOneSelected(geneFourPTwoBG))
+					if (!hasOneSelected(geneFourPOneBG))
 					{
-						System.out.println("ErrorCheckGenes GENE FOUR HAS MISSING SELECTION");
+						errorMsg += "Parent One Gene Four\n";
 						hasNoErrors = false;
 					}
+					if (!hasOneSelected(geneFourPTwoBG))
+					{
+						
+						errorMsg += "Parent Two Gene Four\n";
+						hasNoErrors = false;
+					}
+//					if (!hasOneSelected(geneFourPOneBG) || !hasOneSelected(geneFourPTwoBG))
+//					{
+//						System.out.println("ErrorCheckGenes GENE FOUR HAS MISSING SELECTION");
+//						JOptionPane.showMessageDialog(window, "ERROR: Gene Four must have a selected allele type.");
+//						hasNoErrors = false;
+//					}
 				}
 				else if (geneCheck == 4)
 				{
-					if (!hasOneSelected(geneFivePOneBG) || !hasOneSelected(geneFivePTwoBG))
+					if (!hasOneSelected(geneFivePOneBG))
 					{
-						System.out.println("ErrorCheckGenes GENE FIVE HAS MISSING SELECTION");
+						errorMsg += "Parent One Gene Five\n";
 						hasNoErrors = false;
 					}
+					if (!hasOneSelected(geneFivePTwoBG))
+					{
+						
+						errorMsg += "Parent Two Gene Five\n";
+						hasNoErrors = false;
+					}
+//					if (!hasOneSelected(geneFivePOneBG) || !hasOneSelected(geneFivePTwoBG))
+//					{
+//						System.out.println("ErrorCheckGenes GENE FIVE HAS MISSING SELECTION");
+//						JOptionPane.showMessageDialog(window, "ERROR: Gene Five must have a selected allele type.");
+//						hasNoErrors = false;
+//					}
 				}
 				
 			}
@@ -1576,7 +1607,13 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		if (numberOfInactiveGenes > 4)
 		{
 			hasNoErrors = false;
+			JOptionPane.showMessageDialog(window, "Please select a gene symbol to calculate.");
 		}
+		else if (!hasNoErrors)
+		{
+			JOptionPane.showMessageDialog(window, errorMsg);
+		}
+		
 		return hasNoErrors;
 	}
 	
@@ -1673,13 +1710,13 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 
 		pm.build(parentOne, parentTwo);
 	
-		List<String> output = pm.getResults();
-		
-		for (int i = 0; i < output.size(); i++)
-		{
-			System.out.println(output.get(i));
-		}
-		System.out.println("output size = " + output.size());
+//		List<String> output = pm.getResults();
+//		
+//		for (int i = 0; i < output.size(); i++)
+//		{
+//			System.out.println(output.get(i));
+//		}
+//		System.out.println("output size = " + output.size());
 		
 		outputResults(pm.getResults());
 	}
@@ -1691,7 +1728,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		{
 			resultsJTA.append(results.get(output) + "\n");
 		}
+		resultsJTA.append(results.size() + " total offspring");
 		resultsJTA.setCaretPosition(0);
 	}
-	
 }
