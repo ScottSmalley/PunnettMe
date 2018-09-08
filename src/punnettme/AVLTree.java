@@ -431,10 +431,7 @@ public class AVLTree
 				getInOrderTraversal(root.left);
 //			System.out.println(root.data);
 //			output.add(root.data);
-//			if (root.duplicate != 0)
-//			{
-//				System.out.println("I HAVE " + root.duplicate + " BROTHERS AND SISTERS");
-//			}
+
 			for (int add = 0; add <= root.duplicate; add++)
 			{
 //				System.out.println(root.data);

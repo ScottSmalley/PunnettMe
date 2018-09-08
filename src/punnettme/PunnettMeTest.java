@@ -1,49 +1,322 @@
 package punnettme;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertTrue;
+//import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
+import org.junit.Before;
 import org.junit.jupiter.api.Test;
+
+import junit.framework.Assert;
 
 class PunnettMeTest {
 
+//	@Test
+//	void toRunCurrently(Map<String, Integer> test)
+//	{
+//		PunnettMe pm = new PunnettMe();
+//		Parent parentOne = new Parent();
+//		Parent parentTwo = new Parent();
+//		
+//		parentOne.setRawGenes(new Gene[] {
+//				new Gene("A", true, false, false),
+//				new Gene("B", true, false, false),
+//				new Gene("C", true, false, false),
+//				new Gene("D", true, false, false),
+//				new Gene("E", true, false, false)});
+//		
+//		parentTwo.setRawGenes(new Gene[] {
+//				new Gene("A", true, false, false),
+//				new Gene("B", true, false, false),
+//				new Gene("C", true, false, false),
+//				new Gene("D", true, false, false),
+//				new Gene("E", true, false, false)});
+//		
+//		pm.build(parentOne, parentTwo);
+//
+//		List<String> sample = pm.getResults();
+//
+//		Map<String, Integer> geneOneHeteroBothParents = new TreeMap<>();
+//		geneOneHeteroBothParents.put("aa", 1);
+//		geneOneHeteroBothParents.put("Aa", 2);
+//		geneOneHeteroBothParents.put("AA", 1);
+//		
+//		Map<String, Integer> geneOneHomoDBothParents = new TreeMap<>();
+//		geneOneHomoDBothParents.put("AA", 1);
+//		
+//		Map<String, Integer> geneOneHomoRBothParents = new TreeMap<>();
+//		geneOneHomoRBothParents.put("aa", 1);
+//
+//	}
+	
 	@Test
-	void toRunCurrently()
+	void resultsCheckForGeneOneHeteroBothParents()
 	{
 		PunnettMe pm = new PunnettMe();
 		Parent parentOne = new Parent();
 		Parent parentTwo = new Parent();
 		
 		parentOne.setRawGenes(new Gene[] {
-				new Gene("A", true, false, false),
-				new Gene("B", true, false, false),
-				new Gene("C", true, false, false),
-				new Gene("D", true, false, false),
-				new Gene("E", true, false, false)});
+				new Gene("A", true, false, false)});
 		
 		parentTwo.setRawGenes(new Gene[] {
-				new Gene("A", true, false, false),
-				new Gene("B", true, false, false),
-				new Gene("C", true, false, false),
-				new Gene("D", true, false, false),
-				new Gene("E", true, false, false)});
+				new Gene("A", true, false, false)});
 		
-//		pm.setParents(parentOne, parentTwo);
 		pm.build(parentOne, parentTwo);
-	
-		/*
-		 * 5 - 53
-		 * 4 - 34
-		 * 3 - 19
-		 * 2 - 8
-		 * 1 - 3
-		 * 
-		 */
+
+		List<String> sample = pm.getResults();
+
+		Map<String, Integer> test = new TreeMap<>();
+		test.put("aa", 0);
+		test.put("Aa", 1);
+		test.put("AA", 0);
+		
+		int totalResultsSize = 4;
+		boolean didTestFail = false;
+		for (int index = 0; index < totalResultsSize; index++)
+		{
+			boolean foundMatch = false;
+			for (Map.Entry<String, Integer> testValue: test.entrySet())
+			{
+				if (sample.get(index).equals(testValue.getKey()))
+				{
+					foundMatch = true;
+//					System.out.println("Match: " + sample.get(index) + " "+ testValue.getValue());
+					if (testValue.getValue() > -1)
+					{
+						System.out.println("Duplicates: " + testValue.getValue());
+//						int currentAmtOfDuplicates = testValue.getValue();
+						testValue.setValue(testValue.getValue() - 1);
+					}
+					else
+					{
+//						System.out.println("WE GOT A BOGEY");
+						didTestFail = true;
+//						fail("Sample has more duplicates than Test.");
+						fail();
+					}
+				}
+			}
+			if (!foundMatch)
+			{
+				System.out.println("THROW A FAILURE, DIDN'T FIND THE RESULT IN THE TEST MAP.");
+				didTestFail = true;
+//				fail("Sample wasn't found in Test.");
+				fail();
+			}
+		}
+		
+		assertFalse("TestFailure", didTestFail);
 	}
+	
+	
+	@Test
+	void resultsCheckForGeneOneHomoDBothParents()
+	{
+		PunnettMe pm = new PunnettMe();
+		Parent parentOne = new Parent();
+		Parent parentTwo = new Parent();
+		
+		parentOne.setRawGenes(new Gene[] {
+				new Gene("A", false, true, false)});
+		
+		parentTwo.setRawGenes(new Gene[] {
+				new Gene("A", false, true, false)});
+		
+		pm.build(parentOne, parentTwo);
+
+		List<String> sample = pm.getResults();
+
+		Map<String, Integer> test = new TreeMap<>();
+		test.put("AA", 3);
+		
+		int totalResultsSize = 4;
+		boolean didTestFail = false;
+		for (int index = 0; index < totalResultsSize; index++)
+		{
+			boolean foundMatch = false;
+			for (Map.Entry<String, Integer> testValue: test.entrySet())
+			{
+				if (sample.get(index).equals(testValue.getKey()))
+				{
+					foundMatch = true;
+//					System.out.println("Match: " + sample.get(index) + " "+ testValue.getValue());
+					if (testValue.getValue() > -1)
+					{
+//						System.out.println("Duplicates: " + testValue.getValue());
+//						int currentAmtOfDuplicates = testValue.getValue();
+						testValue.setValue(testValue.getValue() - 1);
+					}
+					else
+					{
+						System.out.println("WE GOT A BOGEY");
+						didTestFail = true;
+//						fail("Sample has more duplicates than Test.");
+						fail();
+					}
+				}
+			}
+			if (!foundMatch)
+			{
+				System.out.println("THROW A FAILURE, DIDN'T FIND THE RESULT IN THE TEST MAP.");
+				didTestFail = true;
+//				fail("Sample wasn't found in Test.");
+				fail();
+			}
+		}
+		
+		assertFalse("TestFailure", didTestFail);
+	}
+	
+	
+	
+	@Test
+	void resultsCheckForGeneOneHomoRBothParents()
+	{
+		PunnettMe pm = new PunnettMe();
+		Parent parentOne = new Parent();
+		Parent parentTwo = new Parent();
+		
+		parentOne.setRawGenes(new Gene[] {
+				new Gene("A", false, false, true)});
+		
+		parentTwo.setRawGenes(new Gene[] {
+				new Gene("A", false, false, true)});
+		
+		pm.build(parentOne, parentTwo);
+
+		List<String> sample = pm.getResults();
+
+		Map<String, Integer> test = new TreeMap<>();
+		test.put("aa", 3);
+		
+		int totalResultsSize = 4;
+		boolean didTestFail = false;
+		for (int index = 0; index < totalResultsSize; index++)
+		{
+			boolean foundMatch = false;
+			for (Map.Entry<String, Integer> testValue: test.entrySet())
+			{
+				if (sample.get(index).equals(testValue.getKey()))
+				{
+					foundMatch = true;
+//					System.out.println("Match: " + sample.get(index) + " "+ testValue.getValue());
+					if (testValue.getValue() > -1)
+					{
+//						System.out.println("Duplicates: " + testValue.getValue());
+//						int currentAmtOfDuplicates = testValue.getValue();
+						testValue.setValue(testValue.getValue() - 1);
+					}
+					else
+					{
+						System.out.println("WE GOT A BOGEY");
+						didTestFail = true;
+//						fail("Sample has more duplicates than Test.");
+						fail();
+					}
+				}
+			}
+			if (!foundMatch)
+			{
+				System.out.println("THROW A FAILURE, DIDN'T FIND THE RESULT IN THE TEST MAP.");
+				didTestFail = true;
+//				fail("Sample wasn't found in Test.");
+				fail();
+			}
+		}
+		
+		assertFalse("TestFailure", didTestFail);
+	}
+	
+	
+	
+	
+	
+	/*
+	 * SEPT 3 2018 NOTES
+	 * SET UP MORE TESTS TO CHECK THE DIFFERENT VARIATIONS.
+	 * .TXT FILE HAS THE RESULTS OF HETERO HOMOD HOMOR UNIQUE PAIRINGS.
+	 * SET UP A TREEMAP TO CHECK TO MAKE SURE YOU HAVEN'T OVER-DUPLICATED, 
+	 * UNDER-DUPLICATED, OR GAINED/LOSSED ANY VALUES. LASTLY, TO MAKE SURE
+	 * THEY ARE ACCURATE. WE ALSO NEED TO SET UP TESTS FOR THE DIFFERENT
+	 * POSSIBLE OUTCOMES OF EACH. HETER+HOMOD, HETERO+HOMOR, HOMOD+HETERO, HOMOD+HOMOR
+	 * HOMOR+HETERO, HOMOR+HOMOD, WHILE SOME MAY BE REDUNDANT, IT'LL BE A GREAT CHECK FOR
+	 * THE INTERNAL WORKINGS OF MY BUILD METHODS.
+	 * I THINK CHANGING FROM JTF TO JTA FOR HTE RESULTS WOULD BE THE BEST MOVE, WE NEED
+	 * TO SEE IF WE CAN MAKE THE FORMAT SCALE WITH THE SIZE BEFORE OCT 10.
+	 * 
+	 * TENTATIVE PLAN: 
+	 * SEPT 8:
+	 * 	FINISH UP TESTING ABOVE
+	 * 
+	 * SEPT 15:
+	 * REPLACE JTF WITH JTA AND FIX SIZING
+	 * 
+	 * SEPT 22:
+	 * REVISIT EACH METHOD, CLEAN IT UP SO IT WORKS WITH
+	 * SINGLE RESPONSIBILITY, AND CALLER CALLEE STANDARD
+	 * 
+	 * SEPT 29:
+	 * REVISIT EACH AND FIGURE OUT ANY INCONSISTENCIES
+	 * UPDATE RESUME
+	 * 
+	 * OCT 6:
+	 * CLOTHING, REVISIT THE BOOK ON DATA STRUCTURES.
+	 * 
+	 * OCT 10: D-DAY
+	 */
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 //	@Test
 //	void heteroBuildPunnettSquareResultsAccuracyWithOneGene() 
