@@ -1,15 +1,16 @@
-/*
+/**
  * Punnett Me is an app to use for Punnett Squares for Genetic Trait Calculations.
  * You can calculate up to 5 different traits at once.
  * You can quickly change from Homozygous parents and Heterozygous parents 
  * for comparisons.
  * 
- * Uses Model View Controller design pattern, with Design by Contract programming.
+ * Uses Design by Contract programming.
  * 
  * Scott Smalley, BS Software Engineering student at Utah Valley University
  * Fall 2020 expected graduation
  * scottsmalley90@gmail.com
  * 
+ * @author Scott Smalley
  */
 package punnettme;
 
@@ -59,24 +60,31 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 	 *HomoR = Homozygous Recessive (Gene trait) 
 	 */
 	
-	//Parent One
+	//Parent One - JComboBox to select the letter
+	//to represent the gene.
 	private JComboBox<String> geneOnePOneCombo;
 	private JComboBox<String> geneTwoPOneCombo;
 	private JComboBox<String> geneThreePOneCombo;
 	private JComboBox<String> geneFourPOneCombo;
 	private JComboBox<String> geneFivePOneCombo;
-	
+		
+		//Parent One Gene Labels
 	private JLabel geneTwoPOneLabel;
 	private JLabel geneThreePOneLabel;
 	private JLabel geneFourPOneLabel;
 	private JLabel geneFivePOneLabel;
 
+		//Parent One ButtonGroups for JRadioButtons
+		//representing Allele types (AA, Aa, aa)
 	private ButtonGroup geneOnePOneBG;
 	private ButtonGroup geneTwoPOneBG;
 	private ButtonGroup geneThreePOneBG;
 	private ButtonGroup geneFourPOneBG;
 	private ButtonGroup geneFivePOneBG;
 	
+		//Parent One each JRadioButton that
+		//will be added to the corresponding
+		//ButtonGroup above.
 	private JRadioButton geneOnePOneRadHomoD;
 	private JRadioButton geneOnePOneRadHetero;
 	private JRadioButton geneOnePOneRadHomoR;
@@ -93,25 +101,32 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 	private JRadioButton geneFivePOneRadHetero;
 	private JRadioButton geneFivePOneRadHomoR;
 
-	//Parent Two
+	//Parent Two - JComboBox to select the letter
+	//to represent the gene.
 	private JComboBox<String> geneOnePTwoCombo;
 	private JComboBox<String> geneTwoPTwoCombo;
 	private JComboBox<String> geneThreePTwoCombo;
 	private JComboBox<String> geneFourPTwoCombo;
 	private JComboBox<String> geneFivePTwoCombo;
 	
+		//Parent Two Gene Labels
 	private JLabel geneOnePTwoLabel;
 	private JLabel geneTwoPTwoLabel;
 	private JLabel geneThreePTwoLabel;
 	private JLabel geneFourPTwoLabel;
 	private JLabel geneFivePTwoLabel;
 	
+		//Parent One ButtonGroups for JRadioButtons
+		//representing Allele types (AA, Aa, aa)
 	private ButtonGroup geneOnePTwoBG;
 	private ButtonGroup geneTwoPTwoBG;
 	private ButtonGroup geneThreePTwoBG;
 	private ButtonGroup geneFourPTwoBG;
 	private ButtonGroup geneFivePTwoBG;
 	
+		//Parent One each JRadioButton that
+		//will be added to the corresponding
+		//ButtonGroup above.
 	private JRadioButton geneOnePTwoRadHomoD;
 	private JRadioButton geneOnePTwoRadHetero;
 	private JRadioButton geneOnePTwoRadHomoR;
@@ -128,22 +143,30 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 	private JRadioButton geneFivePTwoRadHetero;
 	private JRadioButton geneFivePTwoRadHomoR;
 	
+	//List of JComboBoxes for each Parent.
+	//List of ParentOne and ParentTwo Labels.
+	//List of ButtonGroups for ParentOne and ParentTwo.
 	private List<JComboBox<String>> comboBoxPOneList;
 	private List<JComboBox<String>> comboBoxPTwoList;
 	private List<JLabel> geneLabelList;
 	private List<ButtonGroup> buttonGroupList;
 	
-	//Parent One and Two Buttons
+	//Parent One and Two Buttons for initiating Calculations
+	//and resetting the JComboBoxes, JRadioButtons, JLabels,
+	//and the results JTextArea.
 	private JButton resetButton;
 	private JButton calcButton;
 	
 	//Results
-	JPanel resultsPanel;
-	JTextArea resultsJTA;
+	private JPanel resultsPanel;
+	private JTextArea resultsJTA;
 	
+	//Default GUI Colors
 	private Color textColor = Color.WHITE;
 	private Color backgroundColor = Color.DARK_GRAY;
 	private Color textFieldColor = Color.GRAY;
+	
+	//JComboBoxes options.
 	private String[] geneOptions = {"Select Symbol","A","B","C","D","E",
 									"F","G","H","I","J","K",
 									"L","M","N","O","P","Q",
@@ -151,10 +174,10 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 									"X","Y","Z"};
 	private String defaultComboItem = "Select Symbol";
 	
-	//*********** PunnettMe Globals ***********
-	private PunnettMe pm;
+	//*PunnettMe Globals
+	private PunnettMeCalculations pm;
 	
-	//*********** Debug Switches *********** 
+	//Debug Switch 
 	private boolean inDebugMode = false;
 	
 	public static void main (String[] args)
@@ -162,12 +185,15 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		SwingUtilities.invokeLater(new PunnettMeGUI());
 	}
 
+	//Outward facing run method for calling private start method.
 	public void run() 
 	{
 		start();
 	}
 
-	/* Builds the GUI.
+	/**
+	 *  Builds the GUI. Initializes the PunnettMe Object and
+	 *  ArrayLists.
 	 * 
 	 * GUI variable layout breakdown:
 	 * Ex: geneOnePOneLabel
@@ -181,7 +207,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 	{
 		
 		//*********** PunnettMe Code init ***********
-		pm = new PunnettMe();
+		pm = new PunnettMeCalculations();
 		comboBoxPOneList = new ArrayList<>();
 		comboBoxPTwoList = new ArrayList<>();
 		geneLabelList = new ArrayList<>();
@@ -222,7 +248,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		gbl_content.rowWeights = new double[]{0.0, Double.MIN_VALUE};
 		content.setLayout(gbl_content);
 		
-	//Parent One Column
+		//Parent One Column
 		JPanel parentOnePanel = new JPanel();
 		parentOnePanel.setBackground(backgroundColor);
 		parentOnePanel.setForeground(backgroundColor);
@@ -1199,24 +1225,35 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		resultsPanel.add(jsp, gbc_resultsJTA);
 		
-		//COMMENT OUT FOR DESIGN
 		window.pack();
 		window.setVisible(true);
 	}
 
-	//For Mouse clicks on the Radials &
-	//Calculate and Reset Buttons.
+	/**
+	 * For Calculate and Reset Buttons.
+	 * If event came from the Calculate button, it will run errorCheckGenes() 
+	 * to verify all selected genes are assigned a symbol and selected alleles 
+	 * from both parents.
+	 * 
+	 * Reset button will clear all symbol JComboBoxes and ButtonGroups to default.
+	 * 
+	 * @param e MouseEvent
+	 */
 	public void mouseClicked(MouseEvent e) 
 	{
+		//Calculation Button
 		if (e.getSource().equals(calcButton))
 		{
+			//If error checking comes back true, calculate.
 			if (errorCheckGenes())
 			{
 				startCalculation();
 			}
 		}
+		//Reset Button
 		else if (e.getSource().equals(resetButton))
 		{
+			//Resets all JComboBoxes and ButtonGroups to unselected.
 			resetAll();
 		}
 	}
@@ -1227,18 +1264,41 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 	public void mouseReleased(MouseEvent arg0){}
 
 	//For ComboBoxes' selection changes and Radio Button Selections.
+	/**
+	 * Activates when a user changes the selected item in a JComboBox.
+	 * Depending on the Gene Row it's on, it will enable the JComboBox
+	 * of the Gene Row below it. Additionally, it will activate the
+	 * current row's ButtonGroups to select a corresponding allele type.
+	 * 
+	 * @param e ItemEvent
+	 */
 	public void itemStateChanged(ItemEvent e) 
 	{
+		/*
+		 * ItemStateChanged fires twice, one for the deselect of
+		 * the default item, and the selection of the new item.
+		 * Currently we have no relevant use for the deselect.
+		 * So we only care about the even that was a selection.
+		 */
 		if (e.getStateChange() == ItemEvent.SELECTED)
 		{
+			/*
+			 * JRadioButton's activate itemStateChanged() as well.
+			 * We have a separate method to deal with those and 
+			 * the ButtonGroups they're assigned to, so we ignore them.
+			 */
 			if (e.getSource() instanceof JComboBox)
 			{
 				//Gene One 
 				if (e.getSource().equals(geneOnePOneCombo))
 				{
+					//If the current item is the default item, don't activate anything as 
+					//they need to make their selection in the JComboBox before anything else.
 					if (!(e.getItem().equals(defaultComboItem)))
 					{
-						if (geneOnePOneCombo.getSelectedIndex() != 0 && !geneTwoPOneCombo.isEnabled())
+						//If the next JComboBox is disabled(which is should be), call the 
+						//JComboBox and ButtonGroups to be enabled.
+						if (!geneTwoPOneCombo.isEnabled())
 						{
 							geneOnePTwoLabel.setEnabled(true);
 							geneTwoPOneLabel.setEnabled(true);
@@ -1246,10 +1306,13 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 							toggleButtonGroup(geneOnePTwoBG);
 							toggleNextComboBox(geneTwoPOneCombo);
 						}
-						
+						//Update the ButtonGroup's to reflect the symbol that was selected.						
 						updateParentTwoComboBox(geneOnePTwoCombo, geneOnePOneCombo.getSelectedIndex());
-						updateButtonGroup((String)geneOnePOneCombo.getSelectedItem(), geneOnePOneBG, geneOnePTwoBG);
+						updateButtonGroup((String)geneOnePOneCombo.getSelectedItem(), geneOnePOneBG);
+						updateButtonGroup((String)geneOnePOneCombo.getSelectedItem(), geneOnePTwoBG);
 					}
+					//If the JComboBox below the itemEvent is enabled, disable it.
+					//Used to toggle on and off the ButtonGroups as well.
 					else 
 					{
 						geneOnePTwoLabel.setEnabled(false);
@@ -1258,16 +1321,17 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 						toggleButtonGroup(geneOnePTwoBG);
 						toggleNextComboBox(geneTwoPOneCombo);
 						updateParentTwoComboBox(geneOnePTwoCombo, geneOnePOneCombo.getSelectedIndex());
-						updateButtonGroup((String)geneOnePOneCombo.getSelectedItem(), geneOnePOneBG, geneOnePTwoBG);
+						updateButtonGroup((String)geneOnePOneCombo.getSelectedItem(), geneOnePOneBG);
+						updateButtonGroup((String)geneOnePOneCombo.getSelectedItem(), geneOnePTwoBG);
 					}
 				}
 				
-				//Gene Two
+				//Gene Two - Same Comments as above, just for GeneTwo instead of GeneOne
 				else if (e.getSource().equals(geneTwoPOneCombo))
 				{
 					if (!(e.getItem().equals(defaultComboItem)))
 					{
-						if (geneTwoPOneCombo.getSelectedIndex() != 0 && !geneThreePOneCombo.isEnabled())
+						if (!geneThreePOneCombo.isEnabled())
 						{
 							geneTwoPTwoLabel.setEnabled(true);
 							geneThreePOneLabel.setEnabled(true);
@@ -1277,7 +1341,8 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 						}
 						
 						updateParentTwoComboBox(geneTwoPTwoCombo, geneTwoPOneCombo.getSelectedIndex());
-						updateButtonGroup((String)geneTwoPOneCombo.getSelectedItem(), geneTwoPOneBG, geneTwoPTwoBG);
+						updateButtonGroup((String)geneTwoPOneCombo.getSelectedItem(), geneTwoPOneBG);
+						updateButtonGroup((String)geneTwoPOneCombo.getSelectedItem(), geneTwoPTwoBG);
 					}
 					else 
 					{
@@ -1287,16 +1352,17 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 						toggleButtonGroup(geneTwoPTwoBG);
 						toggleNextComboBox(geneThreePOneCombo);
 						updateParentTwoComboBox(geneTwoPTwoCombo, geneTwoPOneCombo.getSelectedIndex());
-						updateButtonGroup((String)geneTwoPOneCombo.getSelectedItem(), geneTwoPOneBG, geneTwoPTwoBG);
+						updateButtonGroup((String)geneTwoPOneCombo.getSelectedItem(), geneTwoPOneBG);
+						updateButtonGroup((String)geneTwoPOneCombo.getSelectedItem(), geneTwoPTwoBG);
 					}
 				}
 				
-				//Gene Three
+				//Gene Three - Same Comments as above, just for GeneThree instead of GeneTwo
 				else if (e.getSource().equals(geneThreePOneCombo))
 				{
 					if (!(e.getItem().equals(defaultComboItem)))
 					{
-						if (geneThreePOneCombo.getSelectedIndex() != 0 && !geneFourPOneCombo.isEnabled())
+						if (!geneFourPOneCombo.isEnabled())
 						{
 							geneThreePTwoLabel.setEnabled(true);
 							geneFourPOneLabel.setEnabled(true);
@@ -1306,7 +1372,8 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 						}
 						
 						updateParentTwoComboBox(geneThreePTwoCombo, geneThreePOneCombo.getSelectedIndex());
-						updateButtonGroup((String)geneThreePOneCombo.getSelectedItem(), geneThreePOneBG, geneThreePTwoBG);
+						updateButtonGroup((String)geneThreePOneCombo.getSelectedItem(), geneThreePOneBG);
+						updateButtonGroup((String)geneThreePOneCombo.getSelectedItem(), geneThreePTwoBG);
 					}
 					else 
 					{
@@ -1316,16 +1383,17 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 						toggleButtonGroup(geneThreePTwoBG);
 						toggleNextComboBox(geneFourPOneCombo);
 						updateParentTwoComboBox(geneThreePTwoCombo, geneThreePOneCombo.getSelectedIndex());
-						updateButtonGroup((String)geneThreePOneCombo.getSelectedItem(), geneThreePOneBG, geneThreePTwoBG);
+						updateButtonGroup((String)geneThreePOneCombo.getSelectedItem(), geneThreePOneBG);
+						updateButtonGroup((String)geneThreePOneCombo.getSelectedItem(), geneThreePTwoBG);
 					}
 				}
 				
-				//Gene Four
+				//Gene Four - Same Comments as above, just for GeneFour instead of GeneThree
 				else if (e.getSource().equals(geneFourPOneCombo))
 				{
 					if (!(e.getItem().equals(defaultComboItem)))
 					{
-						if (geneFourPOneCombo.getSelectedIndex() != 0 && !geneFivePOneCombo.isEnabled())
+						if (!geneFivePOneCombo.isEnabled())
 						{
 							geneFourPTwoLabel.setEnabled(true);
 							geneFivePOneLabel.setEnabled(true);
@@ -1335,7 +1403,8 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 						}
 						
 						updateParentTwoComboBox(geneFourPTwoCombo, geneFourPOneCombo.getSelectedIndex());
-						updateButtonGroup((String)geneFourPOneCombo.getSelectedItem(), geneFourPOneBG, geneFourPTwoBG);
+						updateButtonGroup((String)geneFourPOneCombo.getSelectedItem(), geneFourPOneBG);
+						updateButtonGroup((String)geneFourPOneCombo.getSelectedItem(), geneFourPTwoBG);
 					}
 					else 
 					{
@@ -1345,16 +1414,19 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 						toggleButtonGroup(geneFourPTwoBG);
 						toggleNextComboBox(geneFivePOneCombo);
 						updateParentTwoComboBox(geneFourPTwoCombo, geneFourPOneCombo.getSelectedIndex());
-						updateButtonGroup((String)geneFourPOneCombo.getSelectedItem(), geneFourPOneBG, geneFourPTwoBG);
+						updateButtonGroup((String)geneFourPOneCombo.getSelectedItem(), geneFourPOneBG);
+						updateButtonGroup((String)geneFourPOneCombo.getSelectedItem(), geneFourPTwoBG);
 					}
 				}
 				
-				//Gene Five
+				//Gene Five - Same Comments as above, just for GeneFive instead of GeneFour
+				//Except this method has no method below it, so it only concerns itself with
+				//its own ButtonGroup and JComboBoxes.
 				else if (e.getSource().equals(geneFivePOneCombo))
 				{
 					if (!(e.getItem().equals(defaultComboItem)))
 					{
-						if (geneFourPOneCombo.getSelectedIndex() != 0 && geneFivePTwoLabel.isEnabled() == false)
+						if (geneFivePTwoLabel.isEnabled() == false)
 						{
 							geneFivePTwoLabel.setEnabled(true);
 							toggleButtonGroup(geneFivePOneBG);
@@ -1362,7 +1434,8 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 						}
 						
 						updateParentTwoComboBox(geneFivePTwoCombo, geneFivePOneCombo.getSelectedIndex());
-						updateButtonGroup((String)geneFivePOneCombo.getSelectedItem(), geneFivePOneBG, geneFivePTwoBG);
+						updateButtonGroup((String)geneFivePOneCombo.getSelectedItem(), geneFivePOneBG);
+						updateButtonGroup((String)geneFivePOneCombo.getSelectedItem(), geneFivePTwoBG);
 					}
 					else 
 					{
@@ -1370,34 +1443,57 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 						toggleButtonGroup(geneFivePOneBG);
 						toggleButtonGroup(geneFivePTwoBG);
 						updateParentTwoComboBox(geneFivePTwoCombo, geneFivePOneCombo.getSelectedIndex());
-						updateButtonGroup((String)geneFivePOneCombo.getSelectedItem(), geneFivePOneBG, geneFivePTwoBG);
+						updateButtonGroup((String)geneFivePOneCombo.getSelectedItem(), geneFivePOneBG);
+						updateButtonGroup((String)geneFivePOneCombo.getSelectedItem(), geneFivePTwoBG);
 					}
 				}
 			}
 		}
 	}
 
+	/**
+	 * Acts as a toggle switch for ButtonGroups.
+	 * Takes in a JRadioButton ButtonGroup, 
+	 * cycles through the list and if they 
+	 * are enabled with ItemListeners, disable them.
+	 * Otherwise enable them. 
+	 * 
+	 * @param buttonGroup ButtonGroup
+	 */
 	private void toggleButtonGroup(ButtonGroup buttonGroup)
 	{
-		Enumeration<AbstractButton> buttons = buttonGroup.getElements();
+		//Build Enumeration of the ButtonGroup parameter for use in method.
+		Enumeration<AbstractButton> currentBG = buttonGroup.getElements();
 		
-		while (buttons.hasMoreElements())
+		//Cycle through the Enumeration, check each item if they're enabled
+		//and don't have any ItemListeners. If so, enable them. If they
+		//are enabled and have ItemListeners, disable them.
+		while (currentBG.hasMoreElements())
 		{
-			JRadioButton jrb = (JRadioButton)buttons.nextElement();
-			if (jrb.isEnabled() && jrb.getItemListeners().length > 0)
+			JRadioButton currentButton = (JRadioButton)currentBG.nextElement();
+			if (currentButton.isEnabled() && currentButton.getItemListeners().length > 0)
 			{
+				//Makes JRadioButtons to show unselected.
 				buttonGroup.clearSelection();
-				jrb.setEnabled(false);
-				jrb.removeItemListener(this);
+				currentButton.setEnabled(false);
+				currentButton.removeItemListener(this);
 			}
 			else
 			{
-				jrb.setEnabled(true);
-				jrb.addItemListener(this);
+				currentButton.setEnabled(true);
+				currentButton.addItemListener(this);
 			}
 		}
 	}
 	
+	/**
+	 * Acts like a switch to toggle the JComboBox
+	 * enabled or disabled. If enabled with ItemListeners 
+	 * remove them, disable the JComboBox, and set the 
+	 * selected item in the list to the first item(default item)
+	 * 
+	 * @param comboBox JComboBox
+	 */
 	private void toggleNextComboBox(JComboBox<String> comboBox)
 	{
 		if (comboBox.isEnabled() && comboBox.getItemListeners().length > 0)
@@ -1413,6 +1509,16 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		}
 	}
 	
+	/**
+	 * To update ParentTwo's disabled JComboBox.
+	 * Takes in a JComboBox, and an int value related to an index position
+	 * in the JComboBox. It enables the JComboBox, sets the selected index
+	 * to the corresponding index number passed, and disables the JComboBox
+	 * again. 
+	 *  
+	 * @param comboBox JComboBox
+	 * @param indexPos integer
+	 */
 	private void updateParentTwoComboBox(JComboBox<String> comboBox, int indexPos)
 	{
 		comboBox.setEnabled(true);
@@ -1420,61 +1526,58 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		comboBox.setEnabled(false);
 	}
 	
-	private void updateButtonGroup(String newText, ButtonGroup parentOne, ButtonGroup parentTwo)
+	/**
+	 * Updates each JRadioButton's Label text in the ButtonGroup given.
+	 * The newText parameter must be capitalized.
+	 * If this method was called in lieu of deactivating its 
+	 * ButtonGroup, it will turn the label texts into A equivalents.
+	 * 
+	 * @param labelText String
+	 * @param buttonGroup ButtonGroup
+	 */
+	private void updateButtonGroup(String labelText, ButtonGroup buttonGroup)
 	{
 		//If default selected item, use this default text.
 		//Else use what's in newText as the new text for each radio button.
-		if (newText.equals(defaultComboItem))
+		if (labelText.equals(defaultComboItem))
 		{
-			newText = "A";
+			labelText = "A";
 		}
-			String newTextLowerCase = newText.toLowerCase();
+			String newTextLowerCase = labelText.toLowerCase();
 			
-			//ParentOne Button Group
-			Enumeration<AbstractButton> parentOneButtons = parentOne.getElements();
-			int buttonPOneCtr = 0;
-			while (parentOneButtons.hasMoreElements() && buttonPOneCtr < 3)
+			//Building Enumeration to use on the current ButtonGroup
+			Enumeration<AbstractButton> currentBG = buttonGroup.getElements();
+			int buttonCtr = 0;
+			
+			//Counter used to make sure the first Button displays
+			//two Uppercase letters, second one Uppercase and one Lowercase, 
+			//and finally the third will be both Lowercase letters.
+			while (currentBG.hasMoreElements() && buttonCtr < 3)
 			{
-				JRadioButton jrb = (JRadioButton)parentOneButtons.nextElement();
-				if (buttonPOneCtr == 0)
+				JRadioButton currentButton = (JRadioButton)currentBG.nextElement();
+				if (buttonCtr == 0)
 				{
-					jrb.setText(newText + newText);
+					currentButton.setText(labelText + labelText);
 				}
-				else if (buttonPOneCtr == 1)
+				else if (buttonCtr == 1)
 				{
-					jrb.setText(newText + newTextLowerCase);
+					currentButton.setText(labelText + newTextLowerCase);
 				}
-				else if (buttonPOneCtr == 2)
+				else if (buttonCtr == 2)
 				{
-					jrb.setText(newTextLowerCase + newTextLowerCase);
+					currentButton.setText(newTextLowerCase + newTextLowerCase);
 				}
 				
-				buttonPOneCtr++;
-			}
-			
-			//ParentTwo Button Group
-			Enumeration<AbstractButton> parentTwoButtons = parentTwo.getElements();
-			int buttonPTwoCtr = 0;
-			while (parentTwoButtons.hasMoreElements() && buttonPTwoCtr < 3)
-			{
-				JRadioButton jrb = (JRadioButton)parentTwoButtons.nextElement();
-				if (buttonPTwoCtr == 0)
-				{
-					jrb.setText(newText + newText);
-				}
-				else if (buttonPTwoCtr == 1)
-				{
-					jrb.setText(newText + newTextLowerCase);
-				}
-				else if (buttonPTwoCtr == 2)
-				{
-					jrb.setText(newTextLowerCase + newTextLowerCase);
-				}
-				
-				buttonPTwoCtr++;
+				buttonCtr++;
 			}
 	}
 	
+	/**
+	 * Resets the first JComboBox to default, which
+	 * cascades through all five potentially active
+	 * JComboBoxes to reset them. Also resets the 
+	 * JTextArea where results are shown.
+	 */
 	private void resetAll()
 	{
 		//Uses ItemListener's Deselect ActionListener to toggle
@@ -1483,118 +1586,110 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		resultsJTA.setText("");
 	}
 
+	/**
+	 * Checks to see which Gene Rows are enabled.
+	 * If enabled, verify they have a selected symbol, 
+	 * and in each parent's ButtonGroup has a selected
+	 * JRadioButton(allele). Otherwise it will add to
+	 * the error message, and set the boolean to flag
+	 * to false. If the boolean was flagged, it'll 
+	 * call a error pop-up message to display
+	 * which lines have errors.
+	 * 
+	 * @return noErrors boolean
+	 */
 	private boolean errorCheckGenes()
 	{
 		boolean hasNoErrors = true;
 		int numberOfInactiveGenes = 0;
 		
+		//Starter error message.
 		String errorMsg = "ERROR: Please select an allele type for the following:\n";
-		for (int geneCheck = 0; geneCheck < 5; geneCheck++)
+		
+		//Cycles through the five potentially active JComboBoxes to verify
+		//if they're active and if they have ButtonGroups selected.
+		//Used for loop so if we add new JComboBoxes in the future, we can
+		//simply add them to the list, and create an if statement.
+		for (int geneCheck = 0; geneCheck < comboBoxPOneList.size(); geneCheck++)
 		{
-			JComboBox<String> jcb = comboBoxPOneList.get(geneCheck);
-			if (jcb.isEnabled() && jcb.getSelectedIndex() != 0)
+			JComboBox<String> currentComboBox = comboBoxPOneList.get(geneCheck);
+			if (currentComboBox.isEnabled() && currentComboBox.getSelectedIndex() != 0)
 			{
+				//Gene One
 				if (geneCheck == 0)
 				{
-					if (!hasOneSelected(geneOnePOneBG))
+					if (!hasButtonSelected(geneOnePOneBG))
 					{
 						errorMsg += "Parent One Gene One\n";
 						hasNoErrors = false;
 					}
-					if (!hasOneSelected(geneOnePTwoBG))
+					if (!hasButtonSelected(geneOnePTwoBG))
 					{
 						
 						errorMsg += "Parent Two Gene One\n";
 						hasNoErrors = false;
 					}
-//					if (!hasOneSelected(geneOnePOneBG) || !hasOneSelected(geneOnePTwoBG))
-//					{
-//						System.out.println("ErrorCheckGenes GENE ONE HAS MISSING SELECTION");
-//						JOptionPane.showMessageDialog(window, "ERROR: Gene One must have a selected allele type.");
-//						hasNoErrors = false;
-//					}
 				}
+				//Gene Two
 				else if (geneCheck == 1)
 				{
-					if (!hasOneSelected(geneTwoPOneBG))
+					if (!hasButtonSelected(geneTwoPOneBG))
 					{
 						errorMsg += "Parent One Gene Two\n";
 						hasNoErrors = false;
 					}
-					if (!hasOneSelected(geneTwoPTwoBG))
+					if (!hasButtonSelected(geneTwoPTwoBG))
 					{
 						
 						errorMsg += "Parent Two Gene Two\n";
 						hasNoErrors = false;
 					}
-//					if (!hasOneSelected(geneTwoPOneBG) || !hasOneSelected(geneTwoPTwoBG))
-//					{
-//						System.out.println("ErrorCheckGenes GENE TWO HAS MISSING SELECTION");
-//						JOptionPane.showMessageDialog(window, "ERROR: Gene Two must have a selected allele type.");
-//						hasNoErrors = false;
-//					}
 				}
+				//Gene Three
 				else if (geneCheck == 2)
 				{
-					if (!hasOneSelected(geneThreePOneBG))
+					if (!hasButtonSelected(geneThreePOneBG))
 					{
 						errorMsg += "Parent One Gene Three\n";
 						hasNoErrors = false;
 					}
-					if (!hasOneSelected(geneThreePTwoBG))
+					if (!hasButtonSelected(geneThreePTwoBG))
 					{
 						
 						errorMsg += "Parent Two Gene Three\n";
 						hasNoErrors = false;
 					}
-//					if (!hasOneSelected(geneThreePOneBG) || !hasOneSelected(geneThreePTwoBG))
-//					{
-//						System.out.println("ErrorCheckGenes GENE THREE HAS MISSING SELECTION");
-//						JOptionPane.showMessageDialog(window, "ERROR: Gene Three must have a selected allele type.");
-//						hasNoErrors = false;
-//					}
 				}
+				//Gene Four
 				else if (geneCheck == 3)
 				{
-					if (!hasOneSelected(geneFourPOneBG))
+					if (!hasButtonSelected(geneFourPOneBG))
 					{
 						errorMsg += "Parent One Gene Four\n";
 						hasNoErrors = false;
 					}
-					if (!hasOneSelected(geneFourPTwoBG))
+					if (!hasButtonSelected(geneFourPTwoBG))
 					{
 						
 						errorMsg += "Parent Two Gene Four\n";
 						hasNoErrors = false;
 					}
-//					if (!hasOneSelected(geneFourPOneBG) || !hasOneSelected(geneFourPTwoBG))
-//					{
-//						System.out.println("ErrorCheckGenes GENE FOUR HAS MISSING SELECTION");
-//						JOptionPane.showMessageDialog(window, "ERROR: Gene Four must have a selected allele type.");
-//						hasNoErrors = false;
-//					}
 				}
+				//Gene Five
 				else if (geneCheck == 4)
 				{
-					if (!hasOneSelected(geneFivePOneBG))
+					if (!hasButtonSelected(geneFivePOneBG))
 					{
 						errorMsg += "Parent One Gene Five\n";
 						hasNoErrors = false;
 					}
-					if (!hasOneSelected(geneFivePTwoBG))
+					if (!hasButtonSelected(geneFivePTwoBG))
 					{
 						
 						errorMsg += "Parent Two Gene Five\n";
 						hasNoErrors = false;
 					}
-//					if (!hasOneSelected(geneFivePOneBG) || !hasOneSelected(geneFivePTwoBG))
-//					{
-//						System.out.println("ErrorCheckGenes GENE FIVE HAS MISSING SELECTION");
-//						JOptionPane.showMessageDialog(window, "ERROR: Gene Five must have a selected allele type.");
-//						hasNoErrors = false;
-//					}
 				}
-				
 			}
 			else
 			{
@@ -1609,6 +1704,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 			hasNoErrors = false;
 			JOptionPane.showMessageDialog(window, "Please select a gene symbol to calculate.");
 		}
+		//Show error message if the error boolean was flagged.
 		else if (!hasNoErrors)
 		{
 			JOptionPane.showMessageDialog(window, errorMsg);
@@ -1617,14 +1713,24 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		return hasNoErrors;
 	}
 	
-	private boolean hasOneSelected(ButtonGroup bg)
+	/**
+	 * This method checks to see if one of the 
+	 * ButtonGroup's JRadioButtons are selected.
+	 * If it finds one, it returns true, otherwise
+	 * it returns false.
+	 * 
+	 * @param buttonGroup ButtonGroup
+	 * @return isButtonSelected boolean
+	 */
+	private boolean hasButtonSelected(ButtonGroup buttonGroup)
 	{
-		Enumeration<AbstractButton> buttons = bg.getElements();
+		//To cycle through the ButtonGroup parameter.
+		Enumeration<AbstractButton> currentBG = buttonGroup.getElements();
 		boolean hasOneSelected = false;
-		while (buttons.hasMoreElements())
+		while (currentBG.hasMoreElements())
 		{
-			JRadioButton jrb = (JRadioButton)buttons.nextElement();
-			if (jrb.isSelected())
+			JRadioButton currentButton = (JRadioButton)currentBG.nextElement();
+			if (currentButton.isSelected())
 			{
 				hasOneSelected = true;
 			}
@@ -1633,102 +1739,133 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		return hasOneSelected;
 	}
 	
+	/**
+	 * Builds the Genes by checking all five relevant
+	 * JComboBoxes. Then gets the boolean value from each
+	 * of the corresponding buttons in Parent One and Parent
+	 * Two's ButtonGroups. Two parent objects are built with the Genes,
+	 * and sent to build the punnett square. Finally, after 
+	 * built it displays the results.
+	 */
 	private void startCalculation()
 	{
 		Gene[] rawGenePOne = new Gene[5];
 		Gene[] rawGenePTwo = new Gene[5];
+		
+		//Gene One
 		if (geneOnePOneCombo.getSelectedIndex() != 0)
 		{
+			//Parent One
 			rawGenePOne[0] = new Gene(geneOnePOneCombo.getSelectedItem().toString(), 
 					geneOnePOneRadHetero.isSelected(), 
 					geneOnePOneRadHomoD.isSelected(),
 					geneOnePOneRadHomoR.isSelected());
 			
+			//Parent Two
 			rawGenePTwo[0] = new Gene(geneOnePOneCombo.getSelectedItem().toString(), 
 					geneOnePTwoRadHetero.isSelected(), 
 					geneOnePTwoRadHomoD.isSelected(),
 					geneOnePTwoRadHomoR.isSelected());
 		}
 		
+		//Gene Two
 		if (geneTwoPOneCombo.getSelectedIndex() != 0)
 		{
+			//Parent One
 			rawGenePOne[1] = new Gene(geneTwoPOneCombo.getSelectedItem().toString(), 
 					geneTwoPOneRadHetero.isSelected(), 
 					geneTwoPOneRadHomoD.isSelected(),
 					geneTwoPOneRadHomoR.isSelected());
 			
+			//Parent Two
 			rawGenePTwo[1] = new Gene(geneTwoPOneCombo.getSelectedItem().toString(), 
 					geneTwoPTwoRadHetero.isSelected(), 
 					geneTwoPTwoRadHomoD.isSelected(),
 					geneTwoPTwoRadHomoR.isSelected());
 		}
 		
+		//Gene Three
 		if (geneThreePOneCombo.getSelectedIndex() != 0)
 		{
+			//Parent One
 			rawGenePOne[2] = new Gene(geneThreePOneCombo.getSelectedItem().toString(), 
 					geneThreePOneRadHetero.isSelected(), 
 					geneThreePOneRadHomoD.isSelected(),
 					geneThreePOneRadHomoR.isSelected());
 			
+			//Parent Two
 			rawGenePTwo[2] = new Gene(geneThreePOneCombo.getSelectedItem().toString(), 
 					geneThreePTwoRadHetero.isSelected(), 
 					geneThreePTwoRadHomoD.isSelected(),
 					geneThreePTwoRadHomoR.isSelected());
 		}
 		
+		//Gene Four
 		if (geneFourPOneCombo.getSelectedIndex() != 0)
 		{
+			//Parent One
 			rawGenePOne[3] = new Gene(geneFourPOneCombo.getSelectedItem().toString(), 
 					geneFourPOneRadHetero.isSelected(), 
 					geneFourPOneRadHomoD.isSelected(),
 					geneFourPOneRadHomoR.isSelected());
 			
+			//Parent Two
 			rawGenePTwo[3] = new Gene(geneFourPOneCombo.getSelectedItem().toString(), 
 					geneFourPTwoRadHetero.isSelected(), 
 					geneFourPTwoRadHomoD.isSelected(),
 					geneFourPTwoRadHomoR.isSelected());
 		}
 		
+		//Gene Five
 		if (geneFivePOneCombo.getSelectedIndex() != 0)
 		{
+			//Parent One
 			rawGenePOne[4] = new Gene(geneFivePOneCombo.getSelectedItem().toString(), 
 					geneFivePOneRadHetero.isSelected(), 
 					geneFivePOneRadHomoD.isSelected(),
 					geneFivePOneRadHomoR.isSelected());
-			
+			//Parent Two
 			rawGenePTwo[4] = new Gene(geneFivePOneCombo.getSelectedItem().toString(), 
 					geneFivePTwoRadHetero.isSelected(), 
 					geneFivePTwoRadHomoD.isSelected(),
 					geneFivePTwoRadHomoR.isSelected());
 		}
 
+		//Build parents, and set their Genes.
 		Parent parentOne = new Parent();
 		parentOne.setRawGenes(rawGenePOne);
 		
 		Parent parentTwo = new Parent();
 		parentTwo.setRawGenes(rawGenePTwo);
 
+		//Send to PunnettMe for Calculating.
 		pm.build(parentOne, parentTwo);
-	
-//		List<String> output = pm.getResults();
-//		
-//		for (int i = 0; i < output.size(); i++)
-//		{
-//			System.out.println(output.get(i));
-//		}
-//		System.out.println("output size = " + output.size());
 		
+		//Output the results to the results JTextArea.
 		outputResults(pm.getResults());
 	}
 	
+	/**
+	 * Takes the ArrayList of offspring results, 
+	 * and outputs them line by line to the results JTextArea
+	 * 
+	 * @param results List
+	 */
 	private void outputResults(List<String> results)
 	{
+		//To reset the JTextArea to start from empty.
 		resultsJTA.setText("");
+		
+		//Cycles through offspring to output to JTextArea.
 		for (int output = results.size()-1; output >= 0 ; output--)
 		{
 			resultsJTA.append(results.get(output) + "\n");
 		}
+		//Outputs the size of the ArrayList as the total offspring accounted for.
 		resultsJTA.append(results.size() + " total offspring");
+		//Sets the viewing area of the JTextArea to be the very beginning.
+		//As you append to the JTextArea, it will set the position to the
+		//end of the list. This way it starts at the top.
 		resultsJTA.setCaretPosition(0);
 	}
 }

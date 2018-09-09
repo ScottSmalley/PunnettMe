@@ -5,6 +5,8 @@ and Homozygous Recessive traits. (Also includes different allele
 combinations based on different genes.I.e. Gene 1 is heterozygous, 
 Gene 2 is Homozygous Dominant etc.)
 
+Included in Git Repo is a JavaDoc of all the methods in folder "doc"
+
 Built by:
 Scott Smalley
 Software Engineering Undergrad

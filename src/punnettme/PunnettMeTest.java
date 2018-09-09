@@ -1,17 +1,22 @@
-/*
+/**
  * Punnett Me is an app to use for Punnett Squares for Genetic Trait Calculations.
  * You can calculate up to 5 different traits at once.
  * You can quickly change from Homozygous parents and Heterozygous parents 
  * for comparisons.
  * 
- * Uses Model View Controller design pattern, with Design by Contract programming.
- * 
+ * Uses Design by Contract programming.
+ *
  * Test Data from www.iansvivarium.com/punnett/
+ * 
+ * Note: These tests are preliminary, as I am aware there are a multitude more
+ * test to build. However, with the amount of time left in this project, I
+ * have decided to focus more on the rest of the project.
  * 
  * Scott Smalley, BS Software Engineering student at Utah Valley University
  * Fall 2020 expected graduation
  * scottsmalley90@gmail.com
  * 
+ * @author Scott Smalley
  */
 package punnettme;
 
@@ -26,7 +31,7 @@ class PunnettMeTest {
 	@Test
 	void resultsCheckForGeneOneHeteroBothParents()
 	{
-		PunnettMe pm = new PunnettMe();
+		PunnettMeCalculations pm = new PunnettMeCalculations();
 		Parent parentOne = new Parent();
 		Parent parentTwo = new Parent();
 		
@@ -79,7 +84,7 @@ class PunnettMeTest {
 	@Test
 	void resultsCheckForGeneOneHomoDBothParents()
 	{
-		PunnettMe pm = new PunnettMe();
+		PunnettMeCalculations pm = new PunnettMeCalculations();
 		Parent parentOne = new Parent();
 		Parent parentTwo = new Parent();
 		
@@ -130,7 +135,7 @@ class PunnettMeTest {
 	@Test
 	void resultsCheckForGeneOneHomoRBothParents()
 	{
-		PunnettMe pm = new PunnettMe();
+		PunnettMeCalculations pm = new PunnettMeCalculations();
 		Parent parentOne = new Parent();
 		Parent parentTwo = new Parent();
 		
@@ -181,7 +186,7 @@ class PunnettMeTest {
 	@Test
 	void resultsCheckForGeneTwoHeteroBothParents()
 	{
-		PunnettMe pm = new PunnettMe();
+		PunnettMeCalculations pm = new PunnettMeCalculations();
 		Parent parentOne = new Parent();
 		Parent parentTwo = new Parent();
 		
@@ -242,7 +247,7 @@ class PunnettMeTest {
 	@Test
 	void resultsCheckForGeneTwoHomoDBothParents()
 	{
-		PunnettMe pm = new PunnettMe();
+		PunnettMeCalculations pm = new PunnettMeCalculations();
 		Parent parentOne = new Parent();
 		Parent parentTwo = new Parent();
 		
@@ -295,7 +300,7 @@ class PunnettMeTest {
 	@Test
 	void resultsCheckForGeneTwoHomoRBothParents()
 	{
-		PunnettMe pm = new PunnettMe();
+		PunnettMeCalculations pm = new PunnettMeCalculations();
 		Parent parentOne = new Parent();
 		Parent parentTwo = new Parent();
 		
@@ -348,7 +353,7 @@ class PunnettMeTest {
 	@Test
 	void resultsCheckForGeneThreeHeteroBothParents()
 	{
-		PunnettMe pm = new PunnettMe();
+		PunnettMeCalculations pm = new PunnettMeCalculations();
 		Parent parentOne = new Parent();
 		Parent parentTwo = new Parent();
 		
@@ -429,7 +434,7 @@ class PunnettMeTest {
 	@Test
 	void resultsCheckForGeneThreeHomoDBothParents()
 	{
-		PunnettMe pm = new PunnettMe();
+		PunnettMeCalculations pm = new PunnettMeCalculations();
 		Parent parentOne = new Parent();
 		Parent parentTwo = new Parent();
 		
@@ -484,7 +489,7 @@ class PunnettMeTest {
 	@Test
 	void resultsCheckForGeneThreeHomoRBothParents()
 	{
-		PunnettMe pm = new PunnettMe();
+		PunnettMeCalculations pm = new PunnettMeCalculations();
 		Parent parentOne = new Parent();
 		Parent parentTwo = new Parent();
 		
@@ -539,7 +544,7 @@ class PunnettMeTest {
 	@Test
 	void resultsCheckForGeneFourHeteroBothParents()
 	{
-		PunnettMe pm = new PunnettMe();
+		PunnettMeCalculations pm = new PunnettMeCalculations();
 		Parent parentOne = new Parent();
 		Parent parentTwo = new Parent();
 		
@@ -676,7 +681,7 @@ class PunnettMeTest {
 	@Test
 	void resultsCheckForGeneFourHomoDBothParents()
 	{
-		PunnettMe pm = new PunnettMe();
+		PunnettMeCalculations pm = new PunnettMeCalculations();
 		Parent parentOne = new Parent();
 		Parent parentTwo = new Parent();
 		
@@ -733,7 +738,7 @@ class PunnettMeTest {
 	@Test
 	void resultsCheckForGeneFourHomoRBothParents()
 	{
-		PunnettMe pm = new PunnettMe();
+		PunnettMeCalculations pm = new PunnettMeCalculations();
 		Parent parentOne = new Parent();
 		Parent parentTwo = new Parent();
 		
@@ -790,7 +795,7 @@ class PunnettMeTest {
 	@Test
 	void resultsCheckForGeneFiveHeteroBothParents()
 	{
-		PunnettMe pm = new PunnettMe();
+		PunnettMeCalculations pm = new PunnettMeCalculations();
 		Parent parentOne = new Parent();
 		Parent parentTwo = new Parent();
 		
@@ -1093,7 +1098,7 @@ class PunnettMeTest {
 	@Test
 	void resultsCheckForGeneFiveHomoDBothParents()
 	{
-		PunnettMe pm = new PunnettMe();
+		PunnettMeCalculations pm = new PunnettMeCalculations();
 		Parent parentOne = new Parent();
 		Parent parentTwo = new Parent();
 		
@@ -1152,7 +1157,7 @@ class PunnettMeTest {
 	@Test
 	void resultsCheckForGeneFiveHomoRBothParents()
 	{
-		PunnettMe pm = new PunnettMe();
+		PunnettMeCalculations pm = new PunnettMeCalculations();
 		Parent parentOne = new Parent();
 		Parent parentTwo = new Parent();
 		
