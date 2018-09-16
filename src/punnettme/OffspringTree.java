@@ -282,12 +282,6 @@ public class OffspringTree
 		return node;
 	}
 	
-	/*
-	 * Rotates the Grandparent counterclockwise around the
-	 * parent.
-	 * @param root Node (Grandparent)
-	 */
-	
 	/**
 	 * Rotates the current Node counterclockwise around
 	 * the parent. As it rotates, the parents are updated, 
@@ -390,6 +384,7 @@ public class OffspringTree
 				greatGrandParent.right = temp;
 			}
 		}
+		
 		//If the greatGrandParent was null, the Node
 		//we rotated was the root, so now this new Node
 		//is root.
@@ -461,7 +456,7 @@ public class OffspringTree
 
 		//To check for duplicates, and output them
 		//if they exist.
-		for (int add = 0; add <= root.duplicate; add++)
+		for (int add = 0; add <= root.getDuplicate(); add++)
 		{
 			output.add(root.data);
 		}
@@ -500,6 +495,12 @@ public class OffspringTree
 		private void increment()
 		{
 			duplicate++;
+		}
+		
+		//Get method for duplicate attribute.
+		private int getDuplicate()
+		{
+			return duplicate;
 		}
 	}
 }

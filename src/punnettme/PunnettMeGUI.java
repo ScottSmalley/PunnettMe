@@ -4,7 +4,7 @@
  * You can quickly change from Homozygous parents and Heterozygous parents 
  * for comparisons.
  * 
- * Uses Design by Contract programming.
+ * Uses Design by Contract programming style.
  * 
  * Scott Smalley, BS Software Engineering student at Utah Valley University
  * Fall 2020 expected graduation
@@ -21,14 +21,17 @@ import java.awt.GridBagConstraints;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Insets;
-
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.plaf.ColorUIResource;
+
+import sun.swing.DefaultLookup;
+
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
@@ -48,6 +51,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 
 	//*********** GUI Globals ***********
 	private JFrame window;
+	
 	/*
 	 *Variable Breakdown:
 	 *geneOne = Gene One
@@ -161,10 +165,23 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 	private JPanel resultsPanel;
 	private JTextArea resultsJTA;
 	
+//	//Default GUI Colors
+//	private Color textColor = Color.decode("#E3E7FF");
+//	private Color backgroundColor = Color.decode("#404047");
+//	private Color textFieldColor = Color.decode("#837676");
+
 	//Default GUI Colors
-	private Color textColor = Color.WHITE;
-	private Color backgroundColor = Color.DARK_GRAY;
-	private Color textFieldColor = Color.GRAY;
+	private Color textColor = Color.decode("#DCDDD8");
+	private Color backgroundColor = Color.decode("#354B5E");
+	private Color textFieldColor = Color.decode("#475F77");
+	private Color disabledColor = Color.decode("#D74B4B");
+	
+//	//Default GUI Colors
+//	private Color textColor = Color.WHITE;
+//	private Color backgroundColor = Color.DARK_GRAY;
+//	private Color textFieldColor = Color.GRAY;
+	
+	
 	
 	//JComboBoxes options.
 	private String[] geneOptions = {"Select Symbol","A","B","C","D","E",
@@ -712,7 +729,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		
 		//Parent Two Column
 		JPanel parentTwoPanel = new JPanel();
-		parentTwoPanel.setBackground(Color.DARK_GRAY);
+		parentTwoPanel.setBackground(backgroundColor);
 		GridBagConstraints gbc_parentTwo = new GridBagConstraints();
 		gbc_parentTwo.insets = new Insets(0, 5, 0, 0);
 		gbc_parentTwo.weighty = 1.0;
@@ -1225,6 +1242,12 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		resultsPanel.add(jsp, gbc_resultsJTA);
 		
+		//Error Message Colors
+		UIManager.put("OptionPane.background", new ColorUIResource(215,75,75));
+		UIManager.put("OptionPane.messageForeground", textColor);
+		UIManager.put("Panel.background", new ColorUIResource(215,75,75));
+		UIManager.put("JComboBox.disabledBackground", new ColorUIResource(215, 75, 75));
+
 		window.pack();
 		window.setVisible(true);
 	}
@@ -1707,6 +1730,7 @@ public class PunnettMeGUI implements Runnable, MouseListener, ItemListener
 		//Show error message if the error boolean was flagged.
 		else if (!hasNoErrors)
 		{
+			
 			JOptionPane.showMessageDialog(window, errorMsg);
 		}
 		
