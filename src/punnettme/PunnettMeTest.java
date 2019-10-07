@@ -1,21 +1,21 @@
 /**
  * Punnett Me is an app to use for Punnett Squares for Genetic Trait Calculations.
  * You can calculate up to 5 different traits at once.
- * You can quickly change from Homozygous parents and Heterozygous parents 
+ * You can quickly change from Homozygous parents and Heterozygous parents
  * for comparisons.
- * 
+ *
  * Uses Design by Contract programming.
  *
  * Test Data from www.iansvivarium.com/punnett/
- * 
+ *
  * Note: These tests are preliminary, as I am aware there are a multitude more
  * test to build. However, with the amount of time left in this project, I
  * have decided to focus more on the rest of the project.
- * 
+ *
  * Scott Smalley, BS Software Engineering student at Utah Valley University
  * Fall 2020 expected graduation
  * scottsmalley90@gmail.com
- * 
+ *
  * @author Scott Smalley
  */
 package punnettme;
@@ -27,20 +27,20 @@ import java.util.TreeMap;
 import org.junit.jupiter.api.Test;
 
 class PunnettMeTest {
-	
+
 	@Test
 	void resultsCheckForGeneOneHeteroBothParents()
 	{
 		PunnettMeCalculations pm = new PunnettMeCalculations();
 		Parent parentOne = new Parent();
 		Parent parentTwo = new Parent();
-		
+
 		parentOne.setRawGenes(new Gene[] {
 				new Gene("A", true, false, false)});
-		
+
 		parentTwo.setRawGenes(new Gene[] {
 				new Gene("A", true, false, false)});
-		
+
 		pm.build(parentOne, parentTwo);
 
 		List<String> sample = pm.getResults();
@@ -49,7 +49,7 @@ class PunnettMeTest {
 		test.put("aa", 0);
 		test.put("Aa", 1);
 		test.put("AA", 0);
-		
+
 		int totalResultsSize = 4;
 		boolean didTestFail = false;
 		for (int index = 0; index < totalResultsSize; index++)
@@ -77,30 +77,30 @@ class PunnettMeTest {
 				fail();
 			}
 		}
-		
+
 		assertFalse("TestFailure", didTestFail);
 	}
-	
+
 	@Test
 	void resultsCheckForGeneOneHomoDBothParents()
 	{
 		PunnettMeCalculations pm = new PunnettMeCalculations();
 		Parent parentOne = new Parent();
 		Parent parentTwo = new Parent();
-		
+
 		parentOne.setRawGenes(new Gene[] {
 				new Gene("A", false, true, false)});
-		
+
 		parentTwo.setRawGenes(new Gene[] {
 				new Gene("A", false, true, false)});
-		
+
 		pm.build(parentOne, parentTwo);
 
 		List<String> sample = pm.getResults();
 
 		Map<String, Integer> test = new TreeMap<>();
 		test.put("AA", 3);
-		
+
 		int totalResultsSize = 4;
 		boolean didTestFail = false;
 		for (int index = 0; index < totalResultsSize; index++)
@@ -128,30 +128,30 @@ class PunnettMeTest {
 				fail();
 			}
 		}
-		
+
 		assertFalse("TestFailure", didTestFail);
 	}
-	
+
 	@Test
 	void resultsCheckForGeneOneHomoRBothParents()
 	{
 		PunnettMeCalculations pm = new PunnettMeCalculations();
 		Parent parentOne = new Parent();
 		Parent parentTwo = new Parent();
-		
+
 		parentOne.setRawGenes(new Gene[] {
 				new Gene("A", false, false, true)});
-		
+
 		parentTwo.setRawGenes(new Gene[] {
 				new Gene("A", false, false, true)});
-		
+
 		pm.build(parentOne, parentTwo);
 
 		List<String> sample = pm.getResults();
 
 		Map<String, Integer> test = new TreeMap<>();
 		test.put("aa", 3);
-		
+
 		int totalResultsSize = 4;
 		boolean didTestFail = false;
 		for (int index = 0; index < totalResultsSize; index++)
@@ -179,29 +179,29 @@ class PunnettMeTest {
 				fail();
 			}
 		}
-		
+
 		assertFalse("TestFailure", didTestFail);
 	}
-	
+
 	@Test
 	void resultsCheckForGeneTwoHeteroBothParents()
 	{
 		PunnettMeCalculations pm = new PunnettMeCalculations();
 		Parent parentOne = new Parent();
 		Parent parentTwo = new Parent();
-		
+
 		parentOne.setRawGenes(new Gene[] {
 				new Gene("A", true, false, false),
 				new Gene("B", true, false, false)});
-		
+
 		parentTwo.setRawGenes(new Gene[] {
 				new Gene("A", true, false, false),
 				new Gene("B", true, false, false)});
-		
+
 		pm.build(parentOne, parentTwo);
-		
+
 		List<String> sample = pm.getResults();
-		
+
 		Map<String, Integer> test = new TreeMap<>();
 		test.put("AABB", 0);
 		test.put("AABb", 1);
@@ -212,7 +212,7 @@ class PunnettMeTest {
 		test.put("aaBB", 0);
 		test.put("aaBb", 1);
 		test.put("aabb", 0);
-		
+
 		int totalResultsSize = 16;
 		boolean didTestFail = false;
 		for (int index = 0; index < totalResultsSize; index++)
@@ -240,32 +240,32 @@ class PunnettMeTest {
 				fail();
 			}
 		}
-		
+
 		assertFalse("TestFailure", didTestFail);
 	}
-	
+
 	@Test
 	void resultsCheckForGeneTwoHomoDBothParents()
 	{
 		PunnettMeCalculations pm = new PunnettMeCalculations();
 		Parent parentOne = new Parent();
 		Parent parentTwo = new Parent();
-		
+
 		parentOne.setRawGenes(new Gene[] {
 				new Gene("A", false, true, false),
 				new Gene("B", false, true, false)});
-		
+
 		parentTwo.setRawGenes(new Gene[] {
 				new Gene("A", false, true, false),
 				new Gene("B", false, true, false)});
-		
+
 		pm.build(parentOne, parentTwo);
-		
+
 		List<String> sample = pm.getResults();
-		
+
 		Map<String, Integer> test = new TreeMap<>();
 		test.put("AABB", 15);
-		
+
 		int totalResultsSize = 16;
 		boolean didTestFail = false;
 		for (int index = 0; index < totalResultsSize; index++)
@@ -293,32 +293,32 @@ class PunnettMeTest {
 				fail();
 			}
 		}
-		
+
 		assertFalse("TestFailure", didTestFail);
 	}
-	
+
 	@Test
 	void resultsCheckForGeneTwoHomoRBothParents()
 	{
 		PunnettMeCalculations pm = new PunnettMeCalculations();
 		Parent parentOne = new Parent();
 		Parent parentTwo = new Parent();
-		
+
 		parentOne.setRawGenes(new Gene[] {
 				new Gene("A", false, false, true),
 				new Gene("B", false, false, true)});
-		
+
 		parentTwo.setRawGenes(new Gene[] {
 				new Gene("A", false, false, true),
 				new Gene("B", false, false, true)});
-		
+
 		pm.build(parentOne, parentTwo);
-		
+
 		List<String> sample = pm.getResults();
-		
+
 		Map<String, Integer> test = new TreeMap<>();
 		test.put("aabb", 15);
-		
+
 		int totalResultsSize = 16;
 		boolean didTestFail = false;
 		for (int index = 0; index < totalResultsSize; index++)
@@ -346,31 +346,31 @@ class PunnettMeTest {
 				fail();
 			}
 		}
-		
+
 		assertFalse("TestFailure", didTestFail);
 	}
-	
+
 	@Test
 	void resultsCheckForGeneThreeHeteroBothParents()
 	{
 		PunnettMeCalculations pm = new PunnettMeCalculations();
 		Parent parentOne = new Parent();
 		Parent parentTwo = new Parent();
-		
+
 		parentOne.setRawGenes(new Gene[] {
 				new Gene("A", true, false, false),
 				new Gene("B", true, false, false),
 				new Gene("C", true, false, false)});
-		
+
 		parentTwo.setRawGenes(new Gene[] {
 				new Gene("A", true, false, false),
 				new Gene("B", true, false, false),
 				new Gene("C", true, false, false)});
-		
+
 		pm.build(parentOne, parentTwo);
-		
+
 		List<String> sample = pm.getResults();
-		
+
 		Map<String, Integer> test = new TreeMap<>();
 		test.put("AABBCC", 0);
 		test.put("AABBCc", 1);
@@ -427,34 +427,34 @@ class PunnettMeTest {
 				fail();
 			}
 		}
-		
+
 		assertFalse("TestFailure", didTestFail);
 	}
-	
+
 	@Test
 	void resultsCheckForGeneThreeHomoDBothParents()
 	{
 		PunnettMeCalculations pm = new PunnettMeCalculations();
 		Parent parentOne = new Parent();
 		Parent parentTwo = new Parent();
-		
+
 		parentOne.setRawGenes(new Gene[] {
 				new Gene("A", false, true, false),
 				new Gene("B", false, true, false),
 				new Gene("C", false, true, false)});
-		
+
 		parentTwo.setRawGenes(new Gene[] {
 				new Gene("A", false, true, false),
 				new Gene("B", false, true, false),
 				new Gene("C", false, true, false)});
-		
+
 		pm.build(parentOne, parentTwo);
-		
+
 		List<String> sample = pm.getResults();
-		
+
 		Map<String, Integer> test = new TreeMap<>();
 		test.put("AABBCC", 63);
-		
+
 		int totalResultsSize = 64;
 		boolean didTestFail = false;
 		for (int index = 0; index < totalResultsSize; index++)
@@ -482,34 +482,34 @@ class PunnettMeTest {
 				fail();
 			}
 		}
-		
+
 		assertFalse("TestFailure", didTestFail);
 	}
-	
+
 	@Test
 	void resultsCheckForGeneThreeHomoRBothParents()
 	{
 		PunnettMeCalculations pm = new PunnettMeCalculations();
 		Parent parentOne = new Parent();
 		Parent parentTwo = new Parent();
-		
+
 		parentOne.setRawGenes(new Gene[] {
 				new Gene("A", false, false, true),
 				new Gene("B", false, false, true),
 				new Gene("C", false, false, true)});
-		
+
 		parentTwo.setRawGenes(new Gene[] {
 				new Gene("A", false, false, true),
 				new Gene("B", false, false, true),
 				new Gene("C", false, false, true)});
-		
+
 		pm.build(parentOne, parentTwo);
-		
+
 		List<String> sample = pm.getResults();
-		
+
 		Map<String, Integer> test = new TreeMap<>();
 		test.put("aabbcc", 63);
-		
+
 		int totalResultsSize = 64;
 		boolean didTestFail = false;
 		for (int index = 0; index < totalResultsSize; index++)
@@ -537,33 +537,33 @@ class PunnettMeTest {
 				fail();
 			}
 		}
-		
+
 		assertFalse("TestFailure", didTestFail);
 	}
-	
+
 	@Test
 	void resultsCheckForGeneFourHeteroBothParents()
 	{
 		PunnettMeCalculations pm = new PunnettMeCalculations();
 		Parent parentOne = new Parent();
 		Parent parentTwo = new Parent();
-		
+
 		parentOne.setRawGenes(new Gene[] {
 				new Gene("A", true, false, false),
 				new Gene("B", true, false, false),
 				new Gene("C", true, false, false),
 				new Gene("D", true, false, false)});
-		
+
 		parentTwo.setRawGenes(new Gene[] {
 				new Gene("A", true, false, false),
 				new Gene("B", true, false, false),
 				new Gene("C", true, false, false),
 				new Gene("D", true, false, false)});
-		
+
 		pm.build(parentOne, parentTwo);
-		
+
 		List<String> sample = pm.getResults();
-		
+
 		Map<String, Integer> test = new TreeMap<>();
 		test.put("AABBCCDD", 0);
 		test.put("AABBCCDd", 1);
@@ -674,36 +674,36 @@ class PunnettMeTest {
 				fail();
 			}
 		}
-		
+
 		assertFalse("TestFailure", didTestFail);
 	}
-	
+
 	@Test
 	void resultsCheckForGeneFourHomoDBothParents()
 	{
 		PunnettMeCalculations pm = new PunnettMeCalculations();
 		Parent parentOne = new Parent();
 		Parent parentTwo = new Parent();
-		
+
 		parentOne.setRawGenes(new Gene[] {
 				new Gene("A", false, true, false),
 				new Gene("B", false, true, false),
 				new Gene("C", false, true, false),
 				new Gene("D", false, true, false)});
-		
+
 		parentTwo.setRawGenes(new Gene[] {
 				new Gene("A", false, true, false),
 				new Gene("B", false, true, false),
 				new Gene("C", false, true, false),
 				new Gene("D", false, true, false)});
-		
+
 		pm.build(parentOne, parentTwo);
-		
+
 		List<String> sample = pm.getResults();
-		
+
 		Map<String, Integer> test = new TreeMap<>();
 		test.put("AABBCCDD", 255);
-		
+
 		int totalResultsSize = 256;
 		boolean didTestFail = false;
 		for (int index = 0; index < totalResultsSize; index++)
@@ -731,36 +731,36 @@ class PunnettMeTest {
 				fail();
 			}
 		}
-		
+
 		assertFalse("TestFailure", didTestFail);
 	}
-	
+
 	@Test
 	void resultsCheckForGeneFourHomoRBothParents()
 	{
 		PunnettMeCalculations pm = new PunnettMeCalculations();
 		Parent parentOne = new Parent();
 		Parent parentTwo = new Parent();
-		
+
 		parentOne.setRawGenes(new Gene[] {
 				new Gene("A", false, false, true),
 				new Gene("B", false, false, true),
 				new Gene("C", false, false, true),
 				new Gene("D", false, false, true)});
-		
+
 		parentTwo.setRawGenes(new Gene[] {
 				new Gene("A", false, false, true),
 				new Gene("B", false, false, true),
 				new Gene("C", false, false, true),
 				new Gene("D", false, false, true)});
-		
+
 		pm.build(parentOne, parentTwo);
-		
+
 		List<String> sample = pm.getResults();
-		
+
 		Map<String, Integer> test = new TreeMap<>();
 		test.put("aabbccdd", 255);
-		
+
 		int totalResultsSize = 256;
 		boolean didTestFail = false;
 		for (int index = 0; index < totalResultsSize; index++)
@@ -788,37 +788,37 @@ class PunnettMeTest {
 				fail();
 			}
 		}
-		
+
 		assertFalse("TestFailure", didTestFail);
 	}
-	
+
 	@Test
 	void resultsCheckForGeneFiveHeteroBothParents()
 	{
 		PunnettMeCalculations pm = new PunnettMeCalculations();
 		Parent parentOne = new Parent();
 		Parent parentTwo = new Parent();
-		
+
 		parentOne.setRawGenes(new Gene[] {
 				new Gene("A", true, false, false),
 				new Gene("B", true, false, false),
 				new Gene("C", true, false, false),
 				new Gene("D", true, false, false),
 				new Gene("E", true, false, false)});
-		
+
 		parentTwo.setRawGenes(new Gene[] {
 				new Gene("A", true, false, false),
 				new Gene("B", true, false, false),
 				new Gene("C", true, false, false),
 				new Gene("D", true, false, false),
 				new Gene("E", true, false, false)});
-		
+
 		pm.build(parentOne, parentTwo);
-		
+
 		List<String> sample = pm.getResults();
-		
+
 		Map<String, Integer> test = new TreeMap<>();
-		
+
 		test.put("AABBCCDDEE", 0);
 		test.put("AABBCCDDEe", 1);
 		test.put("AABBCCDdEE", 1);
@@ -1062,10 +1062,10 @@ class PunnettMeTest {
 		test.put("aabbccddEE", 0);
 		test.put("aabbccddEe", 1);
 		test.put("aabbccddee", 0);
-		
+
 		int totalResultsSize = 1024;
 		boolean didTestFail = false;
-		
+
 		for (int index = 0; index < totalResultsSize; index++)
 		{
 			boolean foundMatch = false;
@@ -1091,38 +1091,38 @@ class PunnettMeTest {
 				fail();
 			}
 		}
-		
+
 		assertFalse("TestFailure", didTestFail);
 	}
-	
+
 	@Test
 	void resultsCheckForGeneFiveHomoDBothParents()
 	{
 		PunnettMeCalculations pm = new PunnettMeCalculations();
 		Parent parentOne = new Parent();
 		Parent parentTwo = new Parent();
-		
+
 		parentOne.setRawGenes(new Gene[] {
 				new Gene("A", false, true, false),
 				new Gene("B", false, true, false),
 				new Gene("C", false, true, false),
 				new Gene("D", false, true, false),
 				new Gene("E", false, true, false)});
-		
+
 		parentTwo.setRawGenes(new Gene[] {
 				new Gene("A", false, true, false),
 				new Gene("B", false, true, false),
 				new Gene("C", false, true, false),
 				new Gene("D", false, true, false),
 				new Gene("E", false, true, false)});
-		
+
 		pm.build(parentOne, parentTwo);
-		
+
 		List<String> sample = pm.getResults();
-		
+
 		Map<String, Integer> test = new TreeMap<>();
 		test.put("AABBCCDDEE", 1023);
-		
+
 		int totalResultsSize = 1024;
 		boolean didTestFail = false;
 		for (int index = 0; index < totalResultsSize; index++)
@@ -1150,38 +1150,38 @@ class PunnettMeTest {
 				fail();
 			}
 		}
-		
+
 		assertFalse("TestFailure", didTestFail);
 	}
-	
+
 	@Test
 	void resultsCheckForGeneFiveHomoRBothParents()
 	{
 		PunnettMeCalculations pm = new PunnettMeCalculations();
 		Parent parentOne = new Parent();
 		Parent parentTwo = new Parent();
-		
+
 		parentOne.setRawGenes(new Gene[] {
 				new Gene("A", false, false, true),
 				new Gene("B", false, false, true),
 				new Gene("C", false, false, true),
 				new Gene("D", false, false, true),
 				new Gene("E", false, false, true)});
-		
+
 		parentTwo.setRawGenes(new Gene[] {
 				new Gene("A", false, false, true),
 				new Gene("B", false, false, true),
 				new Gene("C", false, false, true),
 				new Gene("D", false, false, true),
 				new Gene("E", false, false, true)});
-		
+
 		pm.build(parentOne, parentTwo);
-		
+
 		List<String> sample = pm.getResults();
-		
+
 		Map<String, Integer> test = new TreeMap<>();
 		test.put("aabbccddee", 1023);
-		
+
 		int totalResultsSize = 1024;
 		boolean didTestFail = false;
 		for (int index = 0; index < totalResultsSize; index++)
@@ -1209,9 +1209,9 @@ class PunnettMeTest {
 				fail();
 			}
 		}
-		
+
 		assertFalse("TestFailure", didTestFail);
 	}
-	
+
 }
 

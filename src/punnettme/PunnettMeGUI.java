@@ -29,9 +29,6 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.plaf.ColorUIResource;
-
-import sun.swing.DefaultLookup;
-
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
